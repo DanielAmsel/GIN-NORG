@@ -1,0 +1,23 @@
+                                                                <!-- Sample Logik-->
+                                                                @for ($sample=0; $sample < $sampleValue ; $sample++)
+                                                                <div class="btn-group">
+                                                                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Sample {{ $sample + 1 }} </button>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li><a class="dropdown-item" href="#">Hier Infos </a></li>
+                                                                            <li><a class="dropdown-item" href="#">Hier Infos</a></li>
+                                                                            <li><a class="dropdown-item" href="#">Hier Infos</a></li>
+                                                                            <li><hr class="dropdown-divider"></li>
+                                                                            <li><a class="dropdown-item" href="#">Verschicken</a></li>
+                                                                            <li><a class="dropdown-item" href="#">Entfernen</a></li>
+                                                                        </ul>
+                                                                    <!-- Hier if abfragen nötig-->
+                                                                        <!-- Hier if abfragen nötig-->
+                                                                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Sample {{ $sample + 1 }} </button>
+                                                                        <ul class="dropdown-menu"> 
+                                                                            <li><a class="dropdown-item" href={{url('/newSamples')}}>Einlagern</a></li>
+                                                                            <li><a class="dropdown-item" href="#">Erneut einlagern</a></li>
+                                                                        </ul>
+                                                                    <!-- Hier if abfragen nötig-->
+
+                                                                </div>
+                                                            @endfor
