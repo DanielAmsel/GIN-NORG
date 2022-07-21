@@ -1,13 +1,8 @@
-## Über NORG
-
-NORG FiT ist eine webbasierte Lösung für Stickstofftanks:
+# NORG – Nitrogen ORGanizer: A standalone database system for local preservation of cryomaterial 
 
 
-## NORG verstehen
+## How to install 
 
-Es wird eine Nutzerdoku geben!
+## How to use
 
-## NORG Sponsors
-
-Spenden bitte direkt an die Mitglieder überweisen
-
+## How to cite
