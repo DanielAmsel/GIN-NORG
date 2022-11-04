@@ -44,7 +44,7 @@ class SampleFactory extends Factory
             'pos_insert' => $insertCountId,
             'pos_tube' => $tubesCountId,
             'pos_smpl' => $sampleCountId,
-            'responsible_person' => 'Platzhalter@Überschreiben.de',
+            'responsible_person' => 'Platzhalter@Ueberschreiben.de',
             'type_of_material' => 'MK',
             'storage_date' => $this->faker->dateTime,
             'shipping_date' => null,

@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert(
             [
                 'name' => 'AdminNutzer',
-                'email' => 'Platzhalter@Überschreiben.de',
+                'email' => 'Platzhalter@Ueberschreiben.de',
                 'password' => Hash::make('Norg2022'),
                 'role' => DB::table('roles')->where('role_name', '=', 'Administrator')->value('role_name'),
             ]
