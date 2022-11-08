@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('sample', function (Blueprint $table) {
             $table->id();
             $table->string('B_number');
-            $table->integer('pos_tank_nr');
-            $table->foreign('pos_tank_nr')->references('tank_number')->on('storage_tank');
+            $table->string('pos_tank_nr');
+            $table->foreign('pos_tank_nr')->references('tank_name')->on('storage_tank');
             $table->integer('pos_insert');
-            $table->foreign('pos_insert')->references('pos_insert')->on('positions_inserts');
+            //$table->foreign('pos_insert')->references('pos_insert')->on('tank_model');
             $table->integer('pos_tube');
-            $table->foreign('pos_tube')->references('pos_tube')->on('positions_tubes');
+            //$table->foreign('pos_tube')->references('pos_tube')->on('tank_model');
             $table->integer('pos_smpl');
-            $table->foreign('pos_smpl')->references('pos_sample')->on('positions_sample');
+            //$table->foreign('pos_smpl')->references('pos_sample')->on('tank_model');
             $table->string('responsible_person');
             $table->foreign('responsible_person')->references('email')->on('users')->restrictOnDelete();
             $table->string('type_of_material');

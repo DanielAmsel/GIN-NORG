@@ -10,7 +10,7 @@ class StorageTank extends Model
     use HasFactory;
 
     protected $table = 'storage_tank';
-    protected $fillable = ['tank_number', 'modelname'];
+    protected $fillable = ['tank_name', 'modelname'];
     public $timestamps = false;
 
     //Relation zur Probe (1-n)

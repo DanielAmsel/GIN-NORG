@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('type_of_material');
             $table->timestamp('storage_date')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('shipping_date')->useCurrent()->useCurrentOnUpdate();
+            $table->string('shipped_to');
             $table->timestamps();
         });
     }

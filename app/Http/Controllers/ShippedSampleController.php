@@ -50,8 +50,8 @@ class ShippedSampleController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
-    {
-        $sample = Sample::all();
+    {   
+        $sample    = Sample::all();
         $bnummer   = null;
         $material  = null;
         $date      = null;
@@ -72,6 +72,7 @@ class ShippedSampleController extends Controller
         $shippedSample->responsible_person = Auth::user()->email;
         $shippedSample->type_of_material   = $material;
         $shippedSample->storage_date       = $date;
+        $shippedSample->shipped_to         = "Afrika";
         $shippedSample->save();
 
         $toDestroy = Sample::find($sampleId);

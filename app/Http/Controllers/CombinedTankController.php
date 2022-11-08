@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sample;
 use Illuminate\Http\Request;
 use App\Models\StorageTank;
-use App\Models\TankCapacity;
+use App\Models\TankModel;
 
 /**
  *
@@ -33,16 +33,16 @@ class CombinedTankController extends Controller
         $storageTanks = StorageTank::all();
 
         // get all the tank capacities
-        $tankCapacities = TankCapacity::all();
+        $tankCapacities = TankModel::all();
 
         // get all the samples
         $samples = Sample::all();
 
         // load the view and pass the info
         return view('home',[
-            'tanksValue'  => $storageTanks->count(),
+            'tankValue'  => $storageTanks->count(),
             'insertValue' => $tankCapacities->value('number_of_inserts') ,
-            'tubesValue'  => $tankCapacities->value('number_of_tubes'),
+            'tubeValue'  => $tankCapacities->value('number_of_tubes'),
             'sampleValue' => $tankCapacities->value('number_of_samples'),
         ])
             ->with('tankcapacities', $tankCapacities)
@@ -62,16 +62,16 @@ class CombinedTankController extends Controller
         $storageTanks = StorageTank::all();
 
         // get all the tank capacities
-        $tankCapacities = TankCapacity::all();
+        $tankCapacities = TankModel::all();
 
         // get all the samples
         $samples = Sample::all();
 
         // load the view and pass the info
         return view('dataTest',[
-            'tanksValue' => $storageTanks->count(),
+            'tankValue' => $storageTanks->count(),
             'insertValue' => $tankCapacities->value('number_of_inserts') ,
-            'tubesValue' => $tankCapacities->value('number_of_tubes'),
+            'tubeValue' => $tankCapacities->value('number_of_tubes'),
             'sampleValue' => $tankCapacities->value('number_of_samples'),
             'collectionSample' => $samples
         ])

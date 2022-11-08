@@ -9,6 +9,7 @@ use App\Http\Controllers\ShippedSampleController;
 use App\Http\Controllers\StorageTankController;
 use App\Http\Controllers\TankModelController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,7 +74,7 @@ Route::post('/manageUser/delete', [ManageUserController::class, 'destroy']);
 
 Route::post('/restore/confirm', [RestoreSampleController::class, 'store']);
 
-//Tets Section
+//Test Section
 Route::get('/dataTest', [CombinedTankController::class, 'indextest']);
 
 Route::get('/sentSamples', [ShippedSampleController::class, 'index']);

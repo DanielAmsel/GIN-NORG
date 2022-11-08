@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('storage_tank', function (Blueprint $table) {
             $table->id();
-            $table->integer('tank_number');
-            $table->unique('tank_number');
             $table->string('modelname');
+            $table->string('tank_name');
+            $table->unique('tank_name');
             $table->foreign('modelname')->references('modelname')->on('tank_model');
             $table->timestamp('created_at')->useCurrent()->useCurrentOnUpdate();
         });

@@ -23,7 +23,7 @@ class SampleFactory extends Factory
     public function definition()
     {
         //not completely automated, you have to input the corresponding tank_number from the db
-        $tankNrCount = ['3'];
+        $tankNrCount = ['2'];
         $insertCount = ['1','2','3','4','5','6','7','8','9','10'];
         $tubesCount = ['1','2','3','4','5','6','7','8','9','10','11','12'];
         $sampleCount = ['1','2','3','4','5'];
@@ -44,7 +44,7 @@ class SampleFactory extends Factory
             'pos_insert' => $insertCountId,
             'pos_tube' => $tubesCountId,
             'pos_smpl' => $sampleCountId,
-            'responsible_person' => 'Platzhalter@Überschreiben.de',
+            'responsible_person' => 'Platzhalter@Ueberschreiben.de',
             'type_of_material' => 'MK',
             'storage_date' => $this->faker->dateTime,
             'shipping_date' => null,
