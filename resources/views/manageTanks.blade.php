@@ -15,26 +15,22 @@
     <table class="table table-hover text-center">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Tank Nummer</th>
+            <th scope="col">Tank Name</th>
             <th scope="col">Model</th>
             <th scope="col">Hinzugefügt am</th>
-            <th>ID</th>
         </tr>
         </thead>
         <tbody>
         @foreach($activeTanks as $activeTank)
             <tr>
-                <th scope="row">{{$loop->iteration}}</th>
-                <th scope="row">{{$activeTank->tank_number }}</th>
+                <th scope="row">{{$activeTank->tank_name }}</th>
                 <th scope="row">{{$activeTank->modelname}}</th>
                 <th scope="row">{{$activeTank->created_at}}</th>
-                <th scope="row">{{$activeTank->id}}</th>
                     <form method="POST" action="{{ Url('/tankDestroy') }}" >
                         @csrf
                         @foreach ($allSamplesinTank as $sample)
                             @php
-                                $group = $sample->where('pos_tank_nr', $activeTank->tank_number);
+                                $group = $sample->where('pos_tank_nr', $activeTank->tank_name);
                             @endphp
                          @if ($group->count() != 0)
                                 <th>
@@ -76,10 +72,10 @@
         @csrf
         <div class="col">
             <div class="col">
-                <label class="form-label">Tank Nummer</label>
-                <input required type="text" class="form-control" name="tank_number">
-                @error('tank_number') {{$message}} @enderror
-                <br></br>
+                <label class="form-label">Tank Name</label>
+                <input required type="text" class="form-control" name="tank_name">
+                @error('tank_name') {{$message}} @enderror
+                <br>
             </div>
             <div class="col">
                 <label for="MaterialSelect" class="form-label">Model</label>
@@ -90,7 +86,7 @@
                     @endforeach
                 </select>
                 @error('modelname') {{$message}} @enderror
-                <br></br>
+                <br>
             </div>
             <div class="col">
                 Datum

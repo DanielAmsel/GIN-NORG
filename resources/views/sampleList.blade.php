@@ -17,7 +17,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tank Nummer</th>
+                <th scope="col">Tank Name</th>
                 <th scope="col">Einsatz</th>
                 <th scope="col">Röhrchen</th>
                 <th scope="col">Probenplatz</th>
