@@ -32,18 +32,18 @@
 <body>
 
     <div class="container center_div">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <div class="container center_div fixed-top">
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                <div class="container">
 
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ URL('assets/images/logo32col.png') }}" alt="LogoNORG" width="auto" height="auto">
-                    Norg
-                </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="{{ URL('assets/images/logo32col.png') }}" alt="LogoNORG" width="auto"
+                            height="auto">
+                        Norg
+                    </a>
 
-                @guest
-
-                @elseif(Auth::user()->role == 'Default')
-
+                    @guest
+                    @elseif(Auth::user()->role == 'Default')
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <!-- Right Side Of Navbar -->
 
@@ -77,30 +77,30 @@
                         <main class="py-4">
                             @yield('onDefault')
                         </main>
-                @else
-                    @if(Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
-                        <a class="navbar-brand" href="{{ url('/sentSamples') }}">
-                            Verschickte Proben
-                        </a>
                     @else
-                        <a class="navbar-brand" href="{{ url('/sampleList') }}">
-                            Proben im Tank
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/sentSamples') }}">
-                            Verschickte Proben
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/removedSamples') }}">
-                            Entfernte Proben
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/manageTanks') }}">
-                            Tanks verwalten
-                        </a>
-                        @if (Auth::user()->role == 'Administrator')
-                            <a class="navbar-brand" href="{{ url('/manageUser') }}">
-                                User verwalten
+                        @if (Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
+                            <a class="navbar-brand" href="{{ url('/sentSamples') }}">
+                                Verschickte Proben
                             </a>
+                        @else
+                            <a class="navbar-brand" href="{{ url('/sampleList') }}">
+                                Proben im Tank
+                            </a>
+                            <a class="navbar-brand" href="{{ url('/sentSamples') }}">
+                                Verschickte Proben
+                            </a>
+                            <a class="navbar-brand" href="{{ url('/removedSamples') }}">
+                                Entfernte Proben
+                            </a>
+                            <a class="navbar-brand" href="{{ url('/manageTanks') }}">
+                                Tanks verwalten
+                            </a>
+                            @if (Auth::user()->role == 'Administrator')
+                                <a class="navbar-brand" href="{{ url('/manageUser') }}">
+                                    User verwalten
+                                </a>
+                            @endif
                         @endif
-                    @endif
 
 
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
@@ -131,32 +131,37 @@
 
                                 </li>
 
-                        </ul>
+                            </ul>
+                        </div>
+                </nav>
+
+                @if (Auth::user()->email == 'Platzhalter@Ueberschreiben.de')
+                    <div class="alert alert-danger center_div" role="alert">
+                        <b>Dieser Nutzer ist zum Einrichten der Applikation! <br>
+                            Geben Sie einem anderen Nutzer die Rolle "Administrator" und entfernen danach diesen Nutzer
+                            (Name: "AdminNutzer", E-Mail: "Platzhalter@Überschreiben.de")!
+                        </b>
                     </div>
+                @endif
             </div>
 
-        </nav>
+            @if (Auth::user()->email == 'Platzhalter@Ueberschreiben.de')
+                <br><br><br>
+            @endif
 
-        @if (Auth::user()->email == "Platzhalter@Überschreiben.de")
-            <div class="alert alert-danger center_div" role="alert">
-                <b>Dieser Nutzer ist zum Einrichten der Applikation! <br>
-                    Geben Sie einem anderen Nutzer die Rolle "Administrator" und entfernen danach diesen Nutzer (Name: "AdminNutzer", E-Mail: "Platzhalter@Überschreiben.de")!
-                </b>
-            </div>
-        @endif
-        
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <br><br>
+            <main class="py-4">
+                @yield('content')
+            </main>
         @endguest
 
-            </div>
-        </div>
+    </div>
+    </div>
 
-        </nav>
-        <main class="py-4">
-            @yield('login')
-        </main>
+    </nav>
+    <main class="py-4">
+        @yield('login')
+    </main>
 
     </div>
 
