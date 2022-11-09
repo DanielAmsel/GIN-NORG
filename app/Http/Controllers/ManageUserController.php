@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Symfony\Component\Console\Input\Input;
 
 class ManageUserController extends Controller
@@ -43,21 +45,22 @@ class ManageUserController extends Controller
         $users = User::all('id','name', 'email', 'role');
         $roles = Role::all('role_name');
 
-   
-
         return view('manageUser')
             ->with('users', $users)
             ->with('roles', $roles);
-           
+
     }
 
     public function updateRights(Request $request)
     {
         $user = User::find($request->id);
         $user->role = $request->role;
-        $user->update();
 
-        return redirect('/');
+        if ($user->role !== null) {
+            $user->update();
+        }
+
+        return redirect('/manageUser');
 
     }
 
