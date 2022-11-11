@@ -20,6 +20,7 @@
                     <th scope="col">B-nummer</th>
                     <th scope="col">Material Typ</th>
                     <th scope="col">Versand durch</th>
+                    <th scope="col">Zurück aus</th>
                     <th scope="col">Versand Datum</th>
                 </tr>
             </thead>
@@ -30,6 +31,7 @@
                         <td>{{ $hugo->identifier }}</td>
                         <td>{{ $hugo->type_of_material}}</td>
                         <td>{{ $hugo->responsible_person}}</td>
+                        <td>{{ $hugo->shipped_to}}</td>
                         <td>{{ $hugo->shipping_date}}</td>
                         <td>
                             <form method="POST" action="{{ Url('/restore/confirm') }}" >
