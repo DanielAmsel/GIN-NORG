@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreign('responsible_person')->references('email')->on('users')->restrictOnDelete();
             $table->string('type_of_material');
             $table->foreign('type_of_material')->references('type_of_material')->on('material_types');
+            $table->string('commentary')->nullable();
             $table->timestamp('storage_date')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('shipping_date')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('removal_date')->useCurrent()->useCurrentOnUpdate();

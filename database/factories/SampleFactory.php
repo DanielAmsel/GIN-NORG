@@ -46,6 +46,7 @@ class SampleFactory extends Factory
             'pos_smpl' => $sampleCountId,
             'responsible_person' => 'Platzhalter@Ueberschreiben.de',
             'type_of_material' => 'MK',
+            'commentary' => null,
             'storage_date' => $this->faker->dateTime,
             'shipping_date' => null,
             ];

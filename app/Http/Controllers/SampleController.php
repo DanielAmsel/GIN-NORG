@@ -77,6 +77,7 @@ class SampleController extends Controller
         $sample_pos  = $request->sample_pos;
         $bnummer     = $request->bnummer;
         $materialtyp = $request->materialtyp;
+        $commentary  = $request->commentary;
 
         // store
         $sample = new sample;
@@ -87,6 +88,7 @@ class SampleController extends Controller
         $sample->pos_smpl           = $sample_pos;
         $sample->responsible_person = Auth::user()->email;
         $sample->type_of_material   = $materialtyp;
+        $sample->commentary         = $commentary;
         $sample->save();
 
         // redirect
