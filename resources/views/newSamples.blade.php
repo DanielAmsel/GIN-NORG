@@ -42,7 +42,7 @@
             <input type="email" class="form-control" id="email" value="{{ Auth::user()->email }}" readonly>
         </div>
         <div class="col">
-            <label for="bnummer" class="form-label"  >B-Nummer</label>
+            <label for="bnummer" class="form-label" >B-Nummer</label>
             <input required type="text" class="form-control" name="bnummer" autofocus="autofocus">
         </div>
         <div class="col">
@@ -54,14 +54,17 @@
                 @endforeach
             </select>
         </div>
+            <div class="form-group">
+                <label for="commentary" class="form-label" >Kommentar</label>
+                <textarea class="form-control" name="commentary" rows="1" ></textarea>
+                <br>
+            </div>
         <div class="col">
             Datum
         </div>
         <div class="col">
             <p><b><script>document.write(new Date().toLocaleDateString())</script></b></p>
         </div>
-
-
         <div class="col">
             <div class="form-check">
                 <input required class="form-check-input" type="checkbox" id="gridCheck">

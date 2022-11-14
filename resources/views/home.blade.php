@@ -139,6 +139,9 @@
                                                                                 <li><a class="dropdown-item">{{ $selecetedSample->value('storage_date') }}
                                                                                     </a></li>
                                                                                 <li>
+                                                                                <li><a class="dropdown-item">Kommentar: {{ $selecetedSample->value('commentary') }}
+                                                                                    </a></li>
+                                                                                <li>
                                                                                     <hr class="dropdown-divider">
                                                                                 </li>
                                                                                 <li>
