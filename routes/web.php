@@ -58,6 +58,8 @@ Route::get('/manageTanks', [TankModelController::class, 'index']);
 
 Route::post('/addTank', [StorageTankController::class, 'store']);
 
+Route::post('/addTankmodel', [TankModelController::class, 'store']);
+
 Route::post('/tankDestroy', [StorageTankController::class, 'destroy']);
 
 //Route::get('/destroy', [SampleController::class, 'destroy']);
