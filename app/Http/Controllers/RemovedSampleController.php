@@ -79,7 +79,7 @@ class RemovedSampleController extends Controller
         $toDestroy = Sample::find($sampleId);
         $toDestroy->delete();
 
-        return redirect('/');
+        return redirect('/removedSamples');
     }
 
     /**
@@ -113,7 +113,7 @@ class RemovedSampleController extends Controller
         $toDestroy = ShippedSample::find($shippedSampleId);
         $toDestroy->delete();
 
-        return redirect('/');
+        return redirect('/sentSamples');
     }
 
     /**
@@ -148,7 +148,7 @@ class RemovedSampleController extends Controller
         $toDestroy = Sample::find($samplesDeleteId);
         $toDestroy->delete();
 
-        return redirect('/');
+        return redirect('/sampleList');
     }
 
     /**
