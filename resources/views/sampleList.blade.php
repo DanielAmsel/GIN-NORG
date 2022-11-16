@@ -26,7 +26,8 @@
                     <th scope="col">Material</th>
                     <th scope="col">Verantwortlicher</th>
                     <th scope="col">Einlagerungsdatum</th>
-                    <th scope="col">Versand Ort</th>
+                    <th scope="col">Kommentar</th>
+                    <th scope="col">Versandort</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,7 @@
                         <td>{{ $sampleOutput->type_of_material }}</td>
                         <td>{{ $sampleOutput->responsible_person }}</td>
                         <td>{{ $sampleOutput->storage_date }}</td>
+                        <td>{{ $sampleOutput->commentary }}</td>
                         <form method="POST" action="{{ Url('/shipped') }}">
                             @csrf
                             <td>
