@@ -72,7 +72,7 @@ class TankModelController extends Controller
         $tankModel->save();
 
         // redirect
-        return redirect('/');
+        return redirect('/manageTanks');
     }
 
     /**
