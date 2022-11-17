@@ -7,6 +7,7 @@ use App\Models\Sample;
 use App\Models\ShippedSample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RemovedSampleController extends Controller
 {
@@ -29,7 +30,10 @@ class RemovedSampleController extends Controller
     {
         // get all the removed samples
         $removedSamples = RemovedSample::all();
-
+        $removedSamples = ShippedSample::all();
+        $removedSamples = DB::table('removed_sample')
+        ->orderBy('removal_date', 'desc')
+        ->get();
         // load the view and pass the removed samples
         return view('removedSamples')
             ->with('removedSamples', $removedSamples);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MaterialType;
 use App\Http\Controllers\Post;
+use Illuminate\Support\Facades\DB;
 
 class SampleController extends Controller
 {
@@ -28,8 +29,10 @@ class SampleController extends Controller
     public function index()
     {
         // get all the samples
-        $samples = Sample::all();
-
+        //$samples = Sample::all();
+        $samples = DB::table('sample')
+        ->orderBy('storage_date', 'desc')
+        ->get();
         // load the view and pass the samples
         return view('sampleList')
             ->with ('samples', $samples)

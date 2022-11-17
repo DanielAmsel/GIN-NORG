@@ -6,6 +6,7 @@ use App\Models\Sample;
 use App\Models\ShippedSample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ShippedSampleController extends Controller
 {
@@ -26,7 +27,9 @@ class ShippedSampleController extends Controller
     {
         // get all the shipped samples
         $shippedSamples = ShippedSample::all();
-
+        $shippedSamples = DB::table('shipped_sample')
+        ->orderBy('shipping_date', 'desc')
+        ->get();
         // load the view and pass the shipped samples
         return view('sentSamples')
             ->with('shippedsample', $shippedSamples)
