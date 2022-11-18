@@ -21,8 +21,10 @@
             $insertValue = $storagetank->tankConstruction()->number_of_inserts;
             $tubeValue   = $storagetank->tankConstruction()->number_of_tubes;
             $sampleValue = $storagetank->tankConstruction()->number_of_samples;
+            $tankCapacity = $storagetank->tankConstruction()->capacity;
+            $sample_nr=$samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_tank_nr');
             
-            $fill = round((1 / 600) * $samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_tank_nr') * 100);
+            $fill = round((1 / $tankCapacity) * $samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_tank_nr') * 100);
             @endphp
             <div class="accordion-item ">
                 <h2 class="accordion-header" id="tank{{ $storagetank->tank_name }}">
@@ -30,19 +32,19 @@
                         @switch($fill)
                             @case($fill <= 50)
                                 <div class="progress-bar bg-success" role="progressbar" style="width: {{ $fill }}%;"
-                                    aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}%
+                                    aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
                                 </div>
                             @break
 
                             @case($fill > 50 && $fill <= 85)
                                 <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $fill }}%;"
-                                    aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}%
+                                    aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
                                 </div>
                             @break
 
                             @case($fill > 85)
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $fill }}%;"
-                                    aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}%
+                                    aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
                                 </div>
                             @break
                         @endswitch
@@ -52,7 +54,7 @@
                         data-bs-target="#collapseTank{{ $storagetank->id }}" aria-expanded="false"
                         aria-controls="collapseTank{{ $storagetank->id }}">
 
-                        @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_insert') == 10)
+                        @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_insert') == $tankCapacity)
                             <div class="bg-danger p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
                             </div>
                         @else
@@ -75,7 +77,7 @@
                                             data-bs-target="#collapsecontainer{{ $storagetank->id }}{{ $insert }}"
                                             aria-expanded="true" aria-controls="collapsecontainer{{ $insert }}">
 
-                                            @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->count('pos_tube') == 12)
+                                            @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->count('pos_tube') == $tubeValue * $sampleValue)
                                                 <div class="bg-danger p-2 badge bg-primary text-wrap"> Container
                                                     {{ $insert }} </div>
                                             @else
@@ -102,7 +104,7 @@
                                                                 data-bs-target="#collapseinsert{{ $storagetank->id }}{{ $insert }}{{ $tubes }}"
                                                                 aria-expanded="true"
                                                                 aria-controls="collapse{{ $tubes }}">
-                                                                @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->where('pos_tube', $tubes)->count('pos_smpl') == 5)
+                                                                @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->where('pos_tube', $tubes)->count('pos_smpl') == $sampleValue)
                                                                     <div class="bg-danger p-2 badge bg-primary text-wrap">
                                                                         Einsatz {{ $tubes }} </div>
                                                                 @else
