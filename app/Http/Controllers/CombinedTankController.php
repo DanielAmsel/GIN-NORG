@@ -32,20 +32,13 @@ class CombinedTankController extends Controller
         // get all the storage tanks
         $storageTanks = StorageTank::all();
 
-        // get all the tank capacities
-        $tankCapacities = TankModel::all();
-
         // get all the samples
         $samples = Sample::all();
 
         // load the view and pass the info
         return view('home',[
             'tankValue'  => $storageTanks->count(),
-            'insertValue' => $tankCapacities->value('number_of_inserts') ,
-            'tubeValue'  => $tankCapacities->value('number_of_tubes'),
-            'sampleValue' => $tankCapacities->value('number_of_samples'),
         ])
-            ->with('tankcapacities', $tankCapacities)
             ->with('storageTanks', $storageTanks)
             ->with('samples', $samples )
         ;

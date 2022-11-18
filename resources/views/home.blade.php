@@ -15,9 +15,14 @@
     @endif
 
     <div class="accordion accordion-flush container center_div" id="tankTable">
+
         @foreach ($storageTanks as $storagetank)
-            @php
-                $fill = round((1 / 600) * $samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_tank_nr') * 100);
+        @php
+            $insertValue = $storagetank->tankConstruction()->number_of_inserts;
+            $tubeValue   = $storagetank->tankConstruction()->number_of_tubes;
+            $sampleValue = $storagetank->tankConstruction()->number_of_samples;
+            
+            $fill = round((1 / 600) * $samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_tank_nr') * 100);
             @endphp
             <div class="accordion-item ">
                 <h2 class="accordion-header" id="tank{{ $storagetank->tank_name }}">
@@ -44,8 +49,8 @@
 
                     </div>
                     <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTank{{ $storagetank->tank_name }}" aria-expanded="false"
-                        aria-controls="collapseTank{{ $storagetank->tank_name }}">
+                        data-bs-target="#collapseTank{{ $storagetank->id }}" aria-expanded="false"
+                        aria-controls="collapseTank{{ $storagetank->id }}">
 
                         @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_insert') == 10)
                             <div class="bg-danger p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
@@ -58,17 +63,16 @@
                     </button>
 
                 </h2>
-                <div id="collapseTank{{ $storagetank->tank_name }}" class="accordion-collapse collapse"
-                    aria-labelledby="tank{{ $storagetank->tank_name }}" data-bs-parent="#tankTable">
-                    <div class="accordion-body ">
-
+                <div id="collapseTank{{ $storagetank->id }}" class="accordion-collapse collapse"
+                    aria-labelledby="tank{{ $storagetank->id }}" data-bs-parent="#tankTable">
+                    <div class="accordion-body " >
                         <!-- Container Logik -->
-                        <div class="accordion accordion-flush" id="containerTable{{ $storagetank->tank_name }}">
+                        <div class="accordion accordion-flush" id="containerTable{{ $storagetank->id }}">
                             @for ($insert = 1; $insert <= $insertValue; $insert++)
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="container{{ $insert }}">
                                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapsecontainer{{ $storagetank->tank_name }}{{ $insert }}"
+                                            data-bs-target="#collapsecontainer{{ $storagetank->id }}{{ $insert }}"
                                             aria-expanded="true" aria-controls="collapsecontainer{{ $insert }}">
 
                                             @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->count('pos_tube') == 12)
@@ -81,21 +85,21 @@
 
                                         </button>
                                     </h2>
-                                    <div id="collapsecontainer{{ $storagetank->tank_name }}{{ $insert }}"
+                                    <div id="collapsecontainer{{ $storagetank->id }}{{ $insert }}"
                                         class="accordion-collapse collapse toggle"
                                         aria-labelledby="container{{ $insert }}"
-                                        data-bs-parent="#containerTable{{ $storagetank->tank_name }}">
+                                        data-bs-parent="#containerTable{{ $storagetank->id }}">
                                         <div class="accordion-body">
                                             <!-- Tube Logik -->
 
                                             <div class="accordion accordion-flush"
-                                                id="insertTable{{ $storagetank->tank_name }}{{ $insert }}">
+                                                id="insertTable{{ $storagetank->id }}{{ $insert }}">
                                                 @for ($tubes = 1; $tubes <= $tubeValue; $tubes++)
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="insert{{ $tubes }}">
                                                             <button class="accordion-button " type="button"
                                                                 data-bs-toggle="collapse"
-                                                                data-bs-target="#collapseinsert{{ $storagetank->tank_name }}{{ $insert }}{{ $tubes }}"
+                                                                data-bs-target="#collapseinsert{{ $storagetank->id }}{{ $insert }}{{ $tubes }}"
                                                                 aria-expanded="true"
                                                                 aria-controls="collapse{{ $tubes }}">
                                                                 @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->where('pos_tube', $tubes)->count('pos_smpl') == 5)
@@ -107,10 +111,10 @@
                                                                 @endif
                                                             </button>
                                                         </h2>
-                                                        <div id="collapseinsert{{ $storagetank->tank_name }}{{ $insert }}{{ $tubes }}"
+                                                        <div id="collapseinsert{{ $storagetank->id }}{{ $insert }}{{ $tubes }}"
                                                             class="accordion-collapse collapse"
                                                             aria-labelledby="insert{{ $tubes }}"
-                                                            data-bs-parent="#insertTable{{ $storagetank->tank_name }}{{ $insert }}">
+                                                            data-bs-parent="#insertTable{{ $storagetank->id }}{{ $insert }}">
                                                             <div class="accordion-body">
                                                                 <!-- Sample Logik-->
                                                                 @for ($sample = 1; $sample <= $sampleValue; $sample++)

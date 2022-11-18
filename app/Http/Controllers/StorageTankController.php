@@ -57,7 +57,7 @@ class StorageTankController extends Controller
 
         // store
         $storageTank = new storageTank;
-        $storageTank->tank_name = str_replace(" ","_",$request->tank_name);
+        $storageTank->tank_name = $request->tank_name;
         $storageTank->modelname = $request->modelname;
         $storageTank->save();
 
