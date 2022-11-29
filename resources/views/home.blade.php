@@ -30,19 +30,19 @@
                 <h2 class="accordion-header" id="tank{{ $storagetank->tank_name }}">
                     <div class="progress">
                         @switch($fill)
-                            @case($fill <= 50)
+                            @case($fill <= 79)
                                 <div class="progress-bar bg-success" role="progressbar" style="width: {{ $fill }}%;"
                                     aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
                                 </div>
                             @break
 
-                            @case($fill > 50 && $fill <= 85)
+                            @case($fill > 79 && $fill <= 99)
                                 <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $fill }}%;"
                                     aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
                                 </div>
                             @break
 
-                            @case($fill > 85)
+                            @case($fill > 99)
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $fill }}%;"
                                     aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
                                 </div>
@@ -56,6 +56,9 @@
 
                         @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_insert') == $tankCapacity)
                             <div class="bg-danger p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
+                            </div>
+                        @elseif ($fill > 79 && $fill <= 99)
+                            <div class="bg-warning p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
                             </div>
                         @else
                             <div class="bg-success p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
