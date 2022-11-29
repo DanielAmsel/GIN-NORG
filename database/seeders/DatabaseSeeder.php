@@ -20,17 +20,17 @@ class DatabaseSeeder extends Seeder
             'modelname' => 'HC35',
             'manufacturer' => 'Worthington',
             'capacity' => '600',
-            'number_of_inserts' => '2',
-            'number_of_tubes' => '2',
-            'number_of_samples' => '2',
+            'number_of_inserts' => '10',
+            'number_of_tubes' => '12',
+            'number_of_samples' => '5',
         ]);
 
         DB::table('tank_model')->insert([
             'modelname' => 'HC38',
             'manufacturer' => 'Worthington',
             'capacity' => '600',
-            'number_of_inserts' => '1',
-            'number_of_tubes' => '8',
+            'number_of_inserts' => '10',
+            'number_of_tubes' => '12',
             'number_of_samples' => '5',
         ]);
 
