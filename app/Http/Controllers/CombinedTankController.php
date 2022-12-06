@@ -6,6 +6,7 @@ use App\Models\Sample;
 use Illuminate\Http\Request;
 use App\Models\StorageTank;
 use App\Models\TankModel;
+use Illuminate\Support\Facades\DB;
 
 /**
  *
@@ -40,8 +41,75 @@ class CombinedTankController extends Controller
             'tankValue'  => $storageTanks->count(),
         ])
             ->with('storageTanks', $storageTanks)
-            ->with('samples', $samples )
-        ;
+            ->with('samples', $samples );
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application
+     * @return \Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function indexContainer($idTank)
+    {
+        // get all the storage tanks
+        $storagetank = StorageTank::where('id', $idTank)->get();
+
+        // get all the samples
+        $samples = Sample::all();
+
+        // load the view and pass the info
+        return view('container',[
+            // 'tankValue'  => $storageTank->count(),
+        ])
+            ->with('storagetank', $storagetank[0])
+            ->with('samples', $samples );
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application
+     * @return \Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function indexTube($idTank, $idContainer)
+    {
+        // get all the storage tanks
+        $storagetank = StorageTank::where('id', $idTank)->get();
+
+        // get all the samples
+        $samples = Sample::all();
+
+        // load the view and pass the info
+        return view('tube',[
+            // 'tankValue'  => $storageTank->count(),
+        ])
+            ->with('idContainer', $idContainer)
+            ->with('storagetank', $storagetank[0])
+            ->with('samples', $samples );
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application
+     * @return \Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function indexSample($idTank, $idContainer, $idTube)
+    {
+        // get all the storage tanks
+        $storagetank = StorageTank::where('id', $idTank)->get();
+
+        // get all the samples
+        $samples = Sample::all();
+
+        // load the view and pass the info
+        return view('sample',[
+            // 'tankValue'  => $storageTank->count(),
+        ])
+            ->with('idContainer', $idContainer)
+            ->with('idTube', $idTube)
+            ->with('storagetank', $storagetank[0])
+            ->with('samples', $samples );
     }
 
     /**

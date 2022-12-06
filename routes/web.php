@@ -36,6 +36,11 @@ Route::get('/privacy',function() {
     return view('privacy');
 });
 
+Route::get('/insideTank/{idTank}/',[CombinedTankController::class, 'indexContainer']);
+
+Route::get('/insideTank/{idTank}/{idContainer}/',[CombinedTankController::class, 'indexTube']);
+
+Route::get('/insideTank/{idTank}/{idContainer}/{idTube}/',[CombinedTankController::class, 'indexSample']);
 Auth::routes();
 
 Route::get('/', [CombinedTankController::class, 'index']);

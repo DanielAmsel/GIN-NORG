@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\TankModel;
 
 class StorageTank extends Model
 {
@@ -29,4 +30,24 @@ class StorageTank extends Model
         $tankCapacities = DB::table('tank_model')->where('modelname', $this->modelname)->get();
         return $tankCapacities[0];
     }
+
+    public function getInserts() {
+        
+        $numberInserts = TankModel::where('modelname', $this->modelname)->get('number_of_inserts');
+        return $numberInserts[0]->number_of_inserts;
+    }
+
+    public function getTubes() {
+        
+        $numberTubes = TankModel::where('modelname', $this->modelname)->get('number_of_tubes');
+        return $numberTubes[0]->number_of_tubes;
+    }
+
+    public function getSamples() {
+        
+        $numberSamples = TankModel::where('modelname', $this->modelname)->get('number_of_samples');
+        return $numberSamples[0]->number_of_samples;
+    }
+
+
 }
