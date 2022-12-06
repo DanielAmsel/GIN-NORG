@@ -65,10 +65,10 @@ class TankModelController extends Controller
         $tankModel = new tankModel;
         $tankModel->modelname       = $request->modelname;
         $tankModel->manufacturer    = $request->manufacturer;
-        $tankModel->capacity        = $request->capacity;
         $tankModel->number_of_inserts = $request->number_of_inserts;
         $tankModel->number_of_tubes = $request->number_of_tubes;
         $tankModel->number_of_samples = $request->number_of_samples;
+        $tankModel->capacity        = $request->number_of_inserts*$request->number_of_tubes*$request->number_of_samples;
         $tankModel->save();
 
         // redirect

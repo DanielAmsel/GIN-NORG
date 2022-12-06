@@ -161,14 +161,6 @@
         <br>
     </div>
     <div class="col">
-        <label class="form-label">capacity</label>
-        <input required type="integer" class="form-control" name="capacity">
-        @error('capacity')
-            {{ $message }}
-        @enderror
-        <br>
-    </div>
-    <div class="col">
         Datum
     </div>
     <div class="col">
