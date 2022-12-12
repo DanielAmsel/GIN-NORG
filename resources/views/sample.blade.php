@@ -17,6 +17,15 @@
                 ->where('pos_tube', $idTube)
                 ->where('pos_smpl', $sample);
         @endphp
+
+            {{-- @php
+                echo ($idContainer);
+                echo ('-');
+                echo ($idTube);
+                echo ('-');
+                echo ($sample);
+            @endphp --}}
+
         <div class="btn-group">
 
             @if ($selecetedSample->value('pos_smpl') == $sample)
@@ -97,11 +106,11 @@
                                     value="{{ $storagetank->tank_name }}"
                                     name="tank_pos" hidden>
                                 <input type="text"
-                                    value="{{ $insert }}"
+                                    value="{{ $idContainer }}"
                                     name="con_pos" hidden>
                                 <input type="text"
-                                    value="{{ $tubes }}"
-                                    name="insert_pos" hidden>
+                                    value="{{ $idTube }}"
+                                    name="tube_pos" hidden>
                                 <input type="text"
                                     value="{{ $sample }}"
                                     name="sample_pos" hidden>
@@ -120,11 +129,11 @@
                                 value="{{ $storagetank->tank_name }}"
                                 name="tank_pos" hidden>
                             <input type="text"
-                                value="{{ $insert }}"
+                                value="{{ $idContainer }}"
                                 name="con_pos" hidden>
                             <input type="text"
-                                value="{{ $tubes }}"
-                                name="insert_pos" hidden>
+                                value="{{ $idTube }}"
+                                name="tube_pos" hidden>
                             <input type="text"
                                 value="{{ $sample }}"
                                 name="sample_pos" hidden>
