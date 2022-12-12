@@ -17,7 +17,7 @@
             <table class="table table-striped">
                 <input type="text" value="{{ $tank_pos }}" name="tank_pos" hidden>
                 <input type="text" value="{{ $con_pos }}" name="con_pos" hidden>
-                <input type="text" value="{{ $insert_pos }}" name="insert_pos" hidden>
+                <input type="text" value="{{ $tube_pos }}" name="tube_pos" hidden>
                 <input type="text" value="{{ $sample_pos }}" name="sample_pos" hidden>
                 <thead>
                 <tr>
@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ $tank_pos }}</td>
                     <td>{{ $con_pos }}</td>
-                    <td>{{ $insert_pos }}</td>
+                    <td>{{ $tube_pos }}</td>
                     <td>{{ $sample_pos }}</td>
                 </tr>
                 </tbody>

@@ -44,7 +44,7 @@
                             </button>
                                 <input type="text" value="{{ $tank_pos }}" name="tank_pos" hidden>
                                 <input type="text" value="{{ $con_pos }}" name="con_pos" hidden>
-                                <input type="text" value="{{ $insert_pos }}" name="insert_pos" hidden>
+                                <input type="text" value="{{ $tube_pos }}" name="tube_pos" hidden>
                                 <input type="text" value="{{ $sample_pos }}" name="sample_pos" hidden>
                             </form>
                         </td>
