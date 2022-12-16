@@ -12,22 +12,24 @@
             window.location = "/sampleList";
         </script>
     @endif
-
+   
     <div>
-        <table class="table table-hover text-center">
+        <table id="myTables" class="table table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tank Name</th>
-                    <th scope="col">Einsatz</th>
-                    <th scope="col">Röhrchen</th>
-                    <th scope="col">Probenplatz</th>
-                    <th scope="col">B-Nummer</th>
-                    <th scope="col">Material</th>
-                    <th scope="col">Verantwortlicher</th>
-                    <th scope="col">Einlagerungsdatum</th>
-                    <th scope="col">Kommentar</th>
-                    <th scope="col">Versandort</th>
+                    <th scope="col"                       >#</th>
+                    <th scope="col"                       >Tank Name</th>
+                    <th scope="col" data-orderable="false">Einsatz</th>
+                    <th scope="col" data-orderable="false">Röhrchen</th>
+                    <th scope="col" data-orderable="false">Probenplatz</th>
+                    <th scope="col"                       >B-Nummer</th>
+                    <th scope="col"                       >Material</th>
+                    <th scope="col"                       >Verantwortlicher</th>
+                    <th scope="col"                       >Einlagerungsdatum</th>
+                    <th scope="col"                       >Kommentar</th>
+                    <th scope="col" data-orderable="false">Versandort</th>
+                    <th scope="col" data-orderable="false">Probe verschicken</th>
+                    <th scope="col" data-orderable="false">Probe entfernen</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,5 +71,22 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{-- <script>
+            $('#myTable').DataTable( {
+            fixedHeader: false
+        } );
+        </script> --}}
+       
+        {{-- <script>
+            $('#myTable').dataTable( {
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [ 1, 2, 3 ] }
+                ]
+            });
+        </script> --}}
+
     </div>
+    
+
 @endsection

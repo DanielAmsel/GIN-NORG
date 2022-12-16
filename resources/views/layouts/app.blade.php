@@ -23,10 +23,25 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/fh-3.3.1/datatables.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            var table = $('#myTables').DataTable( {
+                fixedHeader: {
+            header: true},
+                lengthMenu: [
+            [25, 50, 100, -1],
+            [25, 50, 100, 'All']
+        ]
+            } );
+        } );
+        </script>
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/fh-3.3.1/datatables.min.css"/>
 
 </head>
 

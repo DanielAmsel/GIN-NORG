@@ -12,7 +12,7 @@
     @endif
 
     <div>
-        <table class="table table-hover text-center">
+        <table id="myTables" class="table table-hover text-center">
             <thead>
             <tr>
                 <th scope="col">#</th>

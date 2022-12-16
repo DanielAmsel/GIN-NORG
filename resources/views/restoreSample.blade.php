@@ -13,7 +13,7 @@
     @endif
 
     <div >
-        <table class="table table-hover text-center">
+        <table id="myTables" class="table table-hover text-center">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -22,6 +22,7 @@
                     <th scope="col">Versand durch</th>
                     <th scope="col">Zurück aus</th>
                     <th scope="col">Versand Datum</th>
+                    <th scope="col" data-orderable="false">Probe einlagern</th>
                 </tr>
             </thead>
             <tbody>
