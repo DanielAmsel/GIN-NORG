@@ -36,6 +36,13 @@ Route::get('/privacy',function() {
     return view('privacy');
 });
 
+Route::get('/download',function() {
+    $pathToFile = public_path().'/sqldumps/NorgDBdump'.date("Ymd",strtotime("-1 days")).'.sql';
+    $name = 'NorgDBdump'.date("Y-m-d",strtotime("-1 days"));
+    $headers = array('Content-Type: application/sql');
+    return response()->download($pathToFile, $name, $headers);
+});
+
 Route::get('/insideTank/{idTank}/',[CombinedTankController::class, 'indexContainer']);
 
 Route::get('/insideTank/{idTank}/{idContainer}/',[CombinedTankController::class, 'indexTube']);
