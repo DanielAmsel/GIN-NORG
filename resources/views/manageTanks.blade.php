@@ -27,35 +27,35 @@
                     <tr>
                         <th scope="row">{{ $activeTank->tank_name }}</th>
                         <th scope="row">{{ $activeTank->modelname }}</th>
-                        <th scope="row">{{ $activeTank->created_at }}</th>
+                        <th scope="row">{{ $activeTank->created_at }}</th>                        
                         <form onsubmit="return confirm('Sicher das dieser Tank Entfernt werden soll?');" method="POST"
                             action="{{ Url('/tankDestroy') }}">
                             @csrf
-                            @foreach ($allSamplesinTank as $sample)
-                                @php
-                                    $group = $sample->where('pos_tank_nr', $activeTank->tank_name);
-                                @endphp
-                                @if ($group->count() != 0)
-                                    <th>
-                                        <button type="submit" class="btn btn-outline-secondary" disabled> Tank Entfernen
-                                        </button>
-                                    </th>
-                                    <th>
-                                        <button type="button" class="btn btn-danger" disabled>Es sind noch Porben im
-                                            Tank</button>
-                                    </th>
-                                @break
-                            @else
-                                <th>
-                                    <button type="submit" class="btn btn-outline-secondary"> Tank Entfernen
-                                        <input value="{{ $activeTank->id }}"name="tank_id" hidden>
-                                    </button>
-                                </th>
-                                <th></th>
-                            @break
-                        @endif
-                    @endforeach
 
+                            @php
+                            $sample = $allSamplesinTank;
+                            $group = $sample->where('pos_tank_nr', $activeTank->tank_name);
+                            @endphp
+
+                            @if ($group->count() == 0)
+                            <th>
+                                <button type="submit" class="btn btn-outline-secondary"> Tank Entfernen
+                                    <input value="{{ $activeTank->id }}"name="tank_id" hidden>
+                                </button>
+                                <th>
+                                    <button type="button" class="btn btn-success" disabled>Der Tank ist leer</button>
+                                </th>
+                            </th>
+                            @else
+                            <th>
+                                <button type="submit" class="btn btn-outline-secondary" disabled> Tank Entfernen
+                                </button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-danger" disabled>Es sind noch Porben im
+                                    Tank</button>
+                            </th>
+                            @endif
 
                 </form>
                 </td> {{-- sollte auf gleiches zugreifen wie in Home --}}
