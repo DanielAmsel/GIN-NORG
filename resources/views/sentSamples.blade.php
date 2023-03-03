@@ -14,12 +14,12 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">B-nummer</th>
-                    <th scope="col">Material Typ</th>
-                    <th scope="col">Versand durch</th>
-                    <th scope="col">Verschickt nach</th>
-                    <th scope="col">Versand Datum</th>
-                    <th scope="col" data-orderable="false">Probe entfernen</th>
+                    <th scope="col">{{__('messages.ID')}}</th>
+                    <th scope="col">{{__('messages.Material')}}</th>
+                    <th scope="col">{{__('messages.Versand durch')}}</th>
+                    <th scope="col">{{__('messages.Verschickt nach')}}</th>
+                    <th scope="col">{{__('messages.Versand Datum')}}</th>
+                    <th scope="col" data-orderable="false"></th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +34,7 @@
                         <td>
                             <form method="POST" action="{{ Url('/transferSentSample') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-secondary"> Probe entfernen
+                                <button type="submit" class="btn btn-outline-secondary"> {{__('messages.Probe entfernen')}}
                                     <input type="text" value="{{ $hugo->id }}" name="sample_id" hidden>
                                 </button>
                             </form>

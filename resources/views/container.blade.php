@@ -18,10 +18,10 @@
 
                      @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->where('pos_insert', $insert)->count('pos_tube') ==
                          $tubeValue * $sampleValue)
-                         <div class="bg-danger p-2 badge bg-primary text-wrap"> Container
+                         <div class="bg-danger p-2 badge bg-primary text-wrap"> {{__('messages.Container')}}
                              {{ $insert }} </div>
                      @else
-                         <div class="bg-success p-2 badge bg-primary text-wrap"> Container
+                         <div class="bg-success p-2 badge bg-primary text-wrap"> {{__('messages.Container')}}
                              {{ $insert }} </div>
                      @endif
                  </button>

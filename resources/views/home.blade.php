@@ -33,21 +33,21 @@
                             @case($fill <= 75)
                                 <div class="progress-bar bg-success" role="progressbar" style="width: {{ $fill }}%;"
                                     aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">
-                                    {{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
+                                    {{ $sample_nr }}/{{ $tankCapacity }} {{__('messages.Proben belegt')}}
                                 </div>
                             @break
 
                             @case($fill > 75 && $fill <= 98)
                                 <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $fill }}%;"
                                     aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">
-                                    {{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
+                                    {{ $sample_nr }}/{{ $tankCapacity }} {{__('messages.Proben belegt')}}
                                 </div>
                             @break
 
                             @case($fill > 98)
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $fill }}%;"
                                     aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">
-                                    {{ $sample_nr }}/{{ $tankCapacity }} Proben belegt
+                                    {{ $sample_nr }}/{{ $tankCapacity }} {{__('messages.Proben belegt')}}
                                 </div>
                             @break
                         @endswitch
@@ -58,13 +58,13 @@
                         aria-expanded="false" aria-controls="collapseTank{{ $storagetank->id }}">
 
                         @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_insert') == $tankCapacity)
-                            <div class="bg-danger p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
+                            <div class="bg-danger p-2 badge bg-primary text-wrap"> {{__('message.Tank')}}{{ $storagetank->tank_name }}
                             </div>
                         @elseif ($fill > 50 && $fill <= 99)
-                            <div class="bg-warning p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
+                            <div class="bg-warning p-2 badge bg-primary text-wrap"> {{__('messages.Tank')}} {{ $storagetank->tank_name }}
                             </div>
                         @else
-                            <div class="bg-success p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_name }}
+                            <div class="bg-success p-2 badge bg-primary text-wrap"> {{__('messages.Tank')}} {{ $storagetank->tank_name }}
                             </div>
                         @endif
 
@@ -74,6 +74,10 @@
                 <div id="collapseTank{{ $storagetank->id }}" class="accordion-collapse collapse"
                     aria-labelledby="tank{{ $storagetank->id }}" data-bs-parent="#tankTable" data-delay="3000">
                     <div class="accordion-body ">
+
+                        @php
+                        echo $storagetank->id;    
+                        @endphp
 
                         <!-- Container Logik -->
                         <script>

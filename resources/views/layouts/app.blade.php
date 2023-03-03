@@ -102,12 +102,12 @@
                                 @if (Request::segment(1) == 'sampleList')
                                     <button onclick="window.location = '/sampleList';" type="button"
                                         class="btn btn-outline-secondary " style="background: lightgray">
-                                        Proben im Tank
+                                        {{__('messages.Proben im Tank')}}
                                     </button>
                                 @else
                                     <button onclick="window.location = '/sampleList';" type="button"
                                         class="btn btn-outline-secondary ">
-                                        Proben im Tank
+                                        {{__('messages.Proben im Tank')}}
                                     </button>
                                 @endif
 
@@ -115,36 +115,36 @@
                                 @if (Request::segment(1) == 'sentSamples')
                                     <button onclick="window.location = '/sentSamples';" type="button"
                                         class="btn btn-outline-secondary" style="background: lightgray">
-                                        Verschickte Proben
+                                        {{__('messages.Verschickte Proben')}}
                                     </button>
                                 @else
                                     <button onclick="window.location = '/sentSamples';" type="button"
                                         class="btn btn-outline-secondary">
-                                        Verschickte Proben
+                                        {{__('messages.Verschickte Proben')}}
                                     </button>
                                 @endif
 
                                 @if (Request::segment(1) == 'removedSamples')
                                     <button onclick="window.location = '/removedSamples';" type="button"
                                         class="btn btn-outline-secondary" style="background: lightgray">
-                                        Entfernte Proben
+                                        {{__('messages.Entfernte Proben')}}
                                     </button>
                                 @else
                                     <button onclick="window.location = '/removedSamples';" type="button"
                                         class="btn btn-outline-secondary">
-                                        Entfernte Proben
+                                        {{__('messages.Entfernte Proben')}}
                                     </button>
                                 @endif
 
                                 @if (Request::segment(1) == 'manageTanks')
                                     <button onclick="window.location = '/manageTanks';" type="button"
                                         class="btn btn-outline-secondary" style="background: lightgray">
-                                        Tanks verwalten
+                                        {{__('messages.Tanks verwalten')}}
                                     </button>
                                 @else
                                     <button onclick="window.location = '/manageTanks';" type="button"
                                         class="btn btn-outline-secondary">
-                                        Tanks verwalten
+                                        {{__('messages.Tanks verwalten')}}
                                     </button>
                                 @endif
 
@@ -153,12 +153,12 @@
                                     @if (Request::segment(1) == 'manageUser')
                                         <button onclick="window.location = '/manageUser';" type="button"
                                             class="btn btn-outline-secondary"style="background: lightgray">
-                                            User verwalten
+                                            {{__('messages.User verwalten')}}
                                         </button>
                                     @else
                                         <button onclick="window.location = '/manageUser';" type="button"
                                             class="btn btn-outline-secondary">
-                                            User verwalten
+                                            {{__('messages.User verwalten')}}
                                         </button>
                                     @endif
                                 @endif
@@ -191,7 +191,7 @@
 
                                         @if (Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
                                         @else
-                                        <a class="dropdown-item" href="/download">Database dump</a>
+                                        <a class="dropdown-item" href="/download">{{__('messages.Datenbank dump')}}</a>
                                         @endif
                                     </div>
 
@@ -203,9 +203,8 @@
 
                 @if (Auth::user()->email == 'Platzhalter@Ueberschreiben.de')
                     <div class="alert alert-danger center_div" role="alert">
-                        <b>Dieser Nutzer ist zum Einrichten der Applikation! <br>
-                            Geben Sie einem anderen Nutzer die Rolle "Administrator" und entfernen danach diesen Nutzer
-                            (Name: "AdminNutzer", E-Mail: "Platzhalter@Überschreiben.de")!
+                        <b>{{__('messages.Dieser Nutzer ist zum Einrichten der Applikation!')}}<br>
+                            {{__('messages.Geben Sie einem anderen Nutzer die Rolle Administrator und entfernen danach diesen Nutzer (Name: AdminNutzer, E-Mail: Platzhalter@Überschreiben.de)!')}}
                         </b>
                     </div>
                 @endif
@@ -235,8 +234,8 @@
 </body>
 <footer class="text-center fixed-bottom">
     <div class="fixed-bottom text-center align-items-center" style="background-color: lightgray">
-        <span class="me-5 text-muted">Information zum <a href="/imprint">Impressum</a> und <a
-                href="/privacy">Datenschutz</a> erhalten Sie über die angegebenen Links.</span>
+        <span class="me-5 text-muted">{{__('messages.Information zum ')}}<a href="/imprint">{{__('messages.Impressum ')}}</a>{{__('messages.und ')}}<a
+                href="/privacy">{{__('messages.Datenschutz ')}}</a>{{__('messages.erhalten Sie über die angegebenen Links.')}}</span>
     </div>
 </footer>
 

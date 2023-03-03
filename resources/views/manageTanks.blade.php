@@ -17,9 +17,9 @@
         <table class="table table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">Tank Name</th>
-                    <th scope="col">Model</th>
-                    <th scope="col">Hinzugefügt am</th>
+                    <th scope="col">{{__('messages.Tank Name')}}</th>
+                    <th scope="col">{{__('messages.Model')}}</th>
+                    <th scope="col">{{__('messages.Hinzugefügt am')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +28,7 @@
                         <th scope="row">{{ $activeTank->tank_name }}</th>
                         <th scope="row">{{ $activeTank->modelname }}</th>
                         <th scope="row">{{ $activeTank->created_at }}</th>                        
-                        <form onsubmit="return confirm('Sicher das dieser Tank Entfernt werden soll?');" method="POST"
+                        <form onsubmit="return confirm({{__('messages.Sicher das dieser Tank Entfernt werden soll?')}});" method="POST"
                             action="{{ Url('/tankDestroy') }}">
                             @csrf
 
@@ -39,21 +39,21 @@
 
                             @if ($group->count() == 0)
                             <th>
-                                <button type="submit" class="btn btn-outline-secondary"> Tank Entfernen
+                                <button type="submit" class="btn btn-outline-secondary">{{__('messages.Tank Entfernen')}}
                                     <input value="{{ $activeTank->id }}"name="tank_id" hidden>
                                 </button>
                                 <th>
-                                    <button type="button" class="btn btn-success" disabled>Der Tank ist leer</button>
+                                    <button type="button" class="btn btn-success" disabled>{{__('messages.Der Tank ist leer')}}</button>
                                 </th>
                             </th>
                             @else
                             <th>
-                                <button type="submit" class="btn btn-outline-secondary" disabled> Tank Entfernen
+                                <button type="submit" class="btn btn-outline-secondary" disabled> {{__('messages.Tank Entfernen')}}
                                 </button>
                             </th>
                             <th>
-                                <button type="button" class="btn btn-danger" disabled>Es sind noch Porben im
-                                    Tank</button>
+                                <button type="button" class="btn btn-danger" disabled>{{__('messages.Es sind noch Proben im Tank')}}
+                                </button>
                             </th>
                             @endif
 
@@ -70,7 +70,7 @@
 @csrf
 <div class="col">
     <div class="col">
-        <label class="form-label">Tank Name</label>
+        <label class="form-label">{{__('messages.Tank Name')}}</label>
         <input required type="text" class="form-control" name="tank_name">
         @error('tank_name')
             {{ $message }}
@@ -78,9 +78,9 @@
         <br>
     </div>
     <div class="col">
-        <label for="MaterialSelect" class="form-label">Model</label>
+        <label for="MaterialSelect" class="form-label">{{__('messages.Model')}}</label>
         <select required id="MaterialSelect" class="form-select" name="modelname">
-            <option disabled selected value> -- Bitte Modeltype wählen durch anklicken -- </option>
+            <option disabled selected value> {{__('messages.-- Bitte Modeltype wählen durch anklicken --')}}</option>
             @foreach ($tankModel as $tank)
                 <option>{{ $tank->modelname }}</option>
             @endforeach
@@ -91,7 +91,7 @@
         <br>
     </div>
     <div class="col">
-        Datum
+        {{__('messages.Datum')}}
     </div>
     <div class="col">
         <p><b>
@@ -104,24 +104,24 @@
         <div class="form-check">
             <input required class="form-check-input" type="checkbox" id="gridCheck">
             <label class="form-check-label" for="gridCheck">
-                Daten überprüft?
+                {{__('messages.Daten überprüft?')}}
             </label>
         </div>
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary">Tank hinzufügen</button>
+        <button type="submit" class="btn btn-primary">{{__('messages.Tank hinzufügen')}}</button>
     </div>
 </div>
 </form>
 
 <hr>
 
-<h3 class="col-md-8 fs-4">Anlage eines neuen Tank Modeltypen</h3>
+<h3 class="col-md-8 fs-4">{{__('messages.Anlage eines neuen Tank Modeltypen')}}</h3>
 <form action="{{ url('/addTankmodel') }}" method="POST">
 @csrf
 <div class="col">
     <div class="col">
-        <label class="form-label">Modeltype</label>
+        <label class="form-label">{{__('messages.Modeltype')}}</label>
         <input required type="text" class="form-control" name="modelname">
         @error('modelname')
             {{ $message }}
@@ -129,7 +129,7 @@
         <br>
     </div>
     <div class="col">
-        <label class="form-label">Manufacturer</label>
+        <label class="form-label">{{__('messages.Hersteller')}}</label>
         <input required type="integer" class="form-control" name="manufacturer">
         @error('manufacturer')
             {{ $message }}
@@ -137,7 +137,7 @@
         <br>
     </div>
     <div class="col">
-        <label class="form-label">Number of Container</label>
+        <label class="form-label">{{__('messages.Anzahl an Containern')}}</label>
         <input required type="integer" class="form-control" name="number_of_inserts">
         @error('number_of_inserts')
             {{ $message }}
@@ -145,7 +145,7 @@
         <br>
     </div>
     <div class="col">
-        <label class="form-label">Number of tubes</label>
+        <label class="form-label">{{__('messages.Anzahl an Einsätzen')}}</label>
         <input required type="integer" class="form-control" name="number_of_tubes">
         @error('number_of_tubes')
             {{ $message }}
@@ -153,7 +153,7 @@
         <br>
     </div>
     <div class="col">
-        <label class="form-label">Number of samples</label>
+        <label class="form-label">{{__('messages.Probenanzahl')}}</label>
         <input required type="integer" class="form-control" name="number_of_samples">
         @error('number_of_samples')
             {{ $message }}
@@ -161,7 +161,7 @@
         <br>
     </div>
     <div class="col">
-        Datum
+        {{__('messages.Datum')}}
     </div>
     <div class="col">
         <p><b>
@@ -174,12 +174,12 @@
         <div class="form-check">
             <input required class="form-check-input" type="checkbox" id="gridCheck">
             <label class="form-check-label" for="gridCheck">
-                Daten überprüft?
+                {{__('messages.Daten überprüft?')}}
             </label>
         </div>
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary">Modeltypen hinzufügen</button>
+        <button type="submit" class="btn btn-primary">{{__('messages.Modeltypen hinzufügen')}}</button>
     </div>
 </div>
 </form>

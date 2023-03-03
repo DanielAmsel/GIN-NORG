@@ -16,11 +16,11 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">B-nummer</th>
-                <th scope="col">Material Typ</th>
-                <th scope="col">Verantwortlicher</th>
-                <th scope="col">Einlagerungsdatum</th>
-                <th scope="col">Auslagerungsdatum</th>
+                <th scope="col">{{__('messages.ID')}}</th>
+                <th scope="col">{{__('messages.Material')}}</th>
+                <th scope="col">{{__('messages.Verantwortlicher')}}</th>
+                <th scope="col">{{__('messages.Einlagerungsdatum')}}</th>
+                <th scope="col">{{__('messages.Auslagerungsdatum')}}</th>
             </tr>
             </thead>
             <tbody>

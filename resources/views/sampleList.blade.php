@@ -18,18 +18,18 @@
             <thead>
                 <tr>
                     <th scope="col"                       >#</th>
-                    <th scope="col"                       >Tank Name</th>
-                    <th scope="col" data-orderable="false">Einsatz</th>
-                    <th scope="col" data-orderable="false">Röhrchen</th>
-                    <th scope="col" data-orderable="false">Probenplatz</th>
-                    <th scope="col"                       >B-Nummer</th>
-                    <th scope="col"                       >Material</th>
-                    <th scope="col"                       >Verantwortlicher</th>
-                    <th scope="col"                       >Einlagerungsdatum</th>
-                    <th scope="col"                       >Kommentar</th>
-                    <th scope="col" data-orderable="false">Versandort</th>
-                    <th scope="col" data-orderable="false">Probe verschicken</th>
-                    <th scope="col" data-orderable="false">Probe entfernen</th>
+                    <th scope="col"                       >{{__('messages.Tank Name')}}</th>
+                    <th scope="col" data-orderable="false">{{__('messages.Container')}}</th>
+                    <th scope="col" data-orderable="false">{{__('messages.Einsatz')}}</th>
+                    <th scope="col" data-orderable="false">{{__('messages.Probenplatz')}}</th>
+                    <th scope="col"                       >{{__('messages.ID')}}</th>
+                    <th scope="col"                       >{{__('messages.Material')}}</th>
+                    <th scope="col"                       >{{__('messages.Verantwortlicher')}}</th>
+                    <th scope="col"                       >{{__('messages.Einlagerungsdatum')}}</th>
+                    <th scope="col"                       >{{__('messages.Kommentar')}}</th>
+                    <th scope="col" data-orderable="false">{{__('messages.Versandort')}}</th>
+                    <th scope="col" data-orderable="false"></th>
+                    <th scope="col" data-orderable="false"></th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
                                 </div>
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-outline-secondary"> Probe verschicken
+                                <button type="submit" class="btn btn-outline-secondary"> {{__('messages.Probe verschicken')}}
                                     <input type="text" value="{{ $sampleOutput->id }}"name="sample_id" hidden>
                                 </button>
                         </form>
@@ -62,7 +62,7 @@
                         <td>
                             <form method="POST" action="{{ Url('/transferSampleDelete') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-secondary"> Probe entfernen
+                                <button type="submit" class="btn btn-outline-secondary"> {{__('messages.Probe entfernen')}}
                                     <input type="text" value="{{ $sampleOutput->id }}"name="sample_id" hidden>
                                 </button>
                             </form>
@@ -71,21 +71,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        {{-- <script>
-            $('#myTable').DataTable( {
-            fixedHeader: false
-        } );
-        </script> --}}
-       
-        {{-- <script>
-            $('#myTable').dataTable( {
-                "aoColumnDefs": [
-                    { 'bSortable': false, 'aTargets': [ 1, 2, 3 ] }
-                ]
-            });
-        </script> --}}
-
     </div>
     
 

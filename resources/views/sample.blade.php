@@ -32,7 +32,7 @@
                 <button type="button"
                     class="btn btn-danger dropdown-toggle"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"> Probe
+                    aria-expanded="false"> {{__('messages.Probe')}}
                     {{ $sample }} </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item">{{ $selecetedSample->value('B_number') }}
@@ -43,7 +43,7 @@
                         </a></li>
                     <li><a class="dropdown-item">{{ $selecetedSample->value('storage_date') }}
                         </a></li>
-                    <li><a class="dropdown-item">Kommentar: {{ $selecetedSample->value('commentary') }}
+                    <li><a class="dropdown-item"> {{__('messages.Kommentar: ')}} {{ $selecetedSample->value('commentary') }}
                         </a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -57,14 +57,13 @@
                             <div class="col">
                                 <input required type="text"
                                     class="form-control"
-                                    placeholder="Verschicken nach"
+                                    placeholder="{{__('messages.Verschicken nach')}}"
                                     name="address"
                                     autofocus="autofocus">
                             </div>
                         </td>
                         <button type="submit"
-                            class="dropdown-item"> Probe
-                            verschicken
+                            class="dropdown-item"> {{__('messages.Probe verschicken')}}
                             <input type="text"
                                 value="{{ $selecetedSample->value('id') }}"name="sample_id"
                                 hidden>
@@ -78,8 +77,7 @@
                             @csrf
                     <li>
                         <button type="submit"
-                            class="dropdown-item"> Probe
-                            entfernen
+                            class="dropdown-item"> {{__('messages.Probe entfernen')}}
                             <input type="text"
                                 value="{{ $selecetedSample->value('id') }}"name="sample_id"
                                 hidden>
@@ -92,7 +90,7 @@
                 <button type="button"
                     class="btn btn-success dropdown-toggle"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"> Position
+                    aria-expanded="false"> {{__('messages.Position')}}
                     {{ $sample }} </button>
                 <ul class="dropdown-menu">
                     <form method="POST"
@@ -100,8 +98,7 @@
                         @csrf
                         <li>
                             <button type="submit"
-                                class="dropdown-item"> Probe
-                                einlagern
+                                class="dropdown-item"> {{__('messages.Probe einlagern')}}
                                 <input type="text"
                                     value="{{ $storagetank->tank_name }}"
                                     name="tank_pos" hidden>
@@ -123,8 +120,7 @@
                             @csrf
                     <li>
                         <button type="submit"
-                            class="dropdown-item"> Erneut
-                            einlagern
+                            class="dropdown-item"> {{__('messages.Probe erneut einlagern')}}
                             <input type="text"
                                 value="{{ $storagetank->tank_name }}"
                                 name="tank_pos" hidden>
