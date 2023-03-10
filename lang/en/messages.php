@@ -17,12 +17,12 @@ return [
     'Datenschutz ' => 'data protection ',
     'erhalten Sie über die angegebenen Links.' => 'can be obtained via the links provided.',
     #home.blade
-    'Tank' => 'Tank',
+    'Tank' => 'tank',
     'Proben belegt' => 'samples occupied',
     #container.blade
-    'Container' => 'Container',
+    'Container' => 'container',
     #tube.blade
-    'Einsatz' => 'Tube',
+    'Einsatz' => 'tube',
     #sample.blade
     'Probe' => 'sample',
     'Kommentar: ' => 'Commentary: ',
@@ -72,13 +72,20 @@ return [
     'Probenanzahl' => 'number of samples',
     'Modeltypen hinzufügen' => 'add model type',
     #manageUser.blade
-    '' => '',
-    '' => '',
+    'Name' => 'name',
+    'E-Mail' => 'E-Mail',
+    'Rolle' => 'role',
+    'Rechte aktualisieren' => 'update rights',
+    'Nutzer entfernen' => 'remove user',
     #newSamples.blade
-    '' => '',
+    //Tabelle schon in anderen Blades mit übersetzt
+    'Eingelagert von' => 'stored by',
+    'Material-Typ' => 'type of material',
+    '-- Bitte Materialtyp wählen durch anklicken --' => '-- Please select material type by clicking --',
+    #restoreSample.blade
+    'Zurück aus' => 'back from',
     #privacy.blade
     '' => '',
     #imprint.blade
     '' => ''
-
 ];

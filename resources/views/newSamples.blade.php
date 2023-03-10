@@ -21,10 +21,10 @@
                 <input type="text" value="{{ $sample_pos }}" name="sample_pos" hidden>
                 <thead>
                 <tr>
-                    <th scope="col">Tank</th>
-                    <th scope="col">Einsatz</th>
-                    <th scope="col">Röhrchen</th>
-                    <th scope="col">Probenplatz</th>
+                    <th scope="col">{{__('messages.Tank')}}</th>
+                    <th scope="col">{{__('messages.Container')}}</th>
+                    <th scope="col">{{__('messages.Einsatz')}}</th>
+                    <th scope="col">{{__('messages.Position')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,29 +38,29 @@
             </table>
         </div>
         <div class="col">
-            <label for="email" class="form-label">Eingelagert von</label>
+            <label for="email" class="form-label">{{__('messages.Eingelagert von')}}</label>
             <input type="email" class="form-control" id="email" value="{{ Auth::user()->email }}" readonly>
         </div>
         <div class="col">
-            <label for="bnummer" class="form-label" >B-Nummer</label>
+            <label for="bnummer" class="form-label" >{{__('messages.ID')}}</label>
             <input required type="text" class="form-control" name="bnummer" autofocus="autofocus">
         </div>
         <div class="col">
-            <label for="MaterialSelect" class="form-label">Material-Typ</label>
+            <label for="MaterialSelect" class="form-label">{{__('messages.Material-Typ')}}</label>
             <select required id="MaterialSelect" class="form-select" name="materialtyp">
-                <option disabled selected value> -- Bitte Materialtyp wählen durch anklicken -- </option>
+                <option disabled selected value>{{__('messages.-- Bitte Materialtyp wählen durch anklicken --')}}  </option>
                 @foreach ($material as $material )
                     <option>{{$material->type_of_material}}</option>
                 @endforeach
             </select>
         </div>
             <div class="form-group">
-                <label for="commentary" class="form-label" >Kommentar</label>
+                <label for="commentary" class="form-label" >{{__('messages.Kommentar')}}</label>
                 <textarea class="form-control" name="commentary" rows="1" ></textarea>
                 <br>
             </div>
         <div class="col">
-            Datum
+            {{__('messages.Datum')}}
         </div>
         <div class="col">
             <p><b><script>document.write(new Date().toLocaleDateString())</script></b></p>
@@ -69,12 +69,12 @@
             <div class="form-check">
                 <input required class="form-check-input" type="checkbox" id="gridCheck">
                 <label class="form-check-label" for="gridCheck">
-                    Daten Überprüft ?
+                    {{__('messages.Daten überprüft?')}}
                 </label>
             </div>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Einlagern</button>
+            <button type="submit" class="btn btn-primary">{{__('messages.Probe einlagern')}}</button>
         </div>
     </form>
 @endsection

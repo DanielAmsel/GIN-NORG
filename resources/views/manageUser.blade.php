@@ -19,9 +19,9 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">E-Mail</th>
-                    <th scope="col">Rolle</th>
+                    <th scope="col">{{__('messages.Name')}}</th>
+                    <th scope="col">{{__('messages.E-Mail')}}</th>
+                    <th scope="col">{{__('messages.Rolle')}}</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -42,7 +42,7 @@
                                 </select>
                                 <td>
                                     <button type="submit" class="btn btn-outline-secondary"> 
-                                        <input type="text" value="{{ $user->id }}" name="id" hidden> Rechte aktualisieren
+                                        <input type="text" value="{{ $user->id }}" name="id" hidden>{{__('messages.Rechte aktualisieren')}} 
                                     </button>
                                 </td>
                             </form>
@@ -52,7 +52,7 @@
                             <form action="{{ url('/manageUser/delete') }}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-danger"> 
-                                    <input type="text" value="{{ $user->id }}" name="id" hidden> Nutzer entfernen
+                                    <input type="text" value="{{ $user->id }}" name="id" hidden> {{__('messages.Nutzer entfernen')}}
                                 </button>
                             </form>
                         </td>

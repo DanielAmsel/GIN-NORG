@@ -17,12 +17,12 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">B-nummer</th>
-                    <th scope="col">Material Typ</th>
-                    <th scope="col">Versand durch</th>
-                    <th scope="col">Zurück aus</th>
-                    <th scope="col">Versand Datum</th>
-                    <th scope="col" data-orderable="false">Probe einlagern</th>
+                    <th scope="col">{{__('messages.ID')}}</th>
+                    <th scope="col">{{__('messages.Material-Typ')}}</th>
+                    <th scope="col">{{__('messages.Versand durch')}}</th>
+                    <th scope="col">{{__('messages.Zurück aus')}}</th>
+                    <th scope="col">{{__('messages.Versand Datum')}}</th>
+                    <th scope="col" data-orderable="false"></th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                         <td>
                             <form method="POST" action="{{ Url('/restore/confirm') }}" >
                                 @csrf
-                            <button type="submit" class="btn btn-outline-secondary"> Probe einlagern
+                            <button type="submit" class="btn btn-outline-secondary"> {{__('messages.Probe einlagern')}}
                                 <input type="text" value="{{ $hugo->identifier }}"     name="bnummer"       hidden>
                                 <input type="text" value="{{ $hugo->type_of_material }}" name="material"    hidden>
                                 <input type="text" value="{{ $hugo->responsible_person }}"   name="name"    hidden>
