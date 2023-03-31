@@ -35,10 +35,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            ['role_name' => 'Administrator'],
-            ['role_name' => 'Laborfachkraft'],
-            ['role_name' => 'Arzt'],
-            ['role_name' => 'Sekretariat'],
+            ['role_name' => 'administrator'],
+            ['role_name' => 'lab technician'],
+            ['role_name' => 'physician'],
+            ['role_name' => 'office'],
             ['role_name' => 'Default'],
         ]);
 
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@norg.de',
                 'password' => Hash::make('adminpass'),
-                'role' => DB::table('roles')->where('role_name', '=', 'Administrator')->value('role_name'),
+                'role' => DB::table('roles')->where('role_name', '=', 'administrator')->value('role_name'),
             ]
         );
     }

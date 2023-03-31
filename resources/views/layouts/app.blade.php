@@ -97,7 +97,7 @@
                         <div class="btn-group btn-group-lg" role="toolbar" aria-label="Toolbar with button groups">
 
 
-                            @if (Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
+                            @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
                             @else
                                 @if (Request::segment(1) == 'sampleList')
                                     <button onclick="window.location = '/sampleList';" type="button"
@@ -149,7 +149,7 @@
                                 @endif
 
 
-                                @if (Auth::user()->role == 'Administrator')
+                                @if (Auth::user()->role == 'administrator')
                                     @if (Request::segment(1) == 'manageUser')
                                         <button onclick="window.location = '/manageUser';" type="button"
                                             class="btn btn-outline-secondary"style="background: lightgray">
@@ -189,7 +189,7 @@
                                             @csrf
                                         </form>
 
-                                        @if (Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
+                                        @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
                                         @else
                                         <a class="dropdown-item" href="/download">{{__('messages.Datenbank dump')}}</a>
                                         @endif
@@ -204,7 +204,7 @@
                 @if (Auth::user()->email == 'admin@norg.de')
                     <div class="alert alert-danger center_div" role="alert">
                         <b>{{__('messages.Dieser Nutzer ist zum Einrichten der Applikation!')}}<br>
-                            {{__('messages.Geben Sie einem anderen Nutzer die Rolle Administrator und entfernen danach diesen Nutzer (Name: admin, E-Mail: admin@norg.de)!')}}
+                            {{__('messages.Geben Sie einem anderen Nutzer die Rolle administrator und entfernen danach diesen Nutzer (Name: admin, E-Mail: admin@norg.de)!')}}
                         </b>
                     </div>
                 @endif

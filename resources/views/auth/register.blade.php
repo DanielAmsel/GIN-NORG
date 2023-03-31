@@ -2,12 +2,12 @@
 
 @section('login')
 
-@if (session('status') && Auth::user->role == 'Administrator')
+@if (session('status') && Auth::user->role == 'administrator')
 <div class="alert alert-success" role="alert">
     {{ session('status') }}
 </div>
 @endif
-
+<br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

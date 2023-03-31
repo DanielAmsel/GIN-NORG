@@ -7,7 +7,7 @@
         </div>
     @endif
 
-    @if (Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
+    @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
         <script>
             window.location = "/sampleList";
         </script>

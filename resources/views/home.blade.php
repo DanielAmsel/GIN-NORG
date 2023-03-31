@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('onDefault')
-    <h2>Der Admin hat Ihnen noch keine Rolle zugewiesen</h2>
+    <h2>{{__('messages.Der Admin hat Ihnen noch keine Rolle zugewiesen')}}</h2>
 @endsection
 @section('content')
     @if (session('status'))
@@ -8,7 +8,7 @@
             {{ session('status') }}
         </div>
     @endif
-    @if (Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
+    @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
         <script>
             window.location = "/sampleList";
         </script>
