@@ -45,7 +45,7 @@ class SampleFactory extends Factory
             'pos_insert' => $insertCountId,
             'pos_tube' => $tubesCountId,
             'pos_smpl' => $sampleCountId,
-            'responsible_person' => 'Platzhalter@Ueberschreiben.de',
+            'responsible_person' => 'admin@norg.de',
             'type_of_material' => 'MK',
             'commentary' => null,
             'storage_date' => $this->faker->dateTime,

@@ -9,7 +9,7 @@ return [
     'Datenbank dump' => 'database dump',
     #'Abmelden' => 'Logout',
     'Dieser Nutzer ist zum Einrichten der Applikation!' => 'This user is for setting up the application!',
-    'Geben Sie einem anderen Nutzer die Rolle Administrator und entfernen danach diesen Nutzer (Name: AdminNutzer, E-Mail: Platzhalter@Überschreiben.de)!' => 'Give another user the role "administrator" and remove this user afterwards. (Name: "AdminUser", E-Mail: "Platzhalter@Überschreiben.de")',
+    'Geben Sie einem anderen Nutzer die Rolle Administrator und entfernen danach diesen Nutzer (Name: admin, E-Mail: admin@norg.de)!' => 'Give another user the role "administrator" and remove this user afterwards. (Name: "admin", E-Mail: "admin@norg.de")',
     #Footer
     'Information zum ' => 'Information on the ',
     'Impressum ' => 'imprint ',

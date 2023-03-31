@@ -201,16 +201,16 @@
                         </div>
                 </nav>
 
-                @if (Auth::user()->email == 'Platzhalter@Ueberschreiben.de')
+                @if (Auth::user()->email == 'admin@norg.de')
                     <div class="alert alert-danger center_div" role="alert">
                         <b>{{__('messages.Dieser Nutzer ist zum Einrichten der Applikation!')}}<br>
-                            {{__('messages.Geben Sie einem anderen Nutzer die Rolle Administrator und entfernen danach diesen Nutzer (Name: AdminNutzer, E-Mail: Platzhalter@Überschreiben.de)!')}}
+                            {{__('messages.Geben Sie einem anderen Nutzer die Rolle Administrator und entfernen danach diesen Nutzer (Name: admin, E-Mail: admin@norg.de)!')}}
                         </b>
                     </div>
                 @endif
             </div>
 
-            @if (Auth::user()->email == 'Platzhalter@Ueberschreiben.de')
+            @if (Auth::user()->email == 'admin@norg.de')
                 <br><br><br>
             @endif
 
