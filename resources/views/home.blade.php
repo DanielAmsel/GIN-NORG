@@ -58,7 +58,7 @@
                         aria-expanded="false" aria-controls="collapseTank{{ $storagetank->id }}">
 
                         @if ($samples->where('pos_tank_nr', $storagetank->tank_name)->count('pos_insert') == $tankCapacity)
-                            <div class="bg-danger p-2 badge bg-primary text-wrap"> {{__('message.Tank')}}{{ $storagetank->tank_name }}
+                            <div class="bg-danger p-2 badge bg-primary text-wrap"> {{__('messages.Tank')}}{{ $storagetank->tank_name }}
                             </div>
                         @elseif ($fill > 50 && $fill <= 99)
                             <div class="bg-warning p-2 badge bg-primary text-wrap"> {{__('messages.Tank')}} {{ $storagetank->tank_name }}
