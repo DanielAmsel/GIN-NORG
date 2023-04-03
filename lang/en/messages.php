@@ -17,6 +17,7 @@ return [
     'Datenschutz ' => 'data protection ',
     'erhalten Sie über die angegebenen Links.' => 'can be obtained via the links provided.',
     #home.blade
+    'Der Admin hat Ihnen noch keine Rolle zugewiesen' => 'The admin has not assigned you a role',
     'Tank' => 'tank',
     'Proben belegt' => 'samples occupied',
     #container.blade
@@ -87,5 +88,15 @@ return [
     #privacy.blade
     '' => '',
     #imprint.blade
-    '' => ''
+    '' => '',
+    #login.blade
+    'E-Mail-Adresse' => 'E-mail address',
+    'E-Mail oder Passwort falsch.' => 'Email or password incorrect.',
+    'Passwort' => 'password',
+    'Login merken' => 'remember login',
+    'Registrieren' => 'Sign up',
+    #register.blade
+    'Registrierung' => 'Registration',
+    'Name' => 'name',
+    'Passwort bestätigen' => 'password confirm'
 ];

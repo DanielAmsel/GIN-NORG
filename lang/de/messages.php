@@ -19,11 +19,11 @@ return [
     #home.blade
     'Tank' => 'Tank',
     'Proben belegt' => 'Proben belegt',
+    'Der Admin hat Ihnen noch keine Rolle zugewiesen' => 'Der Admin hat Ihnen noch keine Rolle zugewiesen',
     #container.blade
     'Container' => 'Container',
     #tube.blade
     'Einsatz' => 'Einsatz',
-    
     #sample.blade
     'Probe' => 'Probe',
     'Kommentar: ' => 'Kommentar: ',
@@ -88,5 +88,15 @@ return [
     #privacy.blade
     '' => '',
     #imprint.blade
-    '' => ''
+    '' => '',
+    #login.blade
+    'E-Mail-Adresse' => 'E-Mail-Adresse',
+    'E-Mail oder Passwort falsch.' => 'E-Mail oder Passwort falsch.',
+    'Passwort' => 'Passwort',
+    'Login merken' => 'Login merken',
+    'Registrieren' => 'Registrieren',
+    #register.blade
+    'Registrierung' => 'Registrierung',
+    'Name' => 'Name',
+    'Passwort bestätigen' => 'Passwort bestätigen'
 ];
