@@ -6,13 +6,7 @@
             {{ session('status') }}
         </div>
     @endif
-
-    @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
-        <script>
-            window.location = "/sampleList";
-        </script>
-    @endif
-   
+ 
     <div>
         <table id="myTables" class="table table-hover text-center">
             <thead>
@@ -27,9 +21,12 @@
                     <th scope="col"                       >{{__('messages.Verantwortlicher')}}</th>
                     <th scope="col"                       >{{__('messages.Einlagerungsdatum')}}</th>
                     <th scope="col"                       >{{__('messages.Kommentar')}}</th>
-                    <th scope="col" data-orderable="false">{{__('messages.Versandort')}}</th>
-                    <th scope="col" data-orderable="false"></th>
-                    <th scope="col" data-orderable="false"></th>
+                    @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
+                    @else
+                        <th scope="col" data-orderable="false">{{__('messages.Versandort')}}</th>
+                        <th scope="col" data-orderable="false"></th>
+                        <th scope="col" data-orderable="false"></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +42,8 @@
                         <td>{{ $sampleOutput->responsible_person }}</td>
                         <td>{{ $sampleOutput->storage_date }}</td>
                         <td>{{ $sampleOutput->commentary }}</td>
+                        @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
+                        @else
                         <form method="POST" action="{{ Url('/shipped') }}">
                             @csrf
                             <td>
@@ -67,6 +66,7 @@
                                 </button>
                             </form>
                         </td> {{-- sollte auf gleiches zugreifen wie in Home --}}
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

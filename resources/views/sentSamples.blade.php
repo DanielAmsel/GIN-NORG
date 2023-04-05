@@ -19,7 +19,10 @@
                     <th scope="col">{{__('messages.Versand durch')}}</th>
                     <th scope="col">{{__('messages.Verschickt nach')}}</th>
                     <th scope="col">{{__('messages.Versand Datum')}}</th>
-                    <th scope="col" data-orderable="false"></th>
+                    @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
+                    @else
+                        <th scope="col" data-orderable="false"></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +34,8 @@
                         <td>{{ $hugo->responsible_person }}</td>
                         <td>{{ $hugo->shipped_to }}</td>
                         <td>{{ $hugo->shipping_date }}</td>
+                        @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
+                        @else
                         <td>
                             <form method="POST" action="{{ Url('/transferSentSample') }}">
                                 @csrf
@@ -39,6 +44,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
