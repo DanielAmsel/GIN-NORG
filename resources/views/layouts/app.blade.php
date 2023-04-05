@@ -51,14 +51,14 @@
         <div class="container center_div fixed-top">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
-
+                    
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ URL('assets/images/logo32col.png') }}" alt="LogoNORG" width="auto"
                             height="auto">
                         Norg
                     </a>
 
-                    @guest
+                    @guest           
                     @elseif(Auth::user()->role == 'Default')
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <!-- Right Side Of Navbar -->
@@ -164,7 +164,7 @@
                                 @endif
                             @endif
 
-                        </div>
+                        </div>              
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <!-- Right Side Of Navbar -->
 
@@ -230,6 +230,17 @@
 
     </div>
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
 </body>
 <footer class="text-center fixed-bottom">

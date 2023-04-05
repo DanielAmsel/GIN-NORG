@@ -74,8 +74,6 @@ Route::post('/addTankmodel', [TankModelController::class, 'store']);
 
 Route::post('/tankDestroy', [StorageTankController::class, 'destroy']);
 
-//Route::get('/destroy', [SampleController::class, 'destroy']);
-
 Route::post('/shipped', [ShippedSampleController::class, 'store']);
 
 Route::post('/restore', [RestoreSampleController::class, 'create']);
@@ -84,7 +82,11 @@ Route::get('/manageUser', [ManageUserController::class, 'create']);
 
 Route::post('/manageUser/updateRights', [ManageUserController::class, 'updateRights']);
 
-Route::post('/manageUser/delete', [ManageUserController::class, 'destroy']);
+Route::post('/manageUser/confirm-delete', [ManageUserController::class, 'confirmDelete'])->name('manageUser.confirmDelete');
+
+Route::post('/manageUser/delete', [ManageUserController::class, 'delete'])->name('manageUser.delete');
+
+Route::post('/manageUser/reset', [ManageUserController::class, 'resetPassword']);
 
 Route::post('/restore/confirm', [RestoreSampleController::class, 'store']);
 
@@ -92,14 +94,3 @@ Route::post('/restore/confirm', [RestoreSampleController::class, 'store']);
 Route::get('/dataTest', [CombinedTankController::class, 'indextest']);
 
 Route::get('/sentSamples', [ShippedSampleController::class, 'index']);
-
-
-//Route::controller(SampleController::class)->group(function () {
-//    Route::post('/newSamples/pos', 'create');
-//    Route::post('/newSamples', 'store');
-//   });
-
-//Route::resource('sample','SampleController');
-
-//Route::get('/newSamples', [SampleController::class, 'index']);
-

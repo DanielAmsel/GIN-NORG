@@ -78,6 +78,19 @@ return [
     'Rolle' => 'role',
     'Rechte aktualisieren' => 'update rights',
     'Nutzer entfernen' => 'remove user',
+    'Passwort zurücksetzen' => 'reset password',
+    'Neues Passwort' => 'set new password',
+    'Passwort setzen' => 'set password',
+    #confirm-delete.blade
+    'confirm_delete_title' => 'Are you sure you want to delete this user?',
+    'confirm_delete_username' => 'Username: :name',
+    'confirm_delete_email' => 'Email: :email',
+    'confirm_delete_yes' => 'Yes, delete user',
+    'confirm_delete_no' => 'No, go back to user management',
+    'delete_user_success' => 'user successfully deleted',
+    'Benutzerrolle wurde aktualisiert' => 'User role has been updated',
+    'Das Passwortfeld darf nicht leer sein!' => 'The password field must not be empty!',
+    'Passwort wurde erfolgreich zurückgesetzt!' => 'Password has been reset successfully!',
     #newSamples.blade
     //Tabelle schon in anderen Blades mit übersetzt
     'Eingelagert von' => 'stored by',

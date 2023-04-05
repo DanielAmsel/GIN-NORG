@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @if (Auth::user()->role == 'administrator')
-
-
     @section('content')
         @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -32,6 +30,7 @@
                         <td>{{ $user->name}}</td>
                         <td>{{ $user->email}}</td>
                         <td>
+                            {{-- Update User rights --}}
                             <form action="{{ url('/manageUser/updateRights') }}" method="post">
                                 @csrf
                                 <select id="Roleselect" class="form-select" name="role">
@@ -47,22 +46,29 @@
                                 </td>
                             </form>
                         </td>
-
+                        {{-- remove user --}}
                         <td>
-                            <form action="{{ url('/manageUser/delete') }}" method="post">
+                            <form action="{{ route('manageUser.confirmDelete') }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger"> 
-                                    <input type="text" value="{{ $user->id }}" name="id" hidden> {{__('messages.Nutzer entfernen')}}
-                                </button>
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                <button type="submit" class="btn btn-outline-danger">{{ __('messages.Nutzer entfernen') }}</button>
                             </form>
                         </td>
+                        {{-- reset user password --}}
+                        <td>
+                            <form action="{{ url('/manageUser/reset') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                <div class="input-group">
+                                    <input type="password" name="new_password" class="form-control" placeholder="{{__('messages.Neues Passwort')}}" aria-label="{{__('messages.Neues Passwort')}}" aria-describedby="button-reset-password">
+                                    <button type="submit" class="btn btn-outline-primary" id="button-reset-password">{{__('messages.Passwort setzen')}}</button>
+                                </div>
+                            </form>
+                        </td>                 
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
     @endsection
-
-@else
-
 @endif
