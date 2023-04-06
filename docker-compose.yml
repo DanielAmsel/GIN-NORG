@@ -8,6 +8,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_myapp
       - MARIADB_DATABASE=bitnami_myapp
+    volumes:
+      - './GIN-NORG/public/sqldumps:/dumps'
   myapp:
     image: docker.io/bitnami/laravel:9
     ports:
