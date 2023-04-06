@@ -1,11 +1,11 @@
 #     Make the script executab
-# chmod +x db_csv_import.sh
+# chmod +x db_import.sh
 
 #     Copy the script to the container:
-# docker cp db_csv_import.sh projekte_mariadb_1:/tmp/db_csv_import.sh
+# docker cp db_import.sh projekte_mariadb_1:/tmp/db_import.sh
 
 #     Run the script inside the container:
-# docker exec -i projekte_mariadb_1 bash -c "/tmp/db_csv_import.sh"
+# docker exec -i projekte_mariadb_1 bash -c "/tmp/db_import.sh"
 
 
 # Replace the placeholders with your actual values
