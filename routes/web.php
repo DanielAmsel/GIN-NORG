@@ -37,7 +37,7 @@ Route::get('/privacy',function() {
 });
 
 Route::get('/download',function() {
-    $pathToFile = public_path().'/sqldumps/NorgDBdump'.date("Ymd",strtotime("-1 days")).'.sql';
+    $pathToFile = public_path().'/sqldumps/NorgDBdump'.date("Ymd",strtotime("-1 days")).'/NorgSQLdump'.date("Ymd",strtotime("-1 days")).'.sql';
     $name = 'NorgDBdump'.date("Y-m-d",strtotime("-1 days"));
     $headers = array('Content-Type: application/sql');
     return response()->download($pathToFile, $name, $headers);
