@@ -9,11 +9,11 @@ For Database Dump:
 -> chmod +x db_export.sh
 - Copy the script to the container
 -> docker exec -i projekte_mariadb_1 bash -c "/tmp/db_export.sh"
-- Replace the placeholders with your actual values
-USERNAME="your_username"
-PASSWORD="your_password"
-DATABASE_NAME="your_database_name"
-EXPORT_BASE_PATH="/dumps"
+- Replace the placeholders with your actual values in the db_export.sh script:
+    - USERNAME="your_username"
+    - PASSWORD="your_password"
+    - DATABASE_NAME="your_database_name"
+    - EXPORT_BASE_PATH="/dumps"
 
 For daily database Dump install Cron 
 - sudo apt-get update
@@ -31,13 +31,13 @@ with the import script:
 -> chmod +x db_import.sh
 - Copy the script to the container:
 -> docker cp db_import.sh projekte_mariadb_1:/tmp/db_import.sh
-- Replace the placeholders with your actual values
-USERNAME="your_username"
-PASSWORD="your_password"
-DATABASE_NAME="your_database_name"
-DATE="[date]"
-EXPORT_BASE_PATH="/dumps"
-EXPORT_PATH="$EXPORT_BASE_PATH/NorgDBdump$DATE"
+- Replace the placeholders with your actual values in the db_import.sh script:
+    - USERNAME="your_username"
+    - PASSWORD="your_password"
+    - DATABASE_NAME="your_database_name"
+    - DATE="[date]"
+    - EXPORT_BASE_PATH="/dumps"
+    - EXPORT_PATH="$EXPORT_BASE_PATH/NorgDBdump$DATE"
 either from SQL Dump import or from the CSV files -> comment out one of the versions in the script ether the commands for the csv-import or the sql import
 
 -> Run the import script:
