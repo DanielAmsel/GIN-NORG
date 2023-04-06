@@ -25,7 +25,7 @@ mysqldump -u $USERNAME -p$PASSWORD $DATABASE_NAME > $EXPORT_PATH/NorgSQLdump$(da
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT * INTO OUTFILE '$EXPORT_PATH/roles$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM roles;"
 
 # Export table users
-mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT * INTO OUTFILE '$EXPORT_PATH/users$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM users;"
+mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT id, name, email, email_verified_at, password, role, IFNULL(remember_token, 'N'), IFNULL(created_at, 'N'), IFNULL(updated_at, 'N') INTO OUTFILE '$EXPORT_PATH/users$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM users;"
 
 # Export table tank_model
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT * INTO OUTFILE '$EXPORT_PATH/tank_model$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM tank_model;"

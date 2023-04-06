@@ -27,7 +27,7 @@ mysql --user root bitnami_myapp < public/sqldumps/NorgDBdump$DATE/NorgSQLdump$DA
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/roles$DATE.csv' INTO TABLE roles FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'; SET FOREIGN_KEY_CHECKS = 1;"
 
 # Import data back to table users
-mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/users$DATE.csv' INTO TABLE users FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'; SET FOREIGN_KEY_CHECKS = 1;"
+mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/users$DATE.csv' INTO TABLE users FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' (id, name, email, email_verified_at, password, role, @remember_token, @created_at, @updated_at) SET remember_token = NULLIF(@remember_token, '\N'), created_at = NULLIF(@created_at, '\N'), updated_at = NULLIF(@updated_at, '\N'); SET FOREIGN_KEY_CHECKS = 1;"
 
 # Import data back to table tank_model
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/tank_model$DATE.csv' INTO TABLE tank_model FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'; SET FOREIGN_KEY_CHECKS = 1;"
