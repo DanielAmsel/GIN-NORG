@@ -35,7 +35,7 @@
                      <script>
                          $("#buttonContainer{{ $storagetank->id }}-{{ $insert }}").click(function() {
                              $("#collapsecontainer{{ $storagetank->id }}-{{ $insert }}").load(
-                                 "http://localhost:8000/insideTank/{{ $storagetank->id }}/{{ $insert }}/");
+                                 "/insideTank/{{ $storagetank->id }}/{{ $insert }}/");
                          });
                      </script>
 

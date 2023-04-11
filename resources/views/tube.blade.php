@@ -35,7 +35,7 @@
                     <script>
                         $("#buttonTube{{ $storagetank->id }}-{{ $idContainer }}-{{ $tubes }}").click(function() {
                             $("#collapseinsert{{ $storagetank->id }}-{{ $idContainer }}-{{ $tubes }}").load(
-                                "http://localhost:8000/insideTank/{{ $storagetank->id }}/{{ $idContainer }}/{{ $tubes }}/");
+                                "/insideTank/{{ $storagetank->id }}/{{ $idContainer }}/{{ $tubes }}/");
                         });
                     </script>
 

@@ -83,7 +83,7 @@
                         <script>
                             $("#buttonTank{{ $storagetank->id }}").click(function() {
                                 $("#collapseTank{{ $storagetank->id }}").load(
-                                    "http://localhost:8000/insideTank/{{ $storagetank->id }}/");
+                                    "/insideTank/{{ $storagetank->id }}/");
                             });
                         </script>
 
