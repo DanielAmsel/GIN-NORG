@@ -19,7 +19,7 @@ For daily database Dump install Cron
 - sudo apt-get update
 - sudo apt-get install cron
     - crontab -e
-    Command: 59 23 * * * docker exec -i projekte_mariadb_1 bash -c "/tmp/db_csv_export.sh
+    Command: 59 23 * * * docker exec -i projekte_mariadb_1 bash -c "/tmp/db_export.sh
     
 If you just want SQL-Dump: Command: 59 23 * * *  docker exec -i projekte_mariadb_1 mysqldump -u root --password=  bitnami_myapp > /home/[Benutzer]/Projekte/GIN-NORG/public/sqldumps/NorgDBdump$(date +\%Y\%m\%d).sql
 
