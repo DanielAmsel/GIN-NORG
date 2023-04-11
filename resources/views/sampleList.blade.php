@@ -32,8 +32,8 @@
             <tbody>
                 @foreach ($samples as $sampleOutput)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <th scope="row">{{ $sampleOutput->pos_tank_nr }}</th>
+                        <td scope="row">{{ $loop->iteration }}</td>
+                        <td scope="row">{{ $sampleOutput->pos_tank_nr }}</td>
                         <th scope="row">{{ $sampleOutput->pos_insert }}</th>
                         <th scope="row">{{ $sampleOutput->pos_tube }}</th>
                         <th scope="row">{{ $sampleOutput->pos_smpl }}</th>

@@ -26,7 +26,7 @@
             <tbody>
             @foreach($removedSamples as $sampleOutput)
                 <tr>
-                    <th scope="row">{{$loop->iteration }}</th>
+                    <td scope="row">{{$loop->iteration }}</td>
                     <td>{{ $sampleOutput->identifier }}</td>
                     <td>{{ $sampleOutput->type_of_material}}</td>
                     <td>{{ $sampleOutput->responsible_person}}</td>

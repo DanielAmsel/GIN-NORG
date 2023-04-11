@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($shippedsample as $hugo)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td scope="row">{{ $loop->iteration }}</td>
                         <td>{{ $hugo->identifier }}</td>
                         <td>{{ $hugo->type_of_material }}</td>
                         <td>{{ $hugo->responsible_person }}</td>

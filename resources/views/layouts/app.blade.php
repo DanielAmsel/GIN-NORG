@@ -42,6 +42,13 @@
         </script>
         
         <!-- Styles -->
+
+        <style>
+          table.dataTable td {
+            text-align: left;
+          }
+        </style>
+        
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/fh-3.3.1/datatables.min.css"/>
