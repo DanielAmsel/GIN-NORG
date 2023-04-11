@@ -8,6 +8,7 @@ use App\Http\Controllers\SampleController;
 use App\Http\Controllers\ShippedSampleController;
 use App\Http\Controllers\StorageTankController;
 use App\Http\Controllers\TankModelController;
+use App\Http\Controllers\MaterialTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,12 @@ Route::get('/removedSamples', [RemovedSampleController::class, 'index']);
 Route::post('/newSamples/pos/confirm', [SampleController::class, 'store']);
 
 Route::post('/newSamples/pos', [SampleController::class, 'create']);
+
+Route::get('/manageMaterialTypes', [MaterialTypeController::class, 'index']);
+
+Route::post('/manageMaterialTypes', [MaterialTypeController::class, 'store'])->name('material-type.store');
+
+Route::post('/materialDestroy', [MaterialTypeController::class, 'destroy']);
 
 Route::post('/transfer', [RemovedSampleController::class, 'store']);
 

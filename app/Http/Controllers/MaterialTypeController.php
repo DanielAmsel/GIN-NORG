@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MaterialType;
+use App\Models\Sample;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
+
 
 class MaterialTypeController extends Controller
 {
@@ -25,7 +26,18 @@ class MaterialTypeController extends Controller
      */
     public function index()
     {
-        //this is pregenerated stub, can be used later if features are to be implemented
+        // get all users
+        $allSamplesinTank = Sample::all();
+        // get MaterialTypes
+        $material = MaterialType::all();
+
+
+        // load the create form (app/resources/views/samples.blade.php)
+        return view('materialType')
+            ->with('material', $material)
+            ->with('allSamplesinTank', $allSamplesinTank)
+        ;
+
     }
 
     /**
@@ -37,7 +49,7 @@ class MaterialTypeController extends Controller
     {
         //this is pregenerated stub, can be used later if features are to be implemented
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -46,9 +58,18 @@ class MaterialTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
+        $request->validate([
+            'newMaterial' => 'required|unique:material_types,type_of_material'
+        ]);
 
+        $materialType = new MaterialType();
+        $materialType->type_of_material = $request->input('newMaterial');
+        $materialType->save();
+
+        return redirect('/manageMaterialTypes')->with('success', __('messages.Materialtyp wurde hinzugefügt!'));
+
+    }
+    
     /**
      * Display the specified resource.
      *
@@ -87,10 +108,14 @@ class MaterialTypeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //this is pregenerated stub, can be used later if features are to be implemented
+        $materialType = MaterialType::find($request->material_id);
+        $materialType->delete();
+
+        // redirect
+        return redirect('/manageMaterialTypes')->with('success', __('messages.Materialtyp wurde entfernt!'));
     }
 }

@@ -5,6 +5,7 @@ return [
     'Verschickte Proben' => 'Verschickte Proben',
     'Entfernte Proben' => 'Entfernte Proben',
     'Tanks verwalten' => 'Tanks verwalten',
+    'MT verwalten'=>'MT verwalten',
     'User verwalten' => 'User verwalten',
     'Datenbank dump' => 'Datenbank dump',
     #'Abmelden' => 'Logout',
@@ -53,6 +54,16 @@ return [
     'Versand Datum' => 'Versand Datum',
     #removedSamples.blade
     'Auslagerungsdatum' => 'Auslagerungsdatum',
+    #materialType.blade
+    'Neuen Materialtyp hinzufügen'=>'Neuen Materialtyp hinzufügen',
+    'Neuen Materialtyp eingeben'=>'Neuen Materialtyp eingeben',
+    'Materialtyp hinzufügen'=>'Materialtyp hinzufügen',
+    'Angelegte Materialtypen'=>'Angelegte Materialtypen',
+    'Materialtyp entfernen'=>'Materialtyp entfernen',
+    'Materialtyp keiner Probe zugeordnet'=>'Materialtyp keiner Probe zugeordnet',
+    'Es gibt noch Proben mit diesem Materialtypen'=>'Es gibt noch Proben mit diesem Materialtypen',
+    'Materialtyp wurde hinzugefügt!' => 'Materialtyp wurde hinzugefügt!',
+    'Materialtyp wurde entfernt!' => 'Materialtyp wurde entfernt!',
     #manageTanks.blade
     'Tank Name' => 'Tank Name',
     'Model' => 'Model',

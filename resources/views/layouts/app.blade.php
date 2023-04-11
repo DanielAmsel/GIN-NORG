@@ -171,6 +171,17 @@
                                         </button>
                                     @endif
 
+                                    @if (Request::segment(1) == 'manageMaterialTypes')
+                                        <button onclick="window.location = '/manageMaterialTypes';" type="button"
+                                            class="btn btn-outline-secondary" style="background: lightgray">
+                                            {{__('messages.MT verwalten')}}
+                                        </button>
+                                    @else
+                                        <button onclick="window.location = '/manageMaterialTypes';" type="button"
+                                            class="btn btn-outline-secondary">
+                                            {{__('messages.MT verwalten')}}
+                                        </button>
+                                    @endif
 
                                     @if (Auth::user()->role == 'administrator')
                                         @if (Request::segment(1) == 'manageUser')

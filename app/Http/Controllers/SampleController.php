@@ -140,7 +140,6 @@ class SampleController extends Controller
      */
     public function destroy($id)
     {
-        //TODO: hier fehlt was?
 
         // delete
         $sample = Sample::where('id','=', $id );
