@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Sample;
 use App\Models\StorageTank;
 use App\Models\TankModel;
+//use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Symfony\Component\Console\Input\Input;
 
 class TankModelController extends Controller
 {
@@ -60,15 +63,16 @@ class TankModelController extends Controller
     {
         // store
         $tankModel = new tankModel;
-        $tankModel->modelname       = Input::get('modelName');
-        $tankModel->manufacturer    = Input::get('manufacturer');
-        $tankModel->capacity        = Input::get('capacity');
-        //TODO: fehlt hier was in date_timestamp_get()?
-        $tankModel->created_at      = date_timestamp_get();
+        $tankModel->modelname       = $request->modelname;
+        $tankModel->manufacturer    = $request->manufacturer;
+        $tankModel->number_of_inserts = $request->number_of_inserts;
+        $tankModel->number_of_tubes = $request->number_of_tubes;
+        $tankModel->number_of_samples = $request->number_of_samples;
+        $tankModel->capacity        = $request->number_of_inserts*$request->number_of_tubes*$request->number_of_samples;
         $tankModel->save();
 
         // redirect
-        return redirect('/');
+        return redirect('/manageTanks');
     }
 
     /**

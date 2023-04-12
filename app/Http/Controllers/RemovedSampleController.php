@@ -7,6 +7,7 @@ use App\Models\Sample;
 use App\Models\ShippedSample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RemovedSampleController extends Controller
 {
@@ -29,7 +30,10 @@ class RemovedSampleController extends Controller
     {
         // get all the removed samples
         $removedSamples = RemovedSample::all();
-
+        $removedSamples = ShippedSample::all();
+        $removedSamples = DB::table('removed_sample')
+        ->orderBy('removal_date', 'desc')
+        ->get();
         // load the view and pass the removed samples
         return view('removedSamples')
             ->with('removedSamples', $removedSamples);
@@ -54,7 +58,7 @@ class RemovedSampleController extends Controller
     public function store(Request $request)
     {
         $sample    = Sample::all();
-        $bnummer   = null;
+        $identifier   = null;
         $material  = null;
         $date      = null;
         $sampleId  = $request->sample_id;
@@ -63,14 +67,14 @@ class RemovedSampleController extends Controller
         foreach($sample->where('id', $sampleId) as $s)
         {
             $sampleId = $s->id;
-            $bnummer  = $s->B_number;
+            $identifier  = $s->identifier;
             $material = $s->type_of_material;
             $date     = $s->storage_date;
         }
 
         $removedSample = new RemovedSample();
         // DB positions
-        $removedSample->identifier         = $bnummer;
+        $removedSample->identifier         = $identifier;
         $removedSample->responsible_person = Auth::user()->email;
         $removedSample->type_of_material   = $material;
         $removedSample->storage_date       = $date;
@@ -79,7 +83,7 @@ class RemovedSampleController extends Controller
         $toDestroy = Sample::find($sampleId);
         $toDestroy->delete();
 
-        return redirect('/');
+        return redirect('/removedSamples');
     }
 
     /**
@@ -113,7 +117,7 @@ class RemovedSampleController extends Controller
         $toDestroy = ShippedSample::find($shippedSampleId);
         $toDestroy->delete();
 
-        return redirect('/');
+        return redirect('/sentSamples');
     }
 
     /**
@@ -130,7 +134,7 @@ class RemovedSampleController extends Controller
         foreach ($samplesDelete->where('id', $sampleId) as $sampleDelete)
         {
             $samplesDeleteId = $sampleDelete['id'];
-            $samplesDeleteIdent = $sampleDelete['B_number'];
+            $samplesDeleteIdent = $sampleDelete['identifier'];
             $samplesDeleteUser = $sampleDelete['responsible_person'];
             $samplesDeleteTyp = $sampleDelete['type_of_material'];
             $samplesDeleteDate = $sampleDelete['storage_date'];
@@ -148,7 +152,7 @@ class RemovedSampleController extends Controller
         $toDestroy = Sample::find($samplesDeleteId);
         $toDestroy->delete();
 
-        return redirect('/');
+        return redirect('/sampleList');
     }
 
     /**

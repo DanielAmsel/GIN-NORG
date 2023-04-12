@@ -42,14 +42,14 @@ class RestoreSampleController extends Controller
         //get request
         $tank_pos = $request->tank_pos;
         $con_pos = $request->con_pos;
-        $insert_pos = $request->insert_pos;
+        $tube_pos = $request->tube_pos;
         $sample_pos = $request->sample_pos;
 
         // load the create form (app/resources/views/samples.blade.php)
         return view('restoreSample')
             ->with('tank_pos', $tank_pos)
             ->with('con_pos', $con_pos)
-            ->with('insert_pos', $insert_pos)
+            ->with('tube_pos', $tube_pos)
             ->with('sample_pos', $sample_pos)
             ->with('shippedsample', $shippedSamples)
         ;
@@ -69,11 +69,11 @@ class RestoreSampleController extends Controller
         //Postion in database schreiben
         $sample->pos_tank_nr = $request->tank_pos;
         $sample->pos_insert  = $request->con_pos;
-        $sample->pos_tube    = $request->insert_pos;
+        $sample->pos_tube    = $request->tube_pos;
         $sample->pos_smpl    = $request->sample_pos;
 
         //Info data
-        $sample->B_number           = $request->bnummer;
+        $sample->identifier           = $request->identifier;
         $sample->responsible_person = Auth::user()->email;
         $sample->type_of_material   = $request->material;
 

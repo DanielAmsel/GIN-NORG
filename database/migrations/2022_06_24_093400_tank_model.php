@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('tank_model', function (Blueprint $table) {
             $table->id();
-            $table->string('manufacturer');
             $table->string('modelname')->index();
+            $table->string('manufacturer');
             $table->integer('capacity');
+            $table->integer('number_of_inserts');
+            $table->integer('number_of_tubes');
+            $table->integer('number_of_samples');
             $table->timestamp('created_at')->useCurrent()->useCurrentOnUpdate();
         });
     }

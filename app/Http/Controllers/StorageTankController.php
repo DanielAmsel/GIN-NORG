@@ -52,12 +52,12 @@ class StorageTankController extends Controller
     {
         // validations
         $request->validate([
-            'tank_number' => 'unique:storage_tank',
+            'tank_name' => 'unique:storage_tank',
         ]);
 
         // store
         $storageTank = new storageTank;
-        $storageTank->tank_number = $request->tank_number;
+        $storageTank->tank_name = $request->tank_name;
         $storageTank->modelname = $request->modelname;
         $storageTank->save();
 
@@ -111,6 +111,6 @@ class StorageTankController extends Controller
         $storageTank->delete();
 
         // redirect
-        return redirect('/');
+        return redirect('/manageTanks');
     }
 }

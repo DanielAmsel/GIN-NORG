@@ -23,15 +23,16 @@ class SampleFactory extends Factory
     public function definition()
     {
         //not completely automated, you have to input the corresponding tank_number from the db
-        $tankNrCount = ['3'];
+        $tank_name = 'HC35 Test.-Tank';
+        $tankNrCount = ['2'];
         $insertCount = ['1','2','3','4','5','6','7','8','9','10'];
         $tubesCount = ['1','2','3','4','5','6','7','8','9','10','11','12'];
         $sampleCount = ['1','2','3','4','5'];
 
         $combinationStyle = Arr::crossJoin($tankNrCount, $insertCount,$tubesCount, $sampleCount);
-
         $combinationUnique = $this->faker->unique->randomElement($combinationStyle);
 
+        //$tank_name = $combinationUnique[0];
         $tankNrCoundId = $combinationUnique[0];
         $insertCountId = $combinationUnique[1];
         $tubesCountId = $combinationUnique[2];
@@ -39,15 +40,17 @@ class SampleFactory extends Factory
 
         return
             [
-            'b_number' => $this->faker->numberBetween(1, 1000),
-            'pos_tank_nr' => $tankNrCoundId,
+            'identifier' => $this->faker->numberBetween(1, 1000),
+            'pos_tank_nr' => $tank_name,
             'pos_insert' => $insertCountId,
             'pos_tube' => $tubesCountId,
             'pos_smpl' => $sampleCountId,
-            'responsible_person' => 'Platzhalter@Überschreiben.de',
+            'responsible_person' => 'admin@norg.de',
             'type_of_material' => 'MK',
+            'commentary' => null,
             'storage_date' => $this->faker->dateTime,
             'shipping_date' => null,
+            'removal_date' => null,
             ];
     }
 
