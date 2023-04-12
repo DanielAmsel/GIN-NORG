@@ -25,7 +25,7 @@
 
                             <div class="row mb-3">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('E-Mail-Adresse') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{__('messages.E-Mail-Adresse')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -34,15 +34,15 @@
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>E-Mail oder Passwort falsch.</strong>
+                                            <strong>{{__('messages.E-Mail oder Passwort falsch.')}}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-
+                        
                             <div class="row mb-3">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Passwort') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('messages.Passwort') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -64,7 +64,7 @@
                                             {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
-                                            {{ __('Eingeloggt bleiben') }}
+                                            {{ __('messages.Login merken') }}
                                         </label>
                                     </div>
                                 </div>
@@ -78,9 +78,8 @@
 
 
                                     <a class="btn btn-link" href="{{ route('register') }}">
-                                        Registrieren?
+                                        {{ __('messages.Registrieren') }} 
                                     </a>
-
                                 </div>
                             </div>
                         </form>

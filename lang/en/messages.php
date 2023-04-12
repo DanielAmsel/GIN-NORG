@@ -114,8 +114,8 @@ return [
     #imprint.blade
     '' => '',
     #login.blade
-    'E-Mail-Adresse' => 'E-mail address',
-    'E-Mail oder Passwort falsch.' => 'Email or password incorrect.',
+    'E-Mail-Adresse' => 'email address',
+    'E-Mail oder Passwort falsch.' => 'email or password incorrect.',
     'Passwort' => 'password',
     'Login merken' => 'remember login',
     'Registrieren' => 'Sign up',
