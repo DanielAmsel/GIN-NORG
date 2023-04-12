@@ -168,12 +168,21 @@ class ManageUserController extends Controller
     public function delete(Request $request)
     {
         $user = User::find($request->id);
-        $user->delete();
-    
-        // redirect
-        return redirect('/manageUser')->with('success', __('messages.delete_user_success'));
-    }
 
+        try {
+            $user->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+
+            if ($errorCode == 1451) {
+                // foreign key constraint violation error
+                return redirect('/manageUser')->with('error', __('messages.Von diesem Benutzer sind existente Proben angelegt bzw. sind aktuell Proben versendet worden. Er kann nicht gelöscht werden'));
+            }
+        }
+        
+        // redirect
+        return redirect('/manageUser')->with('success', __('messages.Benutzer wurde gelöscht'));
+    }
 
     /**
      * Remove the specified resource from storage.

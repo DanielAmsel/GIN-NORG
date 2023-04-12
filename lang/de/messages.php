@@ -96,6 +96,9 @@ return [
     'Benutzerrolle wurde aktualisiert' => 'Benutzerrolle wurde aktualisiert',
     'Das Passwortfeld darf nicht leer sein!' => 'Das Passwortfeld darf nicht leer sein!',
     'Passwort wurde erfolgreich zurückgesetzt!' => 'Passwort wurde erfolgreich zurückgesetzt!',
+    'Von diesem Benutzer sind existente Proben angelegt bzw. sind aktuell Proben versendet worden. Er kann nicht gelöscht werden'
+    => 'Von diesem Benutzer sind existente Proben angelegt bzw. sind aktuell Proben versendet worden. Er kann nicht gelöscht werden',
+    'Benutzer wurde gelöscht' => 'Benutzer wurde gelöscht',
     #confirm-delete.blade
     'confirm_delete_title' => 'Sind Sie sicher, dass Sie den Benutzer löschen möchten?',
     'confirm_delete_username' => 'Benutzername: :name',

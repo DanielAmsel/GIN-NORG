@@ -92,6 +92,9 @@ return [
     'Passwort zurücksetzen' => 'reset password',
     'Neues Passwort' => 'set new password',
     'Passwort setzen' => 'set password',
+    'Von diesem Benutzer sind existente Proben angelegt bzw. sind aktuell Proben versendet worden. Er kann nicht gelöscht werden' 
+    => 'Existing samples have been created by this user or samples have currently been sent. It cannot be deleted',
+    'Benutzer wurde gelöscht' => 'deleted user',
     #confirm-delete.blade
     'confirm_delete_title' => 'Are you sure you want to delete this user?',
     'confirm_delete_username' => 'Username: :name',
