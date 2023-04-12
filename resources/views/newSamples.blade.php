@@ -43,8 +43,8 @@
         <br>
     </div>
     <div class="col">
-        <label for="bnummer" class="form-label" >{{__('messages.ID')}}</label>
-        <input required type="text" class="form-control" name="bnummer" autofocus="autofocus">
+        <label for="identifier" class="form-label" >{{__('messages.ID')}}</label>
+        <input required type="text" class="form-control" name="identifier" autofocus="autofocus">
     </div>
     <br>
 

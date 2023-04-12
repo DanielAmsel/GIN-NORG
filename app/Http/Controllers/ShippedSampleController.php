@@ -56,7 +56,7 @@ class ShippedSampleController extends Controller
     {
 
         $sample    = Sample::all();
-        $bnummer   = null;
+        $identifier   = null;
         $material  = null;
         $date      = null;
         $address   = $request->address;
@@ -66,14 +66,14 @@ class ShippedSampleController extends Controller
         foreach($sample->where('id', $sampleId) as $s)
         {
             $sampleId = $s->id;
-            $bnummer  = $s->B_number;
+            $identifier  = $s->identifier;
             $material = $s->type_of_material;
             $date     = $s->storage_date;
         }
 
         $shippedSample = new ShippedSample();
 
-        $shippedSample->identifier         =  $bnummer;
+        $shippedSample->identifier         =  $identifier;
         $shippedSample->responsible_person = Auth::user()->email;
         $shippedSample->type_of_material   = $material;
         $shippedSample->storage_date       = $date;

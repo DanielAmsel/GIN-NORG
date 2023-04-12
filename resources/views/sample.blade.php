@@ -35,7 +35,7 @@
                     aria-expanded="false"> {{__('messages.Probe')}}
                     {{ $sample }} </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item">{{ $selecetedSample->value('B_number') }}
+                    <li><a class="dropdown-item">{{ $selecetedSample->value('identifier') }}
                         </a></li>
                     <li><a class="dropdown-item">{{ $selecetedSample->value('responsible_person') }}
                         </a></li>

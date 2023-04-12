@@ -73,7 +73,7 @@ class RestoreSampleController extends Controller
         $sample->pos_smpl    = $request->sample_pos;
 
         //Info data
-        $sample->B_number           = $request->bnummer;
+        $sample->identifier           = $request->identifier;
         $sample->responsible_person = Auth::user()->email;
         $sample->type_of_material   = $request->material;
 

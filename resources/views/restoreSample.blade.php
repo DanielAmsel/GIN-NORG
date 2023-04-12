@@ -38,7 +38,7 @@
                             <form method="POST" action="{{ Url('/restore/confirm') }}" >
                                 @csrf
                             <button type="submit" class="btn btn-outline-secondary"> {{__('messages.Probe einlagern')}}
-                                <input type="text" value="{{ $hugo->identifier }}"     name="bnummer"       hidden>
+                                <input type="text" value="{{ $hugo->identifier }}"     name="identifier"    hidden>
                                 <input type="text" value="{{ $hugo->type_of_material }}" name="material"    hidden>
                                 <input type="text" value="{{ $hugo->responsible_person }}"   name="name"    hidden>
                                 <input type="text" value="{{ $hugo->id }}"   name="id"    hidden>

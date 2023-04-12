@@ -40,7 +40,7 @@ class SampleFactory extends Factory
 
         return
             [
-            'b_number' => $this->faker->numberBetween(1, 1000),
+            'identifier' => $this->faker->numberBetween(1, 1000),
             'pos_tank_nr' => $tank_name,
             'pos_insert' => $insertCountId,
             'pos_tube' => $tubesCountId,

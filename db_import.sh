@@ -39,7 +39,7 @@ mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LO
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/material_types$DATE.csv' INTO TABLE material_types FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'; SET FOREIGN_KEY_CHECKS = 1;"
 
 # Import data back to table sample
-mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/sample$DATE.csv' INTO TABLE sample FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' (id, B_number, pos_tank_nr, pos_insert, pos_tube, pos_smpl, responsible_person, type_of_material, @commentary, storage_date, shipping_date, removal_date) SET commentary = NULLIF(@commentary, '\N'); SET FOREIGN_KEY_CHECKS = 1;"
+mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/sample$DATE.csv' INTO TABLE sample FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' (id, identifier, pos_tank_nr, pos_insert, pos_tube, pos_smpl, responsible_person, type_of_material, @commentary, storage_date, shipping_date, removal_date) SET commentary = NULLIF(@commentary, '\N'); SET FOREIGN_KEY_CHECKS = 1;"
 
 # Import data back to table shipped_sample
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA INFILE '$EXPORT_PATH/shipped_sample$DATE.csv' INTO TABLE shipped_sample FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' (id, identifier, responsible_person, type_of_material, storage_date, shipping_date, shipped_to, @created_at, @updated_at) SET created_at = NULLIF(@created_at, '\N'), updated_at = NULLIF(@updated_at, '\N'); SET FOREIGN_KEY_CHECKS = 1;"

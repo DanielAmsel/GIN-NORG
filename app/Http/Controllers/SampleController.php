@@ -78,13 +78,13 @@ class SampleController extends Controller
         $con_pos     = $request->con_pos;
         $tube_pos  = $request->tube_pos;
         $sample_pos  = $request->sample_pos;
-        $bnummer     = $request->bnummer;
+        $identifier     = $request->identifier;
         $materialtyp = $request->materialtyp;
         $commentary  = $request->commentary;
 
         // store
         $sample = new sample;
-        $sample->B_number           = $bnummer;
+        $sample->identifier           = $identifier;
         $sample->pos_tank_nr        = $tank_pos;
         $sample->pos_insert         = $con_pos;
         $sample->pos_tube           = $tube_pos;

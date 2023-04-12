@@ -37,7 +37,7 @@ mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT * INTO OUTFILE '$EXPORT
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT * INTO OUTFILE '$EXPORT_PATH/material_types$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM material_types;"
 
 # Export table sample
-mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT id, B_number, pos_tank_nr, pos_insert, pos_tube, pos_smpl, responsible_person, type_of_material, IFNULL(commentary, 'N'), storage_date, shipping_date, removal_date INTO OUTFILE '$EXPORT_PATH/sample$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM sample;"
+mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT id, identifier, pos_tank_nr, pos_insert, pos_tube, pos_smpl, responsible_person, type_of_material, IFNULL(commentary, 'N'), storage_date, shipping_date, removal_date INTO OUTFILE '$EXPORT_PATH/sample$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM sample;"
 
 # Export table shipped_sample
 mysql -u $USERNAME -p$PASSWORD $DATABASE_NAME -e "SELECT id, identifier, responsible_person, type_of_material, storage_date, shipping_date, shipped_to, IFNULL(created_at, 'N'), IFNULL(updated_at, 'N') INTO OUTFILE '$EXPORT_PATH/shipped_sample$(date +%Y%m%d).csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' FROM shipped_sample;"

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sample', function (Blueprint $table) {
             $table->id();
-            $table->string('B_number');
+            $table->string('identifier');
             $table->string('pos_tank_nr');
             $table->foreign('pos_tank_nr')->references('tank_name')->on('storage_tank');
             $table->integer('pos_insert');

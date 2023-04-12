@@ -37,7 +37,7 @@
                         <th scope="row">{{ $sampleOutput->pos_insert }}</th>
                         <th scope="row">{{ $sampleOutput->pos_tube }}</th>
                         <th scope="row">{{ $sampleOutput->pos_smpl }}</th>
-                        <td>{{ $sampleOutput->B_number }}</td>
+                        <td>{{ $sampleOutput->identifier }}</td>
                         <td>{{ $sampleOutput->type_of_material }}</td>
                         <td>{{ $sampleOutput->responsible_person }}</td>
                         <td>{{ $sampleOutput->storage_date }}</td>
