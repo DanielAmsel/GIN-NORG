@@ -8,10 +8,6 @@
     </div>
     @endif
 
-    @if(Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
-        <script>window.location = "/sampleList";</script>
-    @endif
-
     <div>
         <table class="table table-hover text-center">
             <thead>
@@ -61,5 +57,4 @@
         </table>
     </div>
 @endsection
-
 

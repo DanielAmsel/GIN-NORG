@@ -16,7 +16,6 @@
     <script src="{{ asset('js/app.js') }}" defer>
         const myModal = document.getElementById('myModal')
         const myInput = document.getElementById('myInput')
-
         myModal.addEventListener('shown.bs.modal', () => {
             myInput.focus()
         })
@@ -25,12 +24,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-
+    
 </head>
 
 <body>
-
     <div class="container center_div">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -78,30 +75,73 @@
                             @yield('onDefault')
                         </main>
                 @else
-                    @if(Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
-                        <a class="navbar-brand" href="{{ url('/sentSamples') }}">
-                            Verschickte Proben
-                        </a>
-                    @else
-                        <a class="navbar-brand" href="{{ url('/sampleList') }}">
-                            Proben im Tank
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/sentSamples') }}">
-                            Verschickte Proben
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/removedSamples') }}">
-                            Entfernte Proben
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/manageTanks') }}">
-                            Tanks verwalten
-                        </a>
-                        @if (Auth::user()->role == 'Administrator')
-                            <a class="navbar-brand" href="{{ url('/manageUser') }}">
-                                User verwalten
-                            </a>
-                        @endif
-                    @endif
+                    <div class="btn-group btn-group-lg" role="toolbar" aria-label="Toolbar with button groups">
+                        
+                  
+                            @if(Auth::user()->role == 'Arzt' || Auth::user()->role == 'Sekretariat')
+                
+                            @else
 
+                            
+                                @if ( Request::segment(1) == 'sampleList')
+                                    <button  onclick = "window.location = '/sampleList';" type="button" class="btn btn-outline-secondary " style="background: lightgray">
+                                        Proben im Tank 
+                                    </button>
+                                @else
+                                    <button  onclick = "window.location = '/sampleList';" type="button" class="btn btn-outline-secondary ">
+                                        Proben im Tank 
+                                    </button>
+                                @endif
+        
+                            
+                                @if ( Request::segment(1) == 'sentSamples')
+                                    <button  onclick = "window.location = '/sentSamples';" type="button" class="btn btn-outline-secondary" style="background: lightgray">
+                                        Verschickte Proben
+                                    </button>
+                                @else
+                                <button  onclick = "window.location = '/sentSamples';" type="button" class="btn btn-outline-secondary" >
+                                    Verschickte Proben
+                                </button>
+                                @endif
+
+                                @if (Request::segment(1) == 'removedSamples')
+                                    <button  onclick = "window.location = '/removedSamples';" type="button" class="btn btn-outline-secondary" style="background: lightgray">
+                                        Entfernte Proben
+                                    </button>
+                                @else
+                                    <button  onclick = "window.location = '/removedSamples';" type="button" class="btn btn-outline-secondary">
+                                        Entfernte Proben
+                                    </button>
+                                @endif
+                               
+                                @if (Request::segment(1) == 'manageTanks')
+                                    <button  onclick = "window.location = '/manageTanks';" type="button" class="btn btn-outline-secondary" style="background: lightgray">
+                                        Tanks verwalten
+                                    </button>
+                                @else
+                                    <button  onclick = "window.location = '/manageTanks';" type="button" class="btn btn-outline-secondary">
+                                        Tanks verwalten
+                                    </button>
+                                @endif
+
+                
+                                @if (Auth::user()->role == 'Administrator')
+
+                                    @if (Request::segment(1) == 'manageUser')
+                                        <button  onclick = "window.location = '/manageUser';" type="button" class="btn btn-outline-secondary"style="background: lightgray">
+                                            User verwalten
+                                        </button>
+                                    @else
+                                        <button  onclick = "window.location = '/manageUser';" type="button" class="btn btn-outline-secondary">
+                                            User verwalten
+                                        </button>
+                                    @endif
+                                      
+                                @endif
+                            @endif
+                        
+                    </div>
+                        
 
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <!-- Right Side Of Navbar -->
@@ -137,10 +177,10 @@
 
         </nav>
 
-        @if (Auth::user()->email == "Platzhalter@Überschreiben.de")
+        @if (Auth::user()->email == "Platzhalter@Ueberschreiben.de")
             <div class="alert alert-danger center_div" role="alert">
                 <b>Dieser Nutzer ist zum Einrichten der Applikation! <br>
-                    Geben Sie einem anderen Nutzer die Rolle "Administrator" und entfernen danach diesen Nutzer (Name: "AdminNutzer", E-Mail: "Platzhalter@Überschreiben.de")!
+                    Geben Sie einem anderen Nutzer die Rolle "Administrator" und entfernen danach diesen Nutzer (Name: "AdminNutzer", E-Mail: "Platzhalter@Ueberschreiben.de")!
                 </b>
             </div>
         @endif
@@ -156,6 +196,7 @@
         </nav>
         <main class="py-4">
             @yield('login')
+            @yield('info')
         </main>
 
     </div>

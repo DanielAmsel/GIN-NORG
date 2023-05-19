@@ -1,8 +1,14 @@
 @extends('layouts.app')
 @section('onDefault')
-<h2>Der Admin hat Ihnen noch keine Rolle zugewiesen</h2>
+</nav>
+<div class="alert alert-danger center_div" role="alert">
+    <b>Sie haben noch keine Rolle zugewiesen bekommen <br>
+        Bitte wenden sie sich an einen Admin!
+    </b>
+</div>
 @endsection 
 @section('content')
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -15,31 +21,34 @@
                     <div class="accordion accordion-flush container center_div" id="tankTable">
                         @foreach($storageTanks as $storagetank)
                             @php
-                                $fill = round(1/600 * $samples->where('pos_tank_nr', $storagetank->tank_number)->count('pos_tank_nr') * 100);
+                                $fill = $samples->where('pos_tank_nr', $storagetank->tank_number)->count('pos_tank_nr');
+                                $percent = round(1/600 * $fill * 100);
                             @endphp
                             <div class="accordion-item ">
                                 <h2 class="accordion-header" id="tank{{ $storagetank->tank_number }}">
-                                    <div class="progress">
-                                        @switch($fill)
-                                            @case($fill <= 50)
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $fill }}%;" aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}%</div>
+                                    <div class="fs-6 text-center"></div>
+                                    <div class="progress "> 
+                                        @switch($percent)
+                                            @case($percent <= 85)
+                                                <div class="progress-bar bg-success text-dark" role="progressbar" style="width: {{ $percent }}%;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}/600 </div>
                                                 @break
-                                            @case($fill > 50 && $fill <= 85)
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $fill }}%;" aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}%</div>
+                                            @case($percent > 85 && $percent <= 95)
+                                                <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{ $percent }}%;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}/600</div>
                                                 @break
-                                            @case($fill > 85)
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $fill }}%;" aria-valuenow="{{ $fill }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}%</div>
+                                            @case($percent > 95)
+                                                <div class="progress-bar bg-danger text-dark" role="progressbar" style="width: {{ $percent }}%;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100">{{ $fill }}/600</div>
                                             @break
 
                                         @endswitch
-
                                     </div>
                                     <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTank{{ $storagetank->tank_number }}" aria-expanded="false" aria-controls="collapseTank{{ $storagetank->tank_number }}">
 
-                                        @if ( $samples->where('pos_tank_nr', $storagetank->tank_number)->count('pos_insert') == 10)
+                                        @if ( $samples->where('pos_tank_nr', $storagetank->tank_number)->count('pos_insert') == 600)
                                             <div class = "bg-danger p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_number }} </div>
+                            
                                         @else
                                             <div class = "bg-success p-2 badge bg-primary text-wrap"> Tank {{ $storagetank->tank_number }} </div>
+                                 
                                         @endif
 
                                     </button>
@@ -56,7 +65,7 @@
                                                     <h2 class="accordion-header" id="container{{ $insert }}">
                                                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapsecontainer{{ $storagetank->tank_number }}{{ $insert }}" aria-expanded="true" aria-controls="collapsecontainer{{ $insert }}">
 
-                                                            @if ( $samples->where('pos_tank_nr', $storagetank->tank_number)->where('pos_insert', $insert)->count('pos_tube') == 12)
+                                                            @if ( $samples->where('pos_tank_nr', $storagetank->tank_number)->where('pos_insert', $insert)->count('pos_tube') == 60)
                                                                 <div class = "bg-danger p-2 badge bg-primary text-wrap"> Container {{ $insert }} </div>
                                                             @else
                                                                 <div class = "bg-success p-2 badge bg-primary text-wrap"> Container {{ $insert }} </div>
@@ -77,6 +86,8 @@
                                                                             <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseinsert{{ $storagetank->tank_number }}{{ $insert }}{{ $tubes }}" aria-expanded="true" aria-controls="collapse{{ $tubes }}">
                                                                                 @if ( $samples->where('pos_tank_nr', $storagetank->tank_number)->where('pos_insert', $insert)->where('pos_tube', $tubes)->count('pos_smpl') == 5)
                                                                                     <div class = "bg-danger p-2 badge bg-primary text-wrap"> Einsatz {{ $tubes }} </div>
+                                                                                @elseif( $samples->where('pos_tank_nr', $storagetank->tank_number)->where('pos_insert', $insert)->where('pos_tube', $tubes)->count('pos_smpl') >= 3)
+                                                                                    <div class = "bg-warning p-2 badge bg-primary text-wrap"> Einsatz {{ $tubes }} </div>
                                                                                 @else
                                                                                     <div class = "bg-success p-2 badge bg-primary text-wrap"> Einsatz {{ $tubes }} </div>
                                                                                 @endif
@@ -100,7 +111,7 @@
                                                                                                         <li><a class="dropdown-item" >{{ $selecetedSample->value('storage_date') }}         </a></li>
                                                                                                         <li><hr class="dropdown-divider">                                                       </li>
                                                                                                         <li>
-                                                                                                            <form method="POST" action="{{ Url('/shipped') }}" >
+                                                                                                            <form onsubmit="return confirm('Sicher das diese Probe Verschickt werden soll?');" method="POST" action="{{ Url('/shipped') }}" >
                                                                                                                 @csrf
                                                                                                                     <li >
                                                                                                                         <button type="submit" class="dropdown-item"> Probe verschicken
@@ -110,7 +121,7 @@
                                                                                                             </form>
                                                                                                         </li>
                                                                                                         <li>
-                                                                                                            <form method="POST" action="{{ Url('/transfer') }}" >
+                                                                                                            <form onsubmit="return confirm('Sicher das diese Probe Entfernt werden soll?');" method="POST" action="{{ Url('/transfer') }}" >
                                                                                                                 @csrf
                                                                                                                     <li >
                                                                                                                         <button type="submit" class="dropdown-item"> Probe entfernen

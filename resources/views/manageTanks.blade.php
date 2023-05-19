@@ -30,8 +30,17 @@
                 <th scope="row">{{$activeTank->modelname}}</th>
                 <th scope="row">{{$activeTank->created_at}}</th>
                 <th scope="row">{{$activeTank->id}}</th>
-                    <form method="POST" action="{{ Url('/tankDestroy') }}" >
+                    <form onsubmit="return confirm('Sicher das dieser Tank Entfernt werden soll?');" method="POST" action="{{ Url('/tankDestroy') }}" >
                         @csrf
+                        @if($allSamplesinTank->isEmpty())
+
+                        <th>
+                            <button type="submit" class="btn btn-outline-secondary"> Tank Entfernen
+                                <input value="{{ $activeTank->id }}"name="tank_id" hidden>
+                            </button>
+                        </th>
+                        <th></th>
+                @endif
                         @foreach ($allSamplesinTank as $sample)
                             @php
                                 $group = $sample->where('pos_tank_nr', $activeTank->tank_number);
@@ -47,7 +56,17 @@
                                     <button type="button" class="btn btn-danger" disabled>Es sind noch Porben im Tank</button>
                                 </th>
                                 @break
-                            @else
+                        @elseif($group == '')
+
+                                <th>
+                                    <button type="submit" class="btn btn-outline-secondary"> Tank Entfernen
+                                        <input value="{{ $activeTank->id }}"name="tank_id" hidden>
+                                    </button>
+                                </th>
+                                <th></th>
+
+                            @break
+                        @else
 
                                 <th>
                                     <button type="submit" class="btn btn-outline-secondary"> Tank Entfernen
@@ -66,6 +85,7 @@
                     </form>
                 </td>      {{-- sollte auf gleiches zugreifen wie in Home --}}
             </tr>
+
         @endforeach
         </tbody>
     </table>
