@@ -33,13 +33,19 @@ For inquiries, support, and collaboration opportunities, please contact daniel.a
 
 Thank you for considering the NORG System as your next-generation solution for biological sample management. Together, we can revolutionize the way we preserve and utilize valuable biological resources.
 
+### Required Software
+- Docker
+- Docker-compose
 
+  
 ### How to install 
 The installation is easily manageable via Docker containerization and Docker-compose.
 
+
+
 It is highly recommendable to do system backups of the data you entered into your database. Instead of programming a complex backup solution, we rely on commonly used and well-known cron-jobs that run an export script of the database as often as you like.
 
-### For Database Dump:
+### Database backup:
 - make db_export.sh script executable
 -> chmod +x db_export.sh
 - Copy the script to the container
@@ -81,5 +87,6 @@ either from SQL Dump import or from the CSV files -> comment out one of the vers
 For the SQL import, if you have done the SQL-Dump command without the script:
 - docker exec -i projekte_mariadb_1 mysql --user root bitnami_myapp < public/sqldumps/NorgDBdump[date].sql
 
+## License
 
 ## How to cite
