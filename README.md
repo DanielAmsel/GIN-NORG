@@ -1,10 +1,45 @@
 # NORG – Nitrogen ORGanizer: A standalone database system for local preservation of cryomaterial 
 <img align="right" width="200" height="200" src="norg.png">
 
+The NORG System is a cutting-edge solution designed to revolutionize the way biological samples are managed and preserved. This repository serves as the official documentation for the NORG System, providing a comprehensive guide to its features, functionalities, and implementation.
 
-## How to install 
+If you wish, you can try NORG at: https://gin-norg-dev.med.uni-giessen.de/
 
-For Database Dump:
+
+### Overview
+
+The NORG System addresses a critical challenge in the field of sample preservation – the efficient management of diverse biological samples, ranging from human specimens to plant materials. The preservation process typically involves packaging samples into appropriate containers and storing them in various environments, such as cryogenic containers, freezers, and more. To maximize the value of a biological sample database, meticulous cataloging and continuous maintenance are essential. Without a clear understanding of the sample locations, the database loses its significance.
+
+In many instances, sample documentation is carried out using local spreadsheets saved in formats like CSV or XLSX. In some cases, even handwritten records are utilized to track sample locations. The primary purpose of a biological database is to collect and store rare materials while facilitating sample withdrawal for further analysis, both internally and in collaboration with external partners.
+
+A recurring issue arises when samples are withdrawn from containers that are already fully stored. Reallocating empty spaces within containers demands extensive administrative efforts. Without efficient management, new samples might unintentionally occupy containers that are currently active, leading to inefficiencies and potential data loss.
+
+### Introducing NORG
+
+The NORG System offers a comprehensive and user-friendly software solution through web services, revolutionizing the way biological samples are managed. Key features include:
+
+#### Sample Cataloging: 
+NORG provides a seamless platform to digitally catalog various sample types, ensuring accurate record-keeping and easy retrieval.
+#### Color-Coded Filling Levels: 
+To simplify the monitoring of storage conditions, NORG employs color-coding to indicate the filling levels of storage units, such as nitrogen tanks. This visual representation enhances efficient sample management.
+#### Traceability: 
+NORG enables transparent tracking of sample movement. Users can easily identify the origins and destinations of samples, streamlining collaboration with external partners and analytical processes.
+#### Cooperation Tracking: 
+Collaborative projects become more manageable with NORG's ability to trace sample transfers to and from external partners. This feature facilitates analysis by ensuring seamless communication and tracking.
+Getting Started
+
+### Contact
+For inquiries, support, and collaboration opportunities, please contact daniel.amsel@patho.med.uni-giessen.de .
+
+Thank you for considering the NORG System as your next-generation solution for biological sample management. Together, we can revolutionize the way we preserve and utilize valuable biological resources.
+
+
+### How to install 
+The installation is easily manageable via Docker containerization and Docker-compose.
+
+It is highly recommendable to do system backups of the data you entered into your database. Instead of programming a complex backup solution, we rely on commonly used and well-known cron-jobs that run an export script of the database as often as you like.
+
+### For Database Dump:
 - make db_export.sh script executable
 -> chmod +x db_export.sh
 - Copy the script to the container
