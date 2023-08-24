@@ -55,6 +55,11 @@ If this is your first start, your need to initialize the databse by using these 
 
 `docker exec norg_laravel php artisan db:seed`
 
+You can now login via the default credentials
+`admin@norg.de`
+`adminpass`
+*please change the credentials as soon as you can*
+
 It is highly recommendable to do system backups of the data you entered into your database. Instead of programming a complex backup solution, we rely on commonly used and well-known cron-jobs that run an export script of the database as often as you like.
 
 ### Database backup:
