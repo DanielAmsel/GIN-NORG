@@ -41,7 +41,19 @@ Thank you for considering the NORG System as your next-generation solution for b
 ### How to install 
 The installation is easily manageable via Docker containerization and Docker-compose.
 
+`git clone https://github.com/DanielAmsel/GIN-NORG.git`
 
+`cd GIN-NORG`
+
+`docker-compose up`
+
+If this is your first start, your need to initialize the databse by using these three commands:
+
+`docker exec norg_laravel php artisan key:generate`
+
+`docker exec norg_laravel php artisan migrate`
+
+`docker exec norg_laravel php artisan db:seed`
 
 It is highly recommendable to do system backups of the data you entered into your database. Instead of programming a complex backup solution, we rely on commonly used and well-known cron-jobs that run an export script of the database as often as you like.
 
