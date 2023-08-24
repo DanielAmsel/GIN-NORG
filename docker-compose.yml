@@ -9,7 +9,7 @@ services:
       - MARIADB_USER=bn_myapp
       - MARIADB_DATABASE=bitnami_myapp
     volumes:
-      - './GIN-NORG/public/sqldumps:/dumps'
+      - '$PWD/public/sqldumps:/dumps'
   myapp:
     image: docker.io/bitnami/laravel:9
     ports:
@@ -20,6 +20,6 @@ services:
       - DB_USERNAME=bn_myapp
       - DB_DATABASE=bitnami_myapp
     volumes:
-      - './GIN-NORG:/app'
+      - '$PWD:/app'
     depends_on:
       - mariadb
