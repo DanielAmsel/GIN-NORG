@@ -3,6 +3,7 @@ version: '2'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.6
+    container_name: norg_mariadb
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
@@ -12,6 +13,7 @@ services:
       - '$PWD/public/sqldumps:/dumps'
   myapp:
     image: docker.io/bitnami/laravel:9
+    container_name: norg_laravel
     ports:
       - '8000:8000'
     environment:
