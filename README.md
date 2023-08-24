@@ -55,6 +55,8 @@ If this is your first start, your need to initialize the databse by using these 
 
 `docker exec norg_laravel php artisan db:seed`
 
+`docker exec norg_laravel php artisan route:cache`
+
 You can now login via the default credentials
 `admin@norg.de`
 `adminpass`
