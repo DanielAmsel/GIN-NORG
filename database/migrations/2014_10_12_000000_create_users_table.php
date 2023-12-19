@@ -24,10 +24,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamp('created_at')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('updated_at')->nullable();
-            // TODO: wie updated_at realisieren? //Andi: Versteh ich nicht, warum soll es einen Updated Eintrag für User geben?
-            // bsp:
-            //$table->timestamp('updated_at');
-            // $lastUpdatedUser = User::newest('updated_at')->first();
         });
     }
 

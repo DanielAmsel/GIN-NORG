@@ -34,7 +34,7 @@ return [
     'Position' => 'Position',
     'Probe einlagern' => 'Probe einlagern',
     'Probe erneut einlagern' => 'Probe erneut einlagern',
-    #Tabellen
+    #Tables
     #sampleList.blade
     'Tank Name' => 'Tank Name',
     'Container' => 'Container',
@@ -106,12 +106,11 @@ return [
     'confirm_delete_yes' => 'Ja, Benutzer löschen',
     'confirm_delete_no' => 'Nein, zurück zum Benutzer-Management',
     #newSamples.blade
-    //Tabelle schon in anderen Blades mit übersetzt
     'Eingelagert von' => 'Eingelagert von',
     'Material-Typ' => 'Material-Typ',
     '-- Bitte Materialtyp wählen durch anklicken --' => '-- Bitte Materialtyp wählen durch anklicken --',
-     #restoreSample.blade
-     'Zurück aus' => 'Zurück aus',
+    #restoreSample.blade
+    'Zurück aus' => 'Zurück aus',
     #privacy.blade
     '' => '',
     #imprint.blade

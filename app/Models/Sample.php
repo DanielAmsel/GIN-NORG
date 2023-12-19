@@ -12,12 +12,12 @@ class Sample extends Model
     protected $table = 'sample';
     public $timestamps  = false;
 
-    //Relation zum Tank (1-1)
+    // 1-1 relation to StorageTank
     public function storageTank() {
         return $this->hasOne(StorageTank::class);
     }
 
-    //Relation zum Materialtyp (Gewebetyp) (1-1)
+    // 1-1 relation to MaterialType
     public function materialType() {
         return $this->hasOne(MaterialType::class);
     }

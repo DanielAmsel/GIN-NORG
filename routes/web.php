@@ -25,10 +25,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Route::get('/sentSamples',function() {
-//  return view('sentSamples');
-//});
-
 Route::get('/imprint',function() {
     return view('imprint');
 });

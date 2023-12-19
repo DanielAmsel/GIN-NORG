@@ -32,7 +32,6 @@ class SampleFactory extends Factory
         $combinationStyle = Arr::crossJoin($tankNrCount, $insertCount,$tubesCount, $sampleCount);
         $combinationUnique = $this->faker->unique->randomElement($combinationStyle);
 
-        //$tank_name = $combinationUnique[0];
         $tankNrCoundId = $combinationUnique[0];
         $insertCountId = $combinationUnique[1];
         $tubesCountId = $combinationUnique[2];

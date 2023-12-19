@@ -34,7 +34,7 @@ return [
     'Position' => 'position',
     'Probe einlagern' => 'store sample',
     'Probe erneut einlagern' => 'store again',
-    #Tabellen
+    #Tables
     #sampleList.blade
     'Tank Name' => 'tank name',
     'Container' => 'container',
@@ -106,7 +106,6 @@ return [
     'Das Passwortfeld darf nicht leer sein!' => 'The password field must not be empty!',
     'Passwort wurde erfolgreich zurückgesetzt!' => 'Password has been reset successfully!',
     #newSamples.blade
-    //Tabelle schon in anderen Blades mit übersetzt
     'Eingelagert von' => 'stored by',
     'Material-Typ' => 'type of material',
     '-- Bitte Materialtyp wählen durch anklicken --' => '-- Please select material type by clicking --',

@@ -12,7 +12,7 @@ class Role extends Model
     protected $table = 'roles';
     public $timestamps = false;
 
-    //Relation zum User (1-n)
+    // 1-n relation to User
     public function user() {
         return $this->hasMany(User::class);
     }

@@ -15,17 +15,17 @@ class StorageTank extends Model
     protected $fillable = ['tank_name', 'modelname'];
     public $timestamps = false;
 
-    //Relation zur Probe (1-n)
+    // 1-n relation to Sample
     public function sample() {
         return $this->hasMany(Sample::class);
     }
 
-    //Relation zum Tankmodel (1-1)
+    // 1-1 relation to TankModel
     public function tankModel() {
         return $this->hasOne(TankModel::class);
     }
 
-    //Get Tank_Model for current storageTank
+    // Get Tank_Model for current storageTank
     public function tankConstruction() {
         $tankCapacities = DB::table('tank_model')->where('modelname', $this->modelname)->get();
         return $tankCapacities[0];

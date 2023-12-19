@@ -12,10 +12,12 @@ class ShippedSample extends Model
     protected $table = 'shipped_sample';
     public $timestamps = false;
 
+    // 1-1 relation to User
     public function user() {
         return $this->hasOne(User::class);
     }
 
+    // 1-1 relation to Sample
     public function sample() {
         return $this->hasOne(Sample::class);
     }

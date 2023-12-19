@@ -19,11 +19,8 @@ return new class extends Migration
             $table->string('pos_tank_nr');
             $table->foreign('pos_tank_nr')->references('tank_name')->on('storage_tank');
             $table->integer('pos_insert');
-            //$table->foreign('pos_insert')->references('pos_insert')->on('tank_model');
             $table->integer('pos_tube');
-            //$table->foreign('pos_tube')->references('pos_tube')->on('tank_model');
             $table->integer('pos_smpl');
-            //$table->foreign('pos_smpl')->references('pos_sample')->on('tank_model');
             $table->string('responsible_person');
             $table->foreign('responsible_person')->references('email')->on('users')->restrictOnDelete();
             $table->string('type_of_material');

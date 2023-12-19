@@ -15,6 +15,8 @@ class MaterialType extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+    // 1-n relation to Sample
     public function sample() {
         return $this->hasMany(Sample::class);
     }

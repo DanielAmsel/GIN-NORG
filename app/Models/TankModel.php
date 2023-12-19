@@ -11,11 +11,11 @@ class TankModel extends Model
 
     protected $table = 'tank_model';
     protected $primaryKey = 'modelname';
-    public $incrementing = false; //keine Inkrementierung, da PK String ist
-    protected $keyType = 'string'; //PK ist kein integer
+    public $incrementing = false;
+    protected $keyType = 'string';
     public $timestamps = false;
 
-    //Relation zum Tank (1-n)
+    // 1-n relation to StorageTank
     public function storageTank() {
         return $this->hasMany(StorageTank::class);
     }
