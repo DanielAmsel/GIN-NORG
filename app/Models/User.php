@@ -42,9 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime'
     ];
 
-    // 1-n relation to Role
+    // 1-1 relation to Role
     public function role(){
-        return $this->hasMany(Role::class, 'id', 'id');
+        return $this->hasOne(Role::class, 'id', 'id');
     }
 
     // 1-n relation to Sample
