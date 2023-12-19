@@ -30,20 +30,11 @@ class ShippedSampleController extends Controller
         $shippedSamples = DB::table('shipped_sample')
         ->orderBy('shipping_date', 'desc')
         ->get();
+
         // load the view and pass the shipped samples
         return view('sentSamples')
             ->with('shippedsample', $shippedSamples)
         ;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
     }
 
     /**
@@ -54,13 +45,12 @@ class ShippedSampleController extends Controller
      */
     public function store(Request $request)
     {
-
-        $sample    = Sample::all();
-        $identifier   = null;
-        $material  = null;
-        $date      = null;
-        $address   = $request->address;
-        $sampleId  = $request->sample_id;
+        $sample     = Sample::all();
+        $identifier = null;
+        $material   = null;
+        $date       = null;
+        $address    = $request->address;
+        $sampleId   = $request->sample_id;
 
         // get data per id of any sample
         foreach($sample->where('id', $sampleId) as $s)
@@ -87,40 +77,6 @@ class ShippedSampleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -128,6 +84,6 @@ class ShippedSampleController extends Controller
      */
     public function destroy($id)
     {
-        //???
+        //
     }
 }

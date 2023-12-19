@@ -21,16 +21,6 @@ class RestoreSampleController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
@@ -66,14 +56,14 @@ class RestoreSampleController extends Controller
         // store
         $sample = new sample;
 
-        //Postion in database schreiben
+        // write position in DB
         $sample->pos_tank_nr = $request->tank_pos;
         $sample->pos_insert  = $request->con_pos;
         $sample->pos_tube    = $request->tube_pos;
         $sample->pos_smpl    = $request->sample_pos;
 
-        //Info data
-        $sample->identifier           = $request->identifier;
+        // ínfo data
+        $sample->identifier         = $request->identifier;
         $sample->responsible_person = Auth::user()->email;
         $sample->type_of_material   = $request->material;
 
@@ -84,40 +74,6 @@ class RestoreSampleController extends Controller
         $toDestroy->delete();
 
         return redirect('/');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
     }
 
     /**

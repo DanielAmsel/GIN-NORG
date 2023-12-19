@@ -34,19 +34,10 @@ class RemovedSampleController extends Controller
         $removedSamples = DB::table('removed_sample')
         ->orderBy('removal_date', 'desc')
         ->get();
+
         // load the view and pass the removed samples
         return view('removedSamples')
             ->with('removedSamples', $removedSamples);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
     }
 
     /**
@@ -57,19 +48,19 @@ class RemovedSampleController extends Controller
      */
     public function store(Request $request)
     {
-        $sample    = Sample::all();
-        $identifier   = null;
-        $material  = null;
-        $date      = null;
-        $sampleId  = $request->sample_id;
+        $sample     = Sample::all();
+        $identifier = null;
+        $material   = null;
+        $date       = null;
+        $sampleId   = $request->sample_id;
 
         // get single data for any sample
         foreach($sample->where('id', $sampleId) as $s)
         {
-            $sampleId = $s->id;
-            $identifier  = $s->identifier;
-            $material = $s->type_of_material;
-            $date     = $s->storage_date;
+            $sampleId   = $s->id;
+            $identifier = $s->identifier;
+            $material   = $s->type_of_material;
+            $date       = $s->storage_date;
         }
 
         $removedSample = new RemovedSample();
@@ -99,11 +90,11 @@ class RemovedSampleController extends Controller
 
         foreach ($shippedSamples->where('id', $sampleId) as $shippedSample)
         {
-            $shippedSampleId = $shippedSample['id'];
+            $shippedSampleId    = $shippedSample['id'];
             $shippedSampleIdent = $shippedSample['identifier'];
-            $shippedSampleUser = $shippedSample['responsible_person'];
-            $shippedSampleTyp = $shippedSample['type_of_material'];
-            $shippedSampleDate = $shippedSample['storage_date'];
+            $shippedSampleUser  = $shippedSample['responsible_person'];
+            $shippedSampleTyp   = $shippedSample['type_of_material'];
+            $shippedSampleDate  = $shippedSample['storage_date'];
         }
 
         $removeShippedSample = new RemovedSample();
@@ -133,11 +124,11 @@ class RemovedSampleController extends Controller
 
         foreach ($samplesDelete->where('id', $sampleId) as $sampleDelete)
         {
-            $samplesDeleteId = $sampleDelete['id'];
+            $samplesDeleteId    = $sampleDelete['id'];
             $samplesDeleteIdent = $sampleDelete['identifier'];
-            $samplesDeleteUser = $sampleDelete['responsible_person'];
-            $samplesDeleteTyp = $sampleDelete['type_of_material'];
-            $samplesDeleteDate = $sampleDelete['storage_date'];
+            $samplesDeleteUser  = $sampleDelete['responsible_person'];
+            $samplesDeleteTyp   = $sampleDelete['type_of_material'];
+            $samplesDeleteDate  = $sampleDelete['storage_date'];
             echo 'RemovContr - deleteSampleFromList';
         }
 

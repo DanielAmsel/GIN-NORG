@@ -56,6 +56,16 @@ class ManageUserController extends Controller
 
     }
 
+    /**
+     * Update a user's role.
+     *
+     * Finds and updates the role of a user based on the provided request data.
+     * The update is performed only if the new role is not null.
+     * Redirects to the user management page with a success message after update.
+     *
+     * @param  \Illuminate\Http\Request  $request Request containing user ID and new role.
+     * @return \Illuminate\Http\RedirectResponse Redirects to the manageUser page with a success message.
+     */
     public function updateRights(Request $request)
     {
         $user = User::find($request->id);
@@ -77,10 +87,6 @@ class ManageUserController extends Controller
      */
     public function store(Request $request)
     {
-        // do we need a validation of the user?
-        //TODO: muss noch getestet werden
-
-        // store
         $user = new user;
         $user->name                 = Input::get('name');
         $user->email                = Input::get('email');
@@ -90,7 +96,7 @@ class ManageUserController extends Controller
         $user->save();
 
         // redirect
-        return redirect('user'); //TODO: Login oder Home muss als return hin
+        return redirect('user');
     }
 
     /**
@@ -136,8 +142,6 @@ class ManageUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // store
-        //TODO: Müssten im Update bei uns eigentlich nicht die role geupdated werden?
         $user = User::find($id);
         $user->username  = Input::get('username');
         $user->email     = Input::get('email');
@@ -150,7 +154,15 @@ class ManageUserController extends Controller
     }
 
 
-
+    /**
+     * Display confirmation view for user deletion.
+     *
+     * Retrieves the user by the provided ID from the request and returns a view
+     * to confirm the deletion of the user.
+     *
+     * @param  \Illuminate\Http\Request  $request Request containing the user ID.
+     * @return \Illuminate\Contracts\View\View Returns the 'confirm-delete' view with user data.
+     */
     public function confirmDelete(Request $request)
     {
         $user = User::find($request->id);
@@ -198,16 +210,16 @@ class ManageUserController extends Controller
             
         $newPassword = $request->input('new_password');
         
-        // Überprüfen, ob das Passwort leer ist
+        // check if pw is empty
         if (empty($newPassword)) {
             return redirect('/manageUser')->with('error', __('messages.Das Passwortfeld darf nicht leer sein!'));
         }
         
-        // Passwort des Benutzers zurücksetzen
+        // reset pw of user
         $manageUser = new ManageUser();
         $manageUser->resetPassword($user, $newPassword);
 
-        // Erfolgsnachricht anzeigen
+        // show message
         return redirect('/manageUser')->with('success', __('messages.Passwort wurde erfolgreich zurückgesetzt!'));
     }
 }

@@ -8,15 +8,12 @@ use App\Models\StorageTank;
 use App\Models\TankModel;
 use Illuminate\Support\Facades\DB;
 
-/**
- *
- */
+
 class CombinedTankController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return void
+     * Constructor to initialize the controller.
+     * Applies 'auth' middleware to all the routes in this controller.
      */
     public function __construct()
     {
@@ -24,9 +21,9 @@ class CombinedTankController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application
-     * @return \Illuminate\Contracts\View\Factory
-     * @return \Illuminate\Contracts\View\View
+     * Display the home page with storage tanks and samples data.
+     * 
+     * @return \Illuminate\Contracts\View\View Returns the home view with tanks and samples data.
      */
     public function index()
     {
