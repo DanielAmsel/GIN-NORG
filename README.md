@@ -68,7 +68,7 @@ It is highly recommendable to do system backups of the data you entered into you
 - make db_export.sh script executable
 -> chmod +x db_export.sh
 - Copy the script to the container
--> docker exec -i projekte_mariadb_1 bash -c "/tmp/db_export.sh"
+-> docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh"
 - Replace the placeholders with your actual values in the db_export.sh script:
     - USERNAME="your_username"
     - PASSWORD="your_password"
@@ -79,9 +79,9 @@ For daily database Dump install Cron
 - sudo apt-get update
 - sudo apt-get install cron
     - crontab -e
-    Command: 59 23 * * * docker exec -i projekte_mariadb_1 bash -c "/tmp/db_export.sh
+    Command: 59 23 * * * docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh
     
-If you just want SQL-Dump: Command: 59 23 * * *  docker exec -i projekte_mariadb_1 mysqldump -u root --password=  bitnami_myapp > /home/[Benutzer]/Projekte/GIN-NORG/public/sqldumps/NorgDBdump$(date +\%Y\%m\%d).sql
+If you just want SQL-Dump: Command: 59 23 * * *  docker exec -i [mariadb container name] mysqldump -u root --password=  bitnami_myapp > /home/[Benutzer]/Projekte/GIN-NORG/public/sqldumps/NorgDBdump$(date +\%Y\%m\%d).sql
 
 ## How to use
 
@@ -90,7 +90,7 @@ with the import script:
 - Make the script executable 
 -> chmod +x db_import.sh
 - Copy the script to the container:
--> docker cp db_import.sh projekte_mariadb_1:/tmp/db_import.sh
+-> docker cp db_import.sh [mariadb container name]:/tmp/db_import.sh
 - Replace the placeholders with your actual values in the db_import.sh script:
     - USERNAME="your_username"
     - PASSWORD="your_password"
@@ -101,10 +101,10 @@ with the import script:
 either from SQL Dump import or from the CSV files -> comment out one of the versions in the script ether the commands for the csv-import or the sql import
 
 -> Run the import script:
--> docker exec -i projekte_mariadb_1 bash -c "/tmp/db_import.sh"
+-> docker exec -i [mariadb container name] bash -c "/tmp/db_import.sh"
 
 For the SQL import, if you have done the SQL-Dump command without the script:
-- docker exec -i projekte_mariadb_1 mysql --user root bitnami_myapp < public/sqldumps/NorgDBdump[date].sql
+- docker exec -i [mariadb container name] mysql --user root bitnami_myapp < public/sqldumps/NorgDBdump[date].sql
 
 ## License
 

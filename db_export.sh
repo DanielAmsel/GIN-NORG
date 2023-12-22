@@ -2,10 +2,10 @@
 # chmod +x db_export.sh
 
 #     Copy the script to the container:
-# docker cp db_export.sh projekte_mariadb_1:/tmp/db_export.sh
+# docker cp db_export.sh [mariadb container name]:/tmp/db_export.sh
 
 #     Run the script inside the container:
-# docker exec -i projekte_mariadb_1 bash -c "/tmp/db_export.sh"
+# docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh"
 
 # Replace the placeholders with your actual values
 USERNAME="your_username"
