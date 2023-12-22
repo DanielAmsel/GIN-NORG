@@ -33,11 +33,32 @@ Route::get('/privacy',function() {
     return view('privacy');
 });
 
-Route::get('/download',function() {
-    $pathToFile = public_path().'/sqldumps/NorgDBdump'.date("Ymd",strtotime("-1 days")).'/NorgSQLdump'.date("Ymd",strtotime("-1 days")).'.sql';
-    $name = 'NorgDBdump'.date("Y-m-d",strtotime("-1 days"));
-    $headers = array('Content-Type: application/sql');
-    return response()->download($pathToFile, $name, $headers);
+Route::get('/download', function() {
+    try {
+        $date = date("Ymd", strtotime("-1 days"));
+        $dumpDirectory = public_path()."/sqldumps/NorgDBdump{$date}";
+        $pathToFile = public_path()."/sqldumps/NorgDBdump{$date}/NorgSQLdump{$date}.sql";
+        $name = "NorgDBdump" . date("Y-m-d", strtotime("-1 days"));
+        $headers = ['Content-Type: application/sql'];
+
+        // Check if the directory exists
+        if (!file_exists($dumpDirectory) || !is_dir($dumpDirectory)) {
+            throw new Exception("The directory for the SQL dumps does not exist: {$dumpDirectory}, cause it's empty");
+        }
+
+        // Check if the file exists
+        if (!file_exists($pathToFile)) {
+            throw new Exception("The file {$pathToFile} was not found.");
+        }
+
+
+        return response()->download($pathToFile, $name, $headers);
+    } catch (Exception $e) {
+        // Log the error
+        Log::error("An error occurred: " . $e->getMessage());
+        
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 });
 
 Route::get('/insideTank/{idTank}/',[CombinedTankController::class, 'indexContainer']);
