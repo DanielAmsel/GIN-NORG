@@ -28,7 +28,7 @@
                         <th scope="row">{{ $activeTank->tank_name }}</th>
                         <th scope="row">{{ $activeTank->modelname }}</th>
                         <th scope="row">{{ $activeTank->created_at }}</th>                        
-                        <form onsubmit="return confirm({{__('messages.Sicher das dieser Tank Entfernt werden soll?')}});" method="POST"
+                        <form onsubmit="return confirm('{{__('messages.Sicher, dass dieser Tank entfernt werden soll?')}}')" method="POST"
                             action="{{ Url('/tankDestroy') }}">
                             @csrf
 
@@ -39,7 +39,7 @@
 
                             @if ($group->count() == 0)
                             <th>
-                                <button type="submit" class="btn btn-outline-secondary">{{__('messages.Tank Entfernen')}}
+                                <button type="submit" class="btn btn-outline-secondary">{{__('messages.Tank entfernen')}}
                                     <input value="{{ $activeTank->id }}"name="tank_id" hidden>
                                 </button>
                                 <th>
@@ -48,7 +48,7 @@
                             </th>
                             @else
                             <th>
-                                <button type="submit" class="btn btn-outline-secondary" disabled> {{__('messages.Tank Entfernen')}}
+                                <button type="submit" class="btn btn-outline-secondary" disabled> {{__('messages.Tank entfernen')}}
                                 </button>
                             </th>
                             <th>
