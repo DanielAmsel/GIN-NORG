@@ -77,7 +77,7 @@
                             @csrf
                     <li>
                         <button type="submit"
-                            class="dropdown-item"> {{__('messages.Probe entfernen')}}
+                            class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#CD5C5C'" onmouseout="this.style.backgroundColor=''"> {{__('messages.Probe entfernen')}}
                             <input type="text"
                                 value="{{ $selecetedSample->value('id') }}"name="sample_id"
                                 hidden>

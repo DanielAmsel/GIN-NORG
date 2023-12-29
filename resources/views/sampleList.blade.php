@@ -61,8 +61,8 @@
                         <td>
                             <form method="POST" action="{{ Url('/transferSampleDelete') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-secondary"> {{__('messages.Probe entfernen')}}
-                                    <input type="text" value="{{ $sampleOutput->id }}"name="sample_id" hidden>
+                                <button type="submit" class="btn btn-outline-secondary" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#CD5C5C'" onmouseout="this.style.backgroundColor=''"> {{__('messages.Probe entfernen')}}
+                                    <input type="text" value="{{ $sampleOutput->id }}" name="sample_id" hidden>
                                 </button>
                             </form>
                         </td> {{-- sollte auf gleiches zugreifen wie in Home --}}

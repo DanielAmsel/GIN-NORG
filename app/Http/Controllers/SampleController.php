@@ -29,10 +29,10 @@ class SampleController extends Controller
     public function index()
     {
         // get all the samples
-        //$samples = Sample::all();
         $samples = DB::table('sample')
         ->orderBy('storage_date', 'desc')
         ->get();
+
         // load the view and pass the samples
         return view('sampleList')
             ->with ('samples', $samples)
@@ -76,15 +76,15 @@ class SampleController extends Controller
         // get request
         $tank_pos    = $request->tank_pos;
         $con_pos     = $request->con_pos;
-        $tube_pos  = $request->tube_pos;
+        $tube_pos    = $request->tube_pos;
         $sample_pos  = $request->sample_pos;
-        $identifier     = $request->identifier;
+        $identifier  = $request->identifier;
         $materialtyp = $request->materialtyp;
         $commentary  = $request->commentary;
 
         // store
         $sample = new sample;
-        $sample->identifier           = $identifier;
+        $sample->identifier         = $identifier;
         $sample->pos_tank_nr        = $tank_pos;
         $sample->pos_insert         = $con_pos;
         $sample->pos_tube           = $tube_pos;
@@ -99,40 +99,6 @@ class SampleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //this is pregenerated stub, can be used later if features are to be implemented
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -140,7 +106,6 @@ class SampleController extends Controller
      */
     public function destroy($id)
     {
-
         // delete
         $sample = Sample::where('id','=', $id );
         echo $sample->get();
