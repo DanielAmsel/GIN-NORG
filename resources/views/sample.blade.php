@@ -31,7 +31,6 @@
                         <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('responsible_person') }}</a></li>
                         <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('type_of_material') }}</a></li>
                         <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('storage_date') }}</a></li>
-                        <div class="dropdown-divider"></div>
                         <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{__('messages.Kommentar: ')}} {{ $selecetedSample->value('commentary') }}</a></li>
                     <li>
                         <hr class="dropdown-divider">
