@@ -73,7 +73,7 @@
                     </li>
                     <li>
                         <form method="POST"
-                            action="{{ Url('/transfer') }}">
+                            action="{{ Url('/transfer') }}" onsubmit="return confirm('{{__('messages.Sicher, dass diese Probe entfernt werden soll?')}}')">
                             @csrf
                     <li>
                         <button type="submit"

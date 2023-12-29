@@ -48,6 +48,7 @@ return [
     'Versandort' => 'Versandort',
     'Probe verschicken' => 'Probe verschicken',
     'Probe entfernen' => 'Probe entfernen',
+    'Sicher, dass diese Probe entfernt werden soll?' => 'Sicher, dass diese Probe entfernt werden soll?',
     #sentSamples.blade
     'Versand durch' => 'Versand durch',
     'Verschickt nach' => 'Verschickt nach',

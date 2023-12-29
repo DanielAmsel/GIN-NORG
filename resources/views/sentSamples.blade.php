@@ -37,7 +37,7 @@
                         @if (Auth::user()->role == 'physician' || Auth::user()->role == 'office')
                         @else
                         <td>
-                            <form method="POST" action="{{ Url('/transferSentSample') }}">
+                            <form method="POST" action="{{ Url('/transferSentSample') }}" onsubmit="return confirm('{{__('messages.Sicher, dass diese Probe entfernt werden soll?')}}')">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-secondary" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#CD5C5C'" onmouseout="this.style.backgroundColor=''"> {{__('messages.Probe entfernen')}}
                                     <input type="text" value="{{ $hugo->id }}" name="sample_id" hidden>
