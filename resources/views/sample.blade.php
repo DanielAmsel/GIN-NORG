@@ -18,14 +18,6 @@
                 ->where('pos_smpl', $sample);
         @endphp
 
-            {{-- @php
-                echo ($idContainer);
-                echo ('-');
-                echo ($idTube);
-                echo ('-');
-                echo ($sample);
-            @endphp --}}
-
         <div class="btn-group">
 
             @if ($selecetedSample->value('pos_smpl') == $sample)
@@ -34,17 +26,13 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"> {{__('messages.Probe')}}
                     {{ $sample }} </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item">{{ $selecetedSample->value('identifier') }}
-                        </a></li>
-                    <li><a class="dropdown-item">{{ $selecetedSample->value('responsible_person') }}
-                        </a></li>
-                    <li><a class="dropdown-item">{{ $selecetedSample->value('type_of_material') }}
-                        </a></li>
-                    <li><a class="dropdown-item">{{ $selecetedSample->value('storage_date') }}
-                        </a></li>
-                    <li><a class="dropdown-item"> {{__('messages.Kommentar: ')}} {{ $selecetedSample->value('commentary') }}
-                        </a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('identifier') }}</a></li>
+                        <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('responsible_person') }}</a></li>
+                        <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('type_of_material') }}</a></li>
+                        <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{ $selecetedSample->value('storage_date') }}</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor=''">- {{__('messages.Kommentar: ')}} {{ $selecetedSample->value('commentary') }}</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
