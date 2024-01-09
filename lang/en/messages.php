@@ -21,6 +21,7 @@ return [
     'Der Admin hat Ihnen noch keine Rolle zugewiesen' => 'The admin has not assigned you a role',
     'Tank' => 'tank',
     'Proben belegt' => 'samples occupied',
+    'Probe konnte nicht angelegt werden. Doppelter Eintrag für Identifier nicht möglich.' => 'Sample could not be created. Duplicated entry for identifier not possible.',
     #container.blade
     'Container' => 'container',
     #tube.blade
