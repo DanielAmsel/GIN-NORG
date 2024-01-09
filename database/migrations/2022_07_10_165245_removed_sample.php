@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('removed_sample', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier');
+            $table->string('identifier')->unique();
             $table->string('responsible_person');
             $table->string('type_of_material');
             $table->timestamp('storage_date')->useCurrent()->useCurrentOnUpdate();

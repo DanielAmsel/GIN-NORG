@@ -95,18 +95,17 @@ class SampleController extends Controller
         $sample->type_of_material   = $materialtyp;
         $sample->commentary         = $commentary;
 
-        try {
-            $sample->save();
-            return redirect('/');
-        } catch (QueryException $e) {
-            // Überprüfen auf Duplikat-Eintrag oder andere Integritätsverletzungen
-            $errorCode = $e->errorInfo[1];
-            if($errorCode == 1062){
-                return redirect('/')->with('error', __('messages.Probe konnte nicht angelegt werden. Doppelter Eintrag für Identifier nicht möglich.'));
-            }
-             
+        if ($this->checkIfIdentifierExists($identifier, 'sample') ||
+            $this->checkIfIdentifierExists($identifier, 'shipped_sample') ||
+            $this->checkIfIdentifierExists($identifier, 'removed_sample')) {
+            
+            $lastCheckedTable = $this->getLastCheckedTable();
+            return redirect('/')
+            ->with('error', __('messages.Probe konnte nicht angelegt werden, da eine Probe mit dem Identifier ":identifier" bereits in der Tabelle ":table" existiert.', ['identifier' => $identifier, 'table' => $lastCheckedTable]));
         }
 
+        $sample->save();
+        return redirect('/');
     }
     
     /**
@@ -125,4 +124,21 @@ class SampleController extends Controller
         // redirect
         return view('home');
     }
+
+
+    private $lastCheckedTable;
+
+    private function checkIfIdentifierExists($identifier, $table)
+    {
+        $exists = DB::table($table)->where('identifier', $identifier)->exists();
+        if ($exists) {
+            $this->lastCheckedTable = $table;
+        }
+        return $exists;
+    }
+
+    public function getLastCheckedTable() {
+        return $this->lastCheckedTable;
+    }
+
 }

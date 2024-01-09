@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('shipped_sample', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier');
+            $table->string('identifier')->unique();
             $table->string('responsible_person');
             $table->foreign('responsible_person')->references('email')->on('users')->restrictOnDelete();
             $table->string('type_of_material');
