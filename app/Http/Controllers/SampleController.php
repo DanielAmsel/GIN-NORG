@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\MaterialType;
 use App\Http\Controllers\Post;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class SampleController extends Controller
 {
@@ -84,6 +85,7 @@ class SampleController extends Controller
 
         // store
         $sample = new sample;
+        
         $sample->identifier         = $identifier;
         $sample->pos_tank_nr        = $tank_pos;
         $sample->pos_insert         = $con_pos;
@@ -92,12 +94,21 @@ class SampleController extends Controller
         $sample->responsible_person = Auth::user()->email;
         $sample->type_of_material   = $materialtyp;
         $sample->commentary         = $commentary;
-        $sample->save();
 
-        // redirect
-       return redirect('/');
+        try {
+            $sample->save();
+            return redirect('/');
+        } catch (QueryException $e) {
+            // Überprüfen auf Duplikat-Eintrag oder andere Integritätsverletzungen
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                return redirect('/')->with('error', __('messages.Probe konnte nicht angelegt werden. Doppelter Eintrag für Identifier nicht möglich.'));
+            }
+             
+        }
+
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
