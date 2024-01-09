@@ -21,7 +21,7 @@ return [
     'Tank' => 'Tank',
     'Proben belegt' => 'Proben belegt',
     'Der Admin hat Ihnen noch keine Rolle zugewiesen' => 'Der Admin hat Ihnen noch keine Rolle zugewiesen',
-    'Probe konnte nicht angelegt werden. Doppelter Eintrag für Identifier nicht möglich.' => 'Probe konnte nicht angelegt werden. Doppelter Eintrag für Identifier nicht möglich.',
+    'Probe konnte nicht angelegt werden, da eine Probe mit dem Identifier ":identifier" bereits in der Tabelle ":table" existiert.' => 'Probe konnte nicht angelegt werden, da eine Probe mit dem Identifier ":identifier" bereits in der Tabelle ":table" existiert.',
     #container.blade
     'Container' => 'Container',
     #tube.blade

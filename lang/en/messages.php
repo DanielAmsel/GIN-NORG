@@ -21,7 +21,7 @@ return [
     'Der Admin hat Ihnen noch keine Rolle zugewiesen' => 'The admin has not assigned you a role',
     'Tank' => 'tank',
     'Proben belegt' => 'samples occupied',
-    'Probe konnte nicht angelegt werden. Doppelter Eintrag für Identifier nicht möglich.' => 'Sample could not be created. Duplicated entry for identifier not possible.',
+    'Probe konnte nicht angelegt werden, da eine Probe mit dem Identifier ":identifier" bereits in der Tabelle ":table" existiert.' => 'Sample could not be created because a sample with the identifier ":identifier" already exists in the ":table" table.',
     #container.blade
     'Container' => 'container',
     #tube.blade
