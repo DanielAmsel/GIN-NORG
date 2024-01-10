@@ -35,6 +35,7 @@ return [
     'Position' => 'Position',
     'Probe einlagern' => 'Probe einlagern',
     'Probe erneut einlagern' => 'Probe erneut einlagern',
+    'Bitte füllen Sie das Feld -Verschicken nach- aus.' => 'Bitte füllen Sie das Feld -Verschicken nach- aus.',
     #Tables
     #sampleList.blade
     'Tank Name' => 'Tank Name',

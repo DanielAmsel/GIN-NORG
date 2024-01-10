@@ -35,6 +35,7 @@ return [
     'Position' => 'position',
     'Probe einlagern' => 'store sample',
     'Probe erneut einlagern' => 'store again',
+    'Bitte füllen Sie das Feld -Verschicken nach- aus.' => 'Please fill out the -ship to- field.',
     #Tables
     #sampleList.blade
     'Tank Name' => 'tank name',
