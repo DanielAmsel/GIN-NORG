@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('privacy')
     <div class="container py-4">
         <div class="p-5 mb-4 border rounded-3">
             <div class="container-fluid py-5">

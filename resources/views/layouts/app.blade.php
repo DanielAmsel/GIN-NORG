@@ -249,12 +249,13 @@
                     @yield('content')
                 </main>
             @endguest
-
         </div>
         </div>
         </nav>
         <main class="py-4">
             @yield('login')
+            @yield('imprint')
+            @yield('privacy')
         </main>
 
         </div>

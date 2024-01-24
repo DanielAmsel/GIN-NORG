@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('content')
+@section('imprint')
     <div class="container py-4">
         <div class="row align-items-md-stretch">
                 <div class="col-md-6">
