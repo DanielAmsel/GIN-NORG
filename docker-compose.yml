@@ -10,7 +10,8 @@ services:
       - MARIADB_USER=bn_myapp
       - MARIADB_DATABASE=bitnami_myapp
     volumes:
-      - '$PWD/public/sqldumps:/dumps'
+      - './public/sqldumps:/dumps'
+      - 'mariadb_data:/bitnami/mariadb'
   myapp:
     image: docker.io/bitnami/laravel:9
     container_name: norg_laravel
@@ -22,6 +23,9 @@ services:
       - DB_USERNAME=bn_myapp
       - DB_DATABASE=bitnami_myapp
     volumes:
-      - '$PWD:/app'
+      - './:/app'
     depends_on:
       - mariadb
+
+volumes:
+  mariadb_data:
