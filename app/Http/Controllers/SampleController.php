@@ -9,9 +9,16 @@ use App\Models\MaterialType;
 use App\Http\Controllers\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use App\Fhir\FhirClient;
+use App\Fhir\FhirService;
+use App\Fhir\LocationResourceActiveSample;
 
 class SampleController extends Controller
 {
+
+    private $lastCheckedTable;
+
+
     /**
      * manage samples
      *
@@ -104,30 +111,24 @@ class SampleController extends Controller
             ->with('error', __('messages.Probe konnte nicht angelegt werden, da eine Probe mit dem Identifier ":identifier" bereits in der Tabelle ":table" existiert.', ['identifier' => $identifier, 'table' => $lastCheckedTable]));
         }
 
+
         $sample->save();
+    
+        $request->merge(['action' => 'create']);
+
+        $fhirService = new FhirService();
+        $fhirService->sendToFhirServer($request);
+    
         return redirect('/');
     }
     
     /**
-     * Remove the specified resource from storage.
+     * checkIfIdentifierExists
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $identifier
+     * @param  mixed $table
+     * @return void
      */
-    public function destroy($id)
-    {
-        // delete
-        $sample = Sample::where('id','=', $id );
-        echo $sample->get();
-        $sample->delete();
-
-        // redirect
-        return view('home');
-    }
-
-
-    private $lastCheckedTable;
-
     private function checkIfIdentifierExists($identifier, $table)
     {
         $exists = DB::table($table)->where('identifier', $identifier)->exists();
@@ -136,9 +137,13 @@ class SampleController extends Controller
         }
         return $exists;
     }
-
+    
+    /**
+     * getLastCheckedTable
+     *
+     * @return void
+     */
     public function getLastCheckedTable() {
         return $this->lastCheckedTable;
     }
-
 }

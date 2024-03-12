@@ -26,6 +26,15 @@ services:
       - './:/app'
     depends_on:
       - mariadb
+    # networks:
+    #   - gin-norg_default
+
+  fhir:
+    image: hapiproject/hapi:latest
+    container_name: fhir-hapi-container
+    ports:
+      - '8080:8080'
+
 
 volumes:
   mariadb_data:

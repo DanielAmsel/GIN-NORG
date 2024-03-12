@@ -8,6 +8,9 @@ use App\Models\ShippedSample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\SampleController;
+use App\Fhir\FhirService;
+
 
 class RemovedSampleController extends Controller
 {
@@ -74,6 +77,11 @@ class RemovedSampleController extends Controller
         $toDestroy = Sample::find($sampleId);
         $toDestroy->delete();
 
+        $request->merge(['action' => 'delete', 'identifier' => $removedSample['identifier']]);
+        
+        $fhirService = new FhirService();
+        $fhirService->sendToFhirServer($request);
+
         return redirect('/removedSamples');
     }
 
@@ -108,11 +116,16 @@ class RemovedSampleController extends Controller
         $toDestroy = ShippedSample::find($shippedSampleId);
         $toDestroy->delete();
 
+        $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
+        
+        $fhirService = new FhirService();
+        $fhirService->sendToFhirServer($request);
+
         return redirect('/sentSamples');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -129,7 +142,6 @@ class RemovedSampleController extends Controller
             $samplesDeleteUser  = $sampleDelete['responsible_person'];
             $samplesDeleteTyp   = $sampleDelete['type_of_material'];
             $samplesDeleteDate  = $sampleDelete['storage_date'];
-            echo 'RemovContr - deleteSampleFromList';
         }
 
         $removeShippedSample = new RemovedSample();
@@ -141,53 +153,16 @@ class RemovedSampleController extends Controller
         $removeShippedSample->save();
 
         $toDestroy = Sample::find($samplesDeleteId);
+
+       
+
         $toDestroy->delete();
 
+        $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
+        
+        $fhirService = new FhirService();
+        $fhirService->sendToFhirServer($request);
+
         return redirect('/sampleList');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

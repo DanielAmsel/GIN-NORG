@@ -7,6 +7,9 @@ use App\Models\ShippedSample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Fhir\FhirClient;
+use App\Fhir\FhirService;
+use App\Fhir\LocationResourceActiveSample;
 
 class ShippedSampleController extends Controller
 {
@@ -56,14 +59,14 @@ class ShippedSampleController extends Controller
         foreach($sample->where('id', $sampleId) as $s)
         {
             $sampleId = $s->id;
-            $identifier  = $s->identifier;
+            $identifier = $s->identifier;
             $material = $s->type_of_material;
             $date     = $s->storage_date;
         }
 
         $shippedSample = new ShippedSample();
 
-        $shippedSample->identifier         =  $identifier;
+        $shippedSample->identifier         = $identifier;
         $shippedSample->responsible_person = Auth::user()->email;
         $shippedSample->type_of_material   = $material;
         $shippedSample->storage_date       = $date;
@@ -73,17 +76,12 @@ class ShippedSampleController extends Controller
         $toDestroy = Sample::find($sampleId);
         $toDestroy->delete();
 
-        return redirect('/sentSamples');
-    }
+        $request->merge(['action' => 'update', 'identifier' => $shippedSample['identifier']]);
+        
+        $fhirService = new FhirService();
+        // Nach dem Löschen des Samples die Funktion aufrufen, um Daten an den FHIR-Server zu senden
+        $fhirService->sendToFhirServer($request);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect('/sentSamples');
     }
 }

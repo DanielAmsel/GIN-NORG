@@ -15,6 +15,9 @@ use Ramsey\Uuid\Type\Integer;
  */
 class SampleFactory extends Factory
 {
+
+    private static $identifierCounter = 551;
+
     /**
      * Define the model's default state.
      *
@@ -23,7 +26,7 @@ class SampleFactory extends Factory
     public function definition()
     {
         //not completely automated, you have to input the corresponding tank_number from the db
-        $tank_name = 'HC35 Test.-Tank';
+        $tank_name = 'HC38';
         $tankNrCount = ['2'];
         $insertCount = ['1','2','3','4','5','6','7','8','9','10'];
         $tubesCount = ['1','2','3','4','5','6','7','8','9','10','11','12'];
@@ -39,7 +42,7 @@ class SampleFactory extends Factory
 
         return
             [
-            'identifier' => $this->faker->numberBetween(1, 1000),
+            'identifier' => self::$identifierCounter++,
             'pos_tank_nr' => $tank_name,
             'pos_insert' => $insertCountId,
             'pos_tube' => $tubesCountId,

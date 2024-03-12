@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Post;
 use App\Models\ShippedSample;
+use App\Fhir\FhirService;
 
 class RestoreSampleController extends Controller
 {
@@ -65,13 +66,19 @@ class RestoreSampleController extends Controller
         // ínfo data
         $sample->identifier         = $request->identifier;
         $sample->responsible_person = Auth::user()->email;
-        $sample->type_of_material   = $request->material;
+        $sample->type_of_material   = $request->materialtyp;
 
         $sample->save();
 
         $toDestroy = ShippedSample::find($request->id);
 
         $toDestroy->delete();
+
+        $request->merge(['action' => 'updateRestore', 'identifier' => $sample['identifier']]);
+        
+        $fhirService = new FhirService();
+        // Nach dem Löschen des Samples die Funktion aufrufen, um Daten an den FHIR-Server zu senden
+        $fhirService->sendToFhirServer($request);
 
         return redirect('/');
     }
