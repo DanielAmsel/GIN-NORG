@@ -50,11 +50,12 @@ return [
     'Versandort' => 'shipping destination',
     'Probe verschicken' => 'ship sample',
     'Probe entfernen' => 'remove sample',
-    'Sicher, dass diese Probe entfernt werden soll?' => 'Are you sure this sample should be removed?',
+    'Sicher, dass diese Probe entfernt werden soll?' => 'Are you sure the sample ":sample" in tank ":tank" should be removed?',
     #sentSamples.blade
     'Versand durch' => 'shipped by',
     'Verschickt nach' => 'shipped to',
     'Versand Datum' => 'shipping date',
+    'confirm_sample_removal' => 'Are you sure the sample ":sample" should be removed?',
     #removedSamples.blade
     'Auslagerungsdatum' => 'removal date',
     #manageTanks.blade

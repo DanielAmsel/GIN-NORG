@@ -1,5 +1,3 @@
-
-
 @php
     $insert = $storagetank->getInserts();
     $tubes   = $storagetank->getTubes();
@@ -31,6 +29,8 @@
             ->where('pos_tube', $idTube)
             ->where('pos_smpl', $sample);
     @endphp
+
+
 
     <div class="btn-group">
 
@@ -76,7 +76,8 @@
                 </li>
                 <li>
                     <form method="POST"
-                        action="{{ Url('/transfer') }}" onsubmit="return confirm('{{__('messages.Sicher, dass diese Probe entfernt werden soll?')}}')">
+                        action="{{ Url('/transfer') }}"
+                        onsubmit="return confirm('{{__('messages.Sicher, dass diese Probe entfernt werden soll?', ['sample' => $selecetedSample->value('identifier'), 'tank' => $storagetank->tank_name])}}')">
                         @csrf
                 <li>
                     <button type="submit"

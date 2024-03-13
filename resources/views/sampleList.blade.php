@@ -57,15 +57,15 @@
                                     <input type="text" value="{{ $sampleOutput->id }}"name="sample_id" hidden>
                                 </button>
                         </form>
-                        </td> {{-- sollte auf gleiches zugreifen wie in Home --}}
+                        </td>
                         <td>
-                            <form method="POST" action="{{ Url('/transferSampleDelete') }}" onsubmit="return confirm('{{__('messages.Sicher, dass diese Probe entfernt werden soll?')}}')">
+                            <form method="POST" action="{{ Url('/transferSampleDelete') }}" onsubmit="return confirm('{{__('messages.Sicher, dass diese Probe entfernt werden soll?', ['sample' => $sampleOutput->identifier, 'tank' => $sampleOutput->pos_tank_nr])}}')">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-secondary" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#CD5C5C'" onmouseout="this.style.backgroundColor=''"> {{__('messages.Probe entfernen')}}
                                     <input type="text" value="{{ $sampleOutput->id }}" name="sample_id" hidden>
                                 </button>
                             </form>
-                        </td> {{-- sollte auf gleiches zugreifen wie in Home --}}
+                        </td>
                         @endif
                     </tr>
                 @endforeach

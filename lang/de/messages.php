@@ -5,7 +5,7 @@ return [
     'Verschickte Proben' => 'Verschickte Proben',
     'Entfernte Proben' => 'Entfernte Proben',
     'Tanks verwalten' => 'Tanks verwalten',
-    'MT verwalten'=>'MT verwalten',
+    'MT verwalten'=>'Materialtyp verwalten',
     'User verwalten' => 'User verwalten',
     'Datenbank dump' => 'Datenbank dump',
     #'Abmelden' => 'Logout',
@@ -50,11 +50,12 @@ return [
     'Versandort' => 'Versandort',
     'Probe verschicken' => 'Probe verschicken',
     'Probe entfernen' => 'Probe entfernen',
-    'Sicher, dass diese Probe entfernt werden soll?' => 'Sicher, dass diese Probe entfernt werden soll?',
+    'Sicher, dass diese Probe entfernt werden soll?' => 'Sind Sie sicher, dass die Probe ":sample" im Tank ":tank" entfernt werden soll?',
     #sentSamples.blade
     'Versand durch' => 'Versand durch',
     'Verschickt nach' => 'Verschickt nach',
     'Versand Datum' => 'Versand Datum',
+    'confirm_sample_removal' => 'Sind Sie sicher, dass die Probe ":sample" entfernt werden soll?',
     #removedSamples.blade
     'Auslagerungsdatum' => 'Auslagerungsdatum',
     #materialType.blade
@@ -64,7 +65,7 @@ return [
     'Angelegte Materialtypen'=>'Angelegte Materialtypen',
     'Materialtyp entfernen'=>'Materialtyp entfernen',
     'Materialtyp keiner Probe zugeordnet'=>'Materialtyp keiner Probe zugeordnet',
-    'Es gibt noch Proben mit diesem Materialtypen'=>'Es gibt noch Proben mit diesem Materialtypen',
+    'Es gibt noch Proben mit diesem Materialtypen'=>'Es existieren noch Proben mit diesem Materialtypen',
     'Materialtyp wurde hinzugefügt!' => 'Materialtyp wurde hinzugefügt!',
     'Materialtyp wurde entfernt!' => 'Materialtyp wurde entfernt!',
     #manageTanks.blade
