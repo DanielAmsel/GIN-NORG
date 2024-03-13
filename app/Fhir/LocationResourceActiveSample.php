@@ -12,6 +12,10 @@ class LocationResourceActiveSample
      * Erstellt eine FHIR Location Ressource aus einer aktiven Probe.
      */
      public static function mapToLocationResource($sample, $resourceId) {
+
+        // Accessing the address data from the configuration file
+        $instituteAddress = config('fhir.fhir.institute_address');
+
         return [
             'resourceType' => 'Location',
             'id' => $resourceId,
@@ -43,14 +47,7 @@ class LocationResourceActiveSample
                     ]
                 ]
             ],
-            'address' => 
-            [   
-                'line' => ["Institut fuer Neuropathologie", "Arndtstr. 16"],
-                'city' => "Giessen",
-                'state' => "Hessen",
-                'postalCode' => "35392",
-                'country' => "Germany"
-            ],
+            'address' => $instituteAddress, // Using the address data from the configuration
         ];
     }
     
@@ -73,6 +70,11 @@ class LocationResourceActiveSample
                 ],
             ],
             'name' => null,
+            'type' => [
+                [
+                    'text' => $sample['materialtyp'],
+                ],
+            ],
             'position' => [
                 'longitude' => null, 
                 'latitude' => null, 

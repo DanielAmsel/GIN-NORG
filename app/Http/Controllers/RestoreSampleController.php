@@ -74,11 +74,12 @@ class RestoreSampleController extends Controller
 
         $toDestroy->delete();
 
-        $request->merge(['action' => 'updateRestore', 'identifier' => $sample['identifier']]);
-        
-        $fhirService = new FhirService();
-        // Nach dem Löschen des Samples die Funktion aufrufen, um Daten an den FHIR-Server zu senden
-        $fhirService->sendToFhirServer($request);
+        if (config('fhir.fhir.enabled')) {
+            $request->merge(['action' => 'updateRestore', 'identifier' => $sample['identifier']]);
+            
+            $fhirService = new FhirService();
+            $fhirService->sendToFhirServer($request);
+        }
 
         return redirect('/');
     }

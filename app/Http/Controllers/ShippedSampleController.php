@@ -76,11 +76,12 @@ class ShippedSampleController extends Controller
         $toDestroy = Sample::find($sampleId);
         $toDestroy->delete();
 
-        $request->merge(['action' => 'update', 'identifier' => $shippedSample['identifier']]);
-        
-        $fhirService = new FhirService();
-        // Nach dem Löschen des Samples die Funktion aufrufen, um Daten an den FHIR-Server zu senden
-        $fhirService->sendToFhirServer($request);
+        if (config('fhir.fhir.enabled')) {
+            $request->merge(['action' => 'update', 'identifier' => $shippedSample['identifier'], 'materialtyp' => $shippedSample['type_of_material']]);
+
+            $fhirService = new FhirService();
+            $fhirService->sendToFhirServer($request);
+        }
 
         return redirect('/sentSamples');
     }

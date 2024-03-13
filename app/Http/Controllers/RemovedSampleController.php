@@ -77,12 +77,14 @@ class RemovedSampleController extends Controller
         $toDestroy = Sample::find($sampleId);
         $toDestroy->delete();
 
-        $request->merge(['action' => 'delete', 'identifier' => $removedSample['identifier']]);
-        
-        $fhirService = new FhirService();
-        $fhirService->sendToFhirServer($request);
+        if (config('fhir.fhir.enabled')) {
+            $request->merge(['action' => 'delete', 'identifier' => $removedSample['identifier']]);
+            
+            $fhirService = new FhirService();
+            $fhirService->sendToFhirServer($request);
 
-        return redirect('/removedSamples');
+            return redirect('/removedSamples');
+        }
     }
 
     /**
@@ -116,12 +118,14 @@ class RemovedSampleController extends Controller
         $toDestroy = ShippedSample::find($shippedSampleId);
         $toDestroy->delete();
 
-        $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
-        
-        $fhirService = new FhirService();
-        $fhirService->sendToFhirServer($request);
+        if (config('fhir.fhir.enabled')) {
+            $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
+            
+            $fhirService = new FhirService();
+            $fhirService->sendToFhirServer($request);
 
-        return redirect('/sentSamples');
+            return redirect('/sentSamples');
+        }
     }
 
     /**
@@ -158,10 +162,12 @@ class RemovedSampleController extends Controller
 
         $toDestroy->delete();
 
-        $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
-        
-        $fhirService = new FhirService();
-        $fhirService->sendToFhirServer($request);
+        if (config('fhir.enabled')) {
+            $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
+            
+            $fhirService = new FhirService();
+            $fhirService->sendToFhirServer($request);
+        }
 
         return redirect('/sampleList');
     }

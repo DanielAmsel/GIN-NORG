@@ -114,10 +114,12 @@ class SampleController extends Controller
 
         $sample->save();
     
-        $request->merge(['action' => 'create']);
+        if (config('fhir.fhir.enabled')) {
+            $request->merge(['action' => 'create']);
 
-        $fhirService = new FhirService();
-        $fhirService->sendToFhirServer($request);
+            $fhirService = new FhirService();
+            $fhirService->sendToFhirServer($request);
+        }
     
         return redirect('/');
     }
