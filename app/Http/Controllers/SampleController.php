@@ -115,7 +115,7 @@ class SampleController extends Controller
         $sample->save();
     
         if (config('fhir.fhir.enabled')) {
-            $request->merge(['action' => 'create']);
+            $request->merge(['action' => 'create', 'responsible_person' => $sample['responsible_person']]);
 
             $fhirService = new FhirService();
             $fhirService->sendToFhirServer($request);

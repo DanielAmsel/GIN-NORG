@@ -75,7 +75,7 @@ class RestoreSampleController extends Controller
         $toDestroy->delete();
 
         if (config('fhir.fhir.enabled')) {
-            $request->merge(['action' => 'updateRestore', 'identifier' => $sample['identifier']]);
+            $request->merge(['action' => 'updateRestore', 'identifier' => $sample['identifier'], 'responsible_person' => $sample['responsible_person']]);
             
             $fhirService = new FhirService();
             $fhirService->sendToFhirServer($request);

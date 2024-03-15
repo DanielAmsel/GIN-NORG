@@ -37,14 +37,10 @@ class LocationResourceActiveSample
                 'latitude' => $sample['tube_pos'], 
                 'altitude' => $sample['sample_pos'] 
             ],
-            'contact' => [
+            'telecom' => [
                 [
-                    'telecom' => [
-                        [
-                            'system' => 'email',
-                            'value' => Auth::user()->email
-                        ]
-                    ]
+                    'system' => 'email',
+                    'value' => $sample['responsible_person']
                 ]
             ],
             'address' => $instituteAddress, // Using the address data from the configuration
@@ -80,14 +76,10 @@ class LocationResourceActiveSample
                 'latitude' => null, 
                 'altitude' => null 
             ],
-            'contact' => [
+            'telecom' => [
                 [
-                    'telecom' => [
-                        [
-                            'system' => 'email',
-                            'value' => Auth::user()->email
-                        ]
-                    ]
+                    'system' => 'email',
+                    'value' => $sample['responsible_person']
                 ]
             ],
             'address' => 

@@ -78,13 +78,13 @@ class RemovedSampleController extends Controller
         $toDestroy->delete();
 
         if (config('fhir.fhir.enabled')) {
-            $request->merge(['action' => 'delete', 'identifier' => $removedSample['identifier']]);
-            
+            $request->merge(['action' => 'delete', 'identifier' => $removedSample['identifier'], 'responsible_person' => $removedSample['responsible_person']]);
+
             $fhirService = new FhirService();
             $fhirService->sendToFhirServer($request);
-
-            return redirect('/removedSamples');
         }
+
+        return redirect('/removedSamples');
     }
 
     /**
@@ -119,13 +119,13 @@ class RemovedSampleController extends Controller
         $toDestroy->delete();
 
         if (config('fhir.fhir.enabled')) {
-            $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
-            
+            $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier'], 'responsible_person' => $removeShippedSample['responsible_person']]);
+
             $fhirService = new FhirService();
             $fhirService->sendToFhirServer($request);
-
-            return redirect('/sentSamples');
         }
+
+        return redirect('/sentSamples');
     }
 
     /**
@@ -157,13 +157,10 @@ class RemovedSampleController extends Controller
         $removeShippedSample->save();
 
         $toDestroy = Sample::find($samplesDeleteId);
-
-       
-
         $toDestroy->delete();
 
-        if (config('fhir.enabled')) {
-            $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier']]);
+        if (config('fhir.fhir.enabled')) {
+            $request->merge(['action' => 'delete', 'identifier' => $removeShippedSample['identifier'], 'responsible_person' => $removeShippedSample['responsible_person']]);
             
             $fhirService = new FhirService();
             $fhirService->sendToFhirServer($request);

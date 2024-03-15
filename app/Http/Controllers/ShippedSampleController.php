@@ -77,8 +77,7 @@ class ShippedSampleController extends Controller
         $toDestroy->delete();
 
         if (config('fhir.fhir.enabled')) {
-            $request->merge(['action' => 'update', 'identifier' => $shippedSample['identifier'], 'materialtyp' => $shippedSample['type_of_material']]);
-
+            $request->merge(['action' => 'update', 'identifier' => $shippedSample['identifier'], 'materialtyp' => $shippedSample['type_of_material'], 'responsible_person' => $shippedSample['responsible_person']]);
             $fhirService = new FhirService();
             $fhirService->sendToFhirServer($request);
         }
