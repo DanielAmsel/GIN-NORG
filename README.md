@@ -64,6 +64,20 @@ You can now login via the default credentials
 
 It is highly recommendable to do system backups of the data you entered into your database. Instead of programming a complex backup solution, we rely on commonly used and well-known cron-jobs that run an export script of the database as often as you like.
 
+### FHIR Integration
+FHIR (Fast Healthcare Interoperability Resources) capabilities are integrate d into the NORG System, improving the managment and sharing of biological samples. Making it easier to share data across healthcare systems. 
+Using the FHIR Location resource is an important part of NORG's FHIR integration. This resource is used to represent the physical locations where samples are stored, as well as the sample's status, the identifiers, the institution's address and further information.
+
+Key Functionalities:
+#### Sample Management:
+Manage samples, including creation, shipping, re-storage, and deletion, all within the FHIR framework.
+#### Configurable Settings: 
+Users can enable or disable FHIR capabilities within the config/fhir.php file according on their needs, providing flexibility in the management and sharing of data.
+#### Institution Address:
+To ensure correct representation in the FHIR ecosystem, users can additionally set their institute's address in the config/fhir.php file.
+#### Docker Integration:
+The NORG System setup includes Docker Compose configuration that creates an FHIR server, resulting in a ready-to-use environment for FHIR-related tasks.
+
 ### Database backup:
 - make db_export.sh script executable
 -> chmod +x db_export.sh
