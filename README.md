@@ -47,7 +47,7 @@ The installation is easily manageable via Docker containerization and Docker-com
 
 `docker-compose up`
 
-If this is your first start, your need to initialize the databse by using these three commands:
+If this is your first start, your need to initialize the database by using these four commands:
 
 `docker exec norg_laravel php artisan key:generate`
 
@@ -65,59 +65,73 @@ You can now login via the default credentials
 It is highly recommendable to do system backups of the data you entered into your database. Instead of programming a complex backup solution, we rely on commonly used and well-known cron-jobs that run an export script of the database as often as you like.
 
 ### FHIR Integration
-FHIR (Fast Healthcare Interoperability Resources) capabilities are integrate d into the NORG System, improving the managment and sharing of biological samples. Making it easier to share data across healthcare systems. 
+FHIR (Fast Healthcare Interoperability Resources) capabilities are integrated into the NORG System, improving the managment and sharing of biological samples. Making it easier to share data across healthcare systems. 
 Using the FHIR Location resource is an important part of NORG's FHIR integration. This resource is used to represent the physical locations where samples are stored, as well as the sample's status, the identifiers, the institution's address and further information.
 
 #### Sample Management:
 Manage samples, including creation, shipping, re-storage, and deletion, all within the FHIR framework.
+
 #### Configurable Settings: 
 Users can enable or disable FHIR capabilities within the config/fhir.php file according on their needs, providing flexibility in the management and sharing of data.
+
 #### Institution Address:
 To ensure correct representation in the FHIR ecosystem, users can additionally set their institute's address in the config/fhir.php file.
+
 #### Docker Integration:
 The NORG System setup includes Docker Compose configuration that creates an FHIR server, resulting in a ready-to-use environment for FHIR-related tasks.
 
-### Database backup:
-- make db_export.sh script executable
--> chmod +x db_export.sh
-- Copy the script to the container
--> docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh"
-- Replace the placeholders with your actual values in the db_export.sh script:
-    - USERNAME="your_username"
-    - PASSWORD="your_password"
-    - DATABASE_NAME="your_database_name"
-    - EXPORT_BASE_PATH="/dumps"
+### Database Backup and Recovery
+To ensure the integrity and security of your data within the NORG system, we implemented a solution for automated backups of the entire database. We use scheduled backups to make sure you won't lose your data. Here's how you can set it up and recover data if needed.
 
-For daily database Dump install Cron 
-- sudo apt-get update
-- sudo apt-get install cron
-    - crontab -e
-    Command: 59 23 * * * docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh
-    
-If you just want SQL-Dump: Command: 59 23 * * *  docker exec -i [mariadb container name] mysqldump -u root --password=  bitnami_myapp > /home/[Benutzer]/Projekte/GIN-NORG/public/sqldumps/NorgDBdump$(date +\%Y\%m\%d).sql
+**Automating Backup Routine with Crontab**
+To automate the backup process, a crontab job can be set up on your server. You have two main options based on your needs.
+
+1. **For Full Backup with Script:** if you prefer a comprehensive backup that includes the SQL dump and the CSV tables, you can schedule the execution of the db_export.sh script. 
+
+    **Prepare the Backup Script:** First, ensure your backup script is ready and executable by changing its permissions:
+
+    `chmod +x db_export.sh`
+
+    **Transfer the Script to the Database Container:** Use Docker to copy the script into your MariaDB container:
+
+    `docker cp db_export.sh [mariadb container name]:/tmp/db_export.sh`
+
+    **Execute the Backup Script:** Run the script within the container to perform the backup:
+
+    `docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh"`
+
+    Before you make the `db_export.sh` script executable, you should first update it with your actual database credentials. Replace the placeholders with your actual values:
+    ```bash
+    USERNAME="your_username"
+    PASSWORD="your_password"
+    DATABASE_NAME="your_database_name"
+    EXPORT_BASE_PATH="/dumps"
+    ```
+
+
+    Here's how to set up a crontab job to run this script daily at midnight:
+
+    `0 0 * * * docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh`
+
+    Make sure to replace [mariadb container name] with the actual name of your MariaDB container. 
+
+2. **For SQL Dump Only:** If you only need an SQL dump without the extra steps provided by the db_export.sh script, you can use a more straightforward crontab job. This approach does not require making any script executable. Simply use this command for a daily backup routine to occur at midnight:
+
+    `0 0 * * * docker exec -i [mariadb container name] mysqldump -u root --password=your_password your_database_name > /opt/GIN-NORG/public/sqldumps/NorgDBdump$(date +%Y%m%d).sql`
+
+    Again replace `[mariadb container name]`, `your_password` and `your_database_name`.
+
+**Data Recovery Process:**
+
+Restoring your database from a backup is straightforward. Follow these steps to use your SQL backup file for recovery:
+
+Place the SQL Backup File: First, ensure the SQL backup file is located within an accessible directory for the Docker Compose environment. For example store it under public/sqldumps/. 
+
+Execute the Restore Command: Use the following command to restore your database from the chosen backup file. Replace [mariadb container name], your_password, your_database_name, and [date] with the appropriate values for your setup:
+
+`docker exec -i [mariadb container name] mysql -u root --password=your_password your_database_name < public/sqldumps/NorgDBdump[date].sql`
 
 ## How to use
-
-For Database Dump import:
-with the import script:
-- Make the script executable 
--> chmod +x db_import.sh
-- Copy the script to the container:
--> docker cp db_import.sh [mariadb container name]:/tmp/db_import.sh
-- Replace the placeholders with your actual values in the db_import.sh script:
-    - USERNAME="your_username"
-    - PASSWORD="your_password"
-    - DATABASE_NAME="your_database_name"
-    - DATE="[date]"
-    - EXPORT_BASE_PATH="/dumps"
-    - EXPORT_PATH="$EXPORT_BASE_PATH/NorgDBdump$DATE"
-either from SQL Dump import or from the CSV files -> comment out one of the versions in the script ether the commands for the csv-import or the sql import
-
--> Run the import script:
--> docker exec -i [mariadb container name] bash -c "/tmp/db_import.sh"
-
-For the SQL import, if you have done the SQL-Dump command without the script:
-- docker exec -i [mariadb container name] mysql --user root bitnami_myapp < public/sqldumps/NorgDBdump[date].sql
 
 ## License
 
