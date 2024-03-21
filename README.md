@@ -137,6 +137,23 @@ docker exec -i [mariadb container name] mysql -u root --password=your_password y
 
 ## How to use
 
+### Importing Samples from CSV
+If you're moving to NORG from another system and have your sample data stored in a CSV file, NORG simplifies the process of importing this data directly through its web application. Here’s how to bring your existing sample data into NORG:
+
+1. **Prepare Your CSV File:** Ensure your CSV file is formatted correctly according to NORG's requirements. Each entry should include the necessary information for a single sample: a storage location (with tank name, position insert, position tube, and position sample), a sample identifier, a type of material, a responsible person, and a storage date.
+
+2. **Log In to NORG:** Use your credentials to log in to the NORG web application.
+
+3. **Prepare NORG for Import:** This preparation involves setting up certain elements within the NORG system that correspond to the information in your CSV file. If the responsible persons, material types or the tanks from your CSV does not exist in NORG, you'll need to add them to the system.
+
+4. **Navigate to the Import Section and Upload Your CSV File:** Find the "CSV Import" option within the NORG dashboard and upload your CSV file. 
+
+After the import process is completed, you will receive a notification within the NORG system indicating whether the import was successful.
+
+### Additional Guidance
+
+For a detailed explanation of NORG’s functionalities and step-by-step instructions, including sample importation, check out our paper, "NORG - Nitrogen ORGanizer: a novel web-based system for cryopreservation and freezer management." This publication offers a comprehensive insights into leveraging NORG for biological sample management.
+
 ## License
 
 ## How to cite
