@@ -41,21 +41,24 @@ Thank you for considering the NORG System as your next-generation solution for b
 ### How to install 
 The installation is easily manageable via Docker containerization and Docker-compose.
 
-`git clone https://github.com/DanielAmsel/GIN-NORG.git`
+```bash
+git clone https://github.com/DanielAmsel/GIN-NORG.git
 
-`cd GIN-NORG`
+cd GIN-NORG
 
-`docker-compose up`
+docker-compose up
+```
 
 If this is your first start, your need to initialize the database by using these four commands:
+```bash
+docker exec norg_laravel php artisan key:generate
 
-`docker exec norg_laravel php artisan key:generate`
+docker exec norg_laravel php artisan migrate
 
-`docker exec norg_laravel php artisan migrate`
+docker exec norg_laravel php artisan db:seed
 
-`docker exec norg_laravel php artisan db:seed`
-
-`docker exec norg_laravel php artisan route:cache`
+docker exec norg_laravel php artisan route:cache
+```
 
 You can now login via the default credentials
 `admin@norg.de`
@@ -89,17 +92,17 @@ To automate the backup process, a crontab job can be set up on your server. You 
 1. **For Full Backup with Script:** if you prefer a comprehensive backup that includes the SQL dump and the CSV tables, you can schedule the execution of the db_export.sh script. 
 
     **Prepare the Backup Script:** First, ensure your backup script is ready and executable by changing its permissions:
-
-    `chmod +x db_export.sh`
-
+    ```bash
+    chmod +x db_export.sh
+    ```
     **Transfer the Script to the Database Container:** Use Docker to copy the script into your MariaDB container:
-
-    `docker cp db_export.sh [mariadb container name]:/tmp/db_export.sh`
-
+    ```bash
+    docker cp db_export.sh [mariadb container name]:/tmp/db_export.sh
+    ```
     **Execute the Backup Script:** Run the script within the container to perform the backup:
-
-    `docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh"`
-
+    ```bash
+    docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh"
+    ```
     Before you make the `db_export.sh` script executable, you should first update it with your actual database credentials. Replace the placeholders with your actual values:
     ```bash
     USERNAME="your_username"
@@ -110,15 +113,15 @@ To automate the backup process, a crontab job can be set up on your server. You 
 
 
     Here's how to set up a crontab job to run this script daily at midnight:
-
-    `0 0 * * * docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh`
-
+    ```bash
+    0 0 * * * docker exec -i [mariadb container name] bash -c "/tmp/db_export.sh
+    ```
     Make sure to replace [mariadb container name] with the actual name of your MariaDB container. 
 
 2. **For SQL Dump Only:** If you only need an SQL dump without the extra steps provided by the db_export.sh script, you can use a more straightforward crontab job. This approach does not require making any script executable. Simply use this command for a daily backup routine to occur at midnight:
-
-    `0 0 * * * docker exec -i [mariadb container name] mysqldump -u root --password=your_password your_database_name > /opt/GIN-NORG/public/sqldumps/NorgDBdump$(date +%Y%m%d).sql`
-
+    ```bash
+    0 0 * * * docker exec -i [mariadb container name] mysqldump -u root --password=your_password your_database_name > /opt/GIN-NORG/public/sqldumps/NorgDBdump$(date +%Y%m%d).sql
+    ```
     Again replace `[mariadb container name]`, `your_password` and `your_database_name`.
 
 **Data Recovery Process:**
@@ -128,8 +131,9 @@ Restoring your database from a backup is straightforward. Follow these steps to 
 Place the SQL Backup File: First, ensure the SQL backup file is located within an accessible directory for the Docker Compose environment. For example store it under public/sqldumps/. 
 
 Execute the Restore Command: Use the following command to restore your database from the chosen backup file. Replace [mariadb container name], your_password, your_database_name, and [date] with the appropriate values for your setup:
-
-`docker exec -i [mariadb container name] mysql -u root --password=your_password your_database_name < public/sqldumps/NorgDBdump[date].sql`
+```bash
+docker exec -i [mariadb container name] mysql -u root --password=your_password your_database_name < public/sqldumps/NorgDBdump[date].sql
+```
 
 ## How to use
 
