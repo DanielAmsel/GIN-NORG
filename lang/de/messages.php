@@ -128,5 +128,13 @@ return [
     #register.blade
     'Registrierung' => 'Registrierung',
     'Name' => 'Name',
-    'Passwort bestätigen' => 'Passwort bestätigen'
+    'Passwort bestätigen' => 'Passwort bestätigen',
+    // #import_form.blade
+    // 'csv_column_count_error' => 'Das CSV hat nicht die erwartete Anzahl an Spalten.',
+    // 'missing_material_error' => 'Materialtyp(en) \':materials\' fehlt/fehlen.',
+    // 'missing_person_error' => 'Verantwortliche(r) \':persons\' fehlt/fehlen.',
+    // 'unexpected_error' => 'Ein unerwarteter Fehler ist aufgetreten.',
+    // 'material_type_not_found_error' => 'Ein oder mehrere Materialtypen sind nicht vorhanden und müssen erst noch angelegt werden. Datensätze mit diesen Materialtypen konnten nicht angelegt werden!',
+    // 'responsible_person_not_found_error' => 'Ein oder mehrere verantwortliche Personen existieren nicht im Projekt und müssen erst noch angelegt werden.',
+    // 'duplicate_entry_error' => 'Ein oder mehrere Datensätze sind bereits vorhanden.'
 ];

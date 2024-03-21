@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FhirController;
+use App\Http\Controllers\SampleImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +115,12 @@ Route::post('/manageUser/delete', [ManageUserController::class, 'delete'])->name
 Route::post('/manageUser/reset', [ManageUserController::class, 'resetPassword']);
 
 Route::post('/restore/confirm', [RestoreSampleController::class, 'store']);
+
+Route::post('/sample/import', [SampleImportController::class, 'import'])->name('sample.import');
+
+Route::get('/sample/import/form', [SampleImportController::class, 'showForm'])->name('sample.import.form');
+
+
 
 //Test Section
 Route::get('/dataTest', [CombinedTankController::class, 'indextest']);

@@ -30,8 +30,6 @@
             ->where('pos_smpl', $sample);
     @endphp
 
-
-
     <div class="btn-group">
 
         @if ($selecetedSample->value('pos_smpl') == $sample)
