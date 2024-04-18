@@ -7,7 +7,8 @@ return [
     'Tanks verwalten' => 'manage tanks',
     'MT verwalten'=>'manage MT',
     'User verwalten' => 'manage users',
-    'Datenbank dump' => 'database dump',
+    'Datenbank dump' => 'Database dump',
+    'CSV Import' => 'CSV Import',
     #'Abmelden' => 'Logout',
     'Dieser Nutzer ist zum Einrichten der Applikation!' => 'This user is for setting up the application!',
     'Geben Sie einem anderen Nutzer die Rolle administrator und entfernen danach diesen Nutzer (Name: admin, E-Mail: admin@norg.de)!' => 'Give another user the role "administrator" and remove this user afterwards. (Name: "admin", E-Mail: "admin@norg.de")',
@@ -128,5 +129,22 @@ return [
     #register.blade
     'Registrierung' => 'Registration',
     'Name' => 'name',
-    'Passwort bestätigen' => 'password confirm'
+    'Passwort bestätigen' => 'password confirm',
+    #import_form.blade
+    'Probenimport' => 'Sample import',
+    'Fehler:' => 'Error:',
+    'CSV-Datei auswählen:' => 'Select CSV file:',
+    'Importieren' => 'Import',
+    "Durchsuchen..." => "Browse data...",
+    'csv_column_count_error' => 'The CSV does not have the expected number of columns.',
+    'duplicated_entry' => 'One or more identical data records already exist. Duplicate entries: \':duplicates\'',  
+    'missing_material_error' => 'Material type(s) \':materials\' is/are missing and must be created first. Data could not be imported!',
+    'missing_person_error' => 'Responsible person(s) \':persons\' is/are missing. Data could not be imported!',
+    'unexpected_error' => 'An unexpected error occurred.',
+    'sample_import_success' => 'Samples successfully imported.',
+    'empty_file_error' => 'The uploaded file is empty.',
+    'file_read_error' => 'An error occurred while reading the file.',
+    'invalid_column_names_error' => 'The column names are not correct. Defined are: #, tank name, container, tube, position, ID, material, responsible person, storage Date, (commentary).',
+    'no_file_selected_error' => 'No file selected.',
+    'missing_b_numbers_error' => 'B-Numbers are missing in the following rows of csv document: \':rows\'.',
 ];

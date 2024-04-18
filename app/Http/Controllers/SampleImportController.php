@@ -21,16 +21,33 @@ class SampleImportController extends Controller
     public function import(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'file' => 'required|mimes:csv,txt'
+            'file' => ['required', 'file', 'max:2048', 'mimes:csv,txt'], // Maximalgröße der Datei 2MB
+            // Nur CSV- und Textdateien zulassen
         ]);
+
+        $file = $request->file('file');
+
+        // Überprüfen, ob eine Datei hochgeladen wurde
+        if (!$file) {
+            return redirect()->back()->withErrors(['error' => __('messages.no_file_selected_error')]);
+        }
+
+        // Überprüfen, ob die Datei leer ist
+        if ($file->getSize() === 0) {
+            return redirect()->back()->withErrors(['error' => __('messages.empty_file_error')]);
+        }
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $file = $request->file('file');
-        $fileData = array_map('str_getcsv', file($file));
-
+        try {
+            $fileData = array_map('str_getcsv', file($file));
+            // Entferne leere Zeilen
+            $fileData = $this->removeEmptyRows($fileData);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => __('messages.file_read_error')]);
+        }
 
         // Überprüfung der Anzahl der Spalten
         $minColumnCount = 9; // Mindestanzahl erwarteter Spalten
@@ -38,109 +55,139 @@ class SampleImportController extends Controller
         foreach ($fileData as $row) {
             $columnCount = count($row);
             if ($columnCount < $minColumnCount || $columnCount > $maxColumnCount) {
-                $errorMessage = "Das CSV hat nicht die erwartete Anzahl an Spalten.";
+                //$errorMessage = "Das CSV hat nicht die erwartete Anzahl an Spalten.";
+                $errorMessage = __('messages.csv_column_count_error');
                 return redirect()->back()->withErrors(['error' => $errorMessage]);
             }
+        }
+
+        // Entfernen der ersten Zeile (Spaltennamen) aus den Daten
+        $columnNames = array_shift($fileData);
+
+        // Überprüfen, ob die Spaltennamen den erwarteten entsprechen
+        if (!$this->isHeaderRow($columnNames)) {
+            return redirect()->back()->withErrors(['error' => __('messages.invalid_column_names_error')]);
         }
 
         $validData = [];
         $missingMaterials = [];
         $missingPersons = [];
-        
 
-        // Überspringe leere Zeilen und Kopfzeile
         foreach ($fileData as $key => $row) {
-            if (empty(array_filter($row)) || $key === 0) {
-                unset($fileData[$key]);
+            if (count($row) >= $minColumnCount && count($row) <= $maxColumnCount && !empty(array_filter($row))) {
+                $validData[] = [
+                    'pos_tank_nr' => $row[1],
+                    'pos_insert' => $row[2],
+                    'pos_tube' => $row[3],
+                    'pos_smpl' => $row[4],
+                    'identifier' => $row[5],
+                    'type_of_material' => $row[6],
+                    'responsible_person' => $row[7],
+                    'storage_date' => $this->formatStorageDate($row[8]),
+                    'commentary' => isset($row[9]) ? $row[9] : null,
+                ];
+
+                // Überprüfen, ob die B-Nummer vorhanden ist
+                if (empty($row[5])) {
+                    // B-Nummer fehlt, füge den Fehler zur Fehlermeldung hinzu
+                    $missingBNumbers[] = $key + 1; // Zeilennummer (beginnend bei 1)
+                }
+
+                if (!MaterialType::where('type_of_material', $row[6])->exists()) {
+                    $missingMaterials[] = $row[6];
+                }
+                
+                if (!User::where('email', $row[7])->exists()) {
+                    $missingPersons[] = $row[7];
+                }
+
             } else {
-                break; // Stop, wenn wir die erste nicht-leere Zeile erreichen
+                continue;
             }
         }
 
-        foreach ($fileData as $row) {
-            // Überprüfen, ob die Zeile genügend Elemente enthält
-            if (count($row) >= 10) {
-                // Formatierung des Datums
-                $formattedDate = $this->formatStorageDate($row[9]);
-
-                $validData[] = [
-                    'pos_tank_nr' => $row[1],
-                    'pos_insert' => $row[2],
-                    'pos_tube' => $row[3],
-                    'pos_smpl' => $row[4],
-                    'identifier' => $row[5],
-                    'type_of_material' => $row[6],
-                    'responsible_person' => $row[7],
-                    'commentary' => $row[8],
-                    'storage_date' => $formattedDate,
-                ];
-
-                if (!MaterialType::where('type_of_material', $row[6])->exists()) {
-                    $missingMaterials[] = $row[6];
-                }
-                
-                if (!User::where('email', $row[7])->exists()) {
-                    $missingPersons[] = $row[7];
-                }
-
-            } else {
-                $validData[] = [
-                    'pos_tank_nr' => $row[1],
-                    'pos_insert' => $row[2],
-                    'pos_tube' => $row[3],
-                    'pos_smpl' => $row[4],
-                    'identifier' => $row[5],
-                    'type_of_material' => $row[6],
-                    'responsible_person' => $row[7],
-                    'commentary' => null,
-                    'storage_date' => $this->formatStorageDate($row[8]),
-                ];
-
-                if (!MaterialType::where('type_of_material', $row[6])->exists()) {
-                    $missingMaterials[] = $row[6];
-                }
-                
-                if (!User::where('email', $row[7])->exists()) {
-                    $missingPersons[] = $row[7];
-                }
-            }
+        // Überprüfen, ob fehlende B-Nummern vorhanden sind
+        if (!empty($missingBNumbers)) {
+            $missingBNumbersMessage = __('messages.missing_b_numbers_error', ['rows' => implode(', ', $missingBNumbers)]);
+            return redirect()->back()->withErrors(['error' => $missingBNumbersMessage]);
         }
 
         $missingMaterialMessage = '';
         $missingPersonsMessage = '';
-        $missingBoth = '';
-
-        // var_dump($missingMaterials);
-        // var_dump($missingPersons);
-
-        // dd();
+        $missingBoth = " ";
 
         // Alle Daten sind gültig, jetzt in die Datenbank einfügen
         try {
             DB::table('sample')->insert($validData);
         } catch (\Illuminate\Database\QueryException $e) {
-            if ($e->errorInfo[1] === 1062) {
-                $errorMessage = "Ein oder mehrere identische Datensätze sind bereits vorhanden.";
+            if ($e->errorInfo[1] === 1062) { 
+                // Identifiziere die doppelten Einträge
+                $duplicateEntries = [];
+                $duplicateIdentifiers = [];
+                
+                foreach ($validData as $data) {
+                    $duplicates = DB::table('sample')
+                        ->where(function($query) use ($data) {
+                            $query->where('pos_tank_nr', $data['pos_tank_nr'])
+                                  ->where('pos_insert', $data['pos_insert'])
+                                  ->where('pos_tube', $data['pos_tube'])
+                                  ->where('pos_smpl', $data['pos_smpl']);
+                        })
+                        ->get();
+                    
+                    if ($duplicates->isNotEmpty()) {
+                        // Überprüfe auf doppelte Einträge mit denselben Werten für pos_tank_nr, pos_insert, pos_tube und pos_smpl
+                        $foundDuplicate = false;
+                        foreach ($duplicates as $duplicate) {
+                            if ($duplicate->identifier === $data['identifier']) {
+                                // Wenn ein doppelter identifier gefunden wird, füge ihn zur Liste der doppelten identifier hinzu
+                                if (count($duplicateIdentifiers) < 10) {
+                                    $duplicateIdentifiers[] = $data['identifier'];
+                                }
+                                $foundDuplicate = true;
+                            }
+                        }
+            
+                        // Wenn kein doppelter identifier gefunden wurde, füge den gesamten Datensatz zur Liste der doppelten Einträge hinzu
+                        if (!$foundDuplicate) {
+                            $duplicateEntries[] = $duplicates->toArray();
+                        }
+                    }
+                }
+            
+                // Erzeuge die Fehlermeldung basierend auf den gefundenen doppelten Einträgen und/oder identifiern
+                $errorMessage = '';
+                if (!empty($duplicateIdentifiers)) {
+                    $errorMessage = __('messages.duplicated_entry', ['duplicates' => ' identifier: ' . implode(', ', $duplicateIdentifiers)]);
+                } elseif (!empty($duplicateEntries)) {
+                    $duplicateEntriesString = '';
+                    foreach ($duplicateEntries as $entries) {
+                        foreach ($entries as $entry) {
+                            $entryString = "pos_tank_nr: {$entry->pos_tank_nr}, pos_insert: {$entry->pos_insert}, pos_tube: {$entry->pos_tube}, pos_smpl: {$entry->pos_smpl}, identifier: {$entry->identifier}, type_of_material: {$entry->type_of_material}, responsible_person: {$entry->responsible_person}, storage_date: {$entry->storage_date}, commentary: {$entry->commentary}";
+                            $duplicateEntriesString .= $entryString . " /// ";
+                        }
+                    }
+                    $errorMessage = __('messages.duplicated_entry', ['duplicates' => $duplicateEntriesString]);
+                }
+            
                 return redirect()->back()->withErrors(['error' => $errorMessage]);
             } elseif (isset($missingMaterials[0]) && isset($missingPersons[0])) {
-                $missingMaterialMessage = "Materialtyp(en): '" . implode("', '", array_unique($missingMaterials)) . "' fehlt/fehlen und müssen erst noch angelegt werden. Daten konnten nicht importiert werden! ";
-                $missingPersonsMessage = "Verantwortliche(r) Person(en): '" . implode("', '", array_unique($missingPersons)) . "' fehlt/fehlen. Daten konnten nicht importiert werden! ";
-                $missingBoth = " ";
+                $missingMaterialMessage = __('messages.missing_material_error', ['materials' => implode("', '", array_unique($missingMaterials))]);
+                $missingPersonsMessage = __('messages.missing_person_error', ['persons' => implode("', '", array_unique($missingPersons))]);
                 return redirect()->back()->withErrors(['error' => $missingMaterialMessage . $missingBoth . $missingPersonsMessage]);
             } elseif (isset($missingMaterials[0]) && empty($missingPersons)) {
-                $missingMaterialMessage = "Materialtyp(en): '" . implode("', '", array_unique($missingMaterials)) . "' fehlt/fehlen und müssen erst noch angelegt werden. Daten konnten nicht importiert werden! ";
+                $missingMaterialMessage = __('messages.missing_material_error', ['materials' => implode("', '", array_unique($missingMaterials))]);
                 return redirect()->back()->withErrors(['error' => $missingMaterialMessage]);
             } elseif (empty($missingMaterials) && isset($missingPersons[0])) {
-                $missingPersonsMessage = "Verantwortliche(r) Person(en): '" . implode("', '", array_unique($missingPersons)) . "' fehlt/fehlen. Daten konnten nicht importiert werden! ";
+                $missingPersonsMessage = __('messages.missing_person_error', ['persons' => implode("', '", array_unique($missingPersons))]);
                 return redirect()->back()->withErrors(['error' => $missingPersonsMessage]);
             } else {
-                Log::error($e->getMessage());
-                //return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-                return redirect()->back()->withErrors(['error' => 'Ein unerwarteter Fehler ist aufgetreten.']);
+                // Log::error($e->getMessage());
+                return redirect()->back()->withErrors(['error' => __('messages.unexpected_error')]);
             }
         }
 
-        return redirect()->back()->with('success', 'Proben erfolgreich importiert.'); 
+        return redirect()->back()->with('success', __('messages.sample_import_success'));
     }
 
     private function formatStorageDate($date) {
@@ -157,7 +204,30 @@ class SampleImportController extends Controller
 
     private function isHeaderRow($row)
     {
+        // Deutsche Spaltennamen
+        $germanColumnNames = ['#', 'Tank Nummer', 'Einsatz', 'Röhrchen', 'Probenplatz', 'B-Nummer', 'Material', 'Verantwortlicher', 'Einlagerungsdatum'];
+        
+        // Englische Spaltennamen
+        $englishColumnNames = ['#', 'tank name', 'container', 'tube', 'position', 'ID', 'material', 'responsible person', 'storage Date'];
+        
         // Überprüfe, ob die Zeile die Kopfzeile mit den Spaltennamen enthält
-        return in_array('Tank Nummer', $row) && in_array('Einsatz', $row) && in_array('Röhrchen', $row);
+        foreach ($row as $columnName) {
+            if (in_array($columnName, $germanColumnNames) || in_array($columnName, $englishColumnNames)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
+
+    private function removeEmptyRows($fileData)
+    {
+        foreach ($fileData as $key => $row) {
+            if (count(array_filter($row)) === 0) {
+                unset($fileData[$key]);
+            }
+        }
+        return array_values($fileData);
+    }
+
 }

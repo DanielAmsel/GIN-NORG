@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="container">
-        <h1>Probenimport</h1>
+        <h1>{{__('messages.Probenimport')}}</h1>
         @if ($errors->any())
             <div>
-                <h4>Fehler:</h4>
+                <h4>{{__('messages.Fehler:')}}</h4>
+                <h4></h4>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -13,20 +14,14 @@
                 </ul>
             </div>
         @endif
-        @if (session('success'))
-            <div>
-                {{ session('success') }}
-            </div>
-        @endif
-
         <form method="POST" action="{{ route('sample.import') }}" enctype="multipart/form-data">
             @csrf
             <div>
-                <label for="file">CSV-Datei auswählen:</label>
+                <label for="file">{{__('messages.CSV-Datei auswählen:')}}</label>
                 <input type="file" id="file" name="file" accept=".csv">
             </div>
             <div>
-                <button type="submit">Importieren</button>
+                <button type="submit">{{__('messages.Importieren')}}</button>
             </div>
         </form>
     </div>
