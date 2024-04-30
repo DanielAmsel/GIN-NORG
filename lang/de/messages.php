@@ -137,7 +137,9 @@ return [
     'Importieren' => 'Importieren',
     "Durchsuchen..." => "Durchsuchen...",
     'csv_column_count_error' => 'Das CSV hat nicht die erwartete Anzahl an Spalten.',
-    'duplicated_entry' => 'Ein oder mehrere identische Datensätze sind bereits vorhanden.. Doppelte Einträge: \':duplicates\'',  
+    'duplicated_entry' => 'Ein oder mehrere identische Datensätze sind bereits vorhanden. Doppelte Einträge: \':duplicates\'',
+    'duplicated_identifier' => 'Im CSV befinden sich ein oder mehrere identische B-Nummern. Doppelte Einträge: \':identifiers\'. ',
+    'position' => 'Im CSV befinden sich ein oder mehrere identische Probenpositionen. Doppelte Einträge: \':positions\'. ',
     'missing_material_error' => 'Materialtyp(en) \':materials\' fehlt/fehlen und müssen erst noch angelegt werden. Daten konnten nicht importiert werden!',
     'missing_person_error' => 'Verantwortliche(r) Person(en) \':persons\' fehlt/fehlen. Daten konnten nicht importiert werden!',
     'unexpected_error' => 'Ein unerwarteter Fehler ist aufgetreten.',
@@ -147,4 +149,5 @@ return [
     'invalid_column_names_error' => 'Die Spaltennamen sind nicht korrekt. Definiert sind: #, Tank Nummer, Einsatz, Röhrchen, Probenplatz, B-Nummer, Material, Verantwortlicher, Einlagerungsdatum, (Kommentar)',
     'no_file_selected_error' => 'Es wurde keine Datei ausgewählt.',
     'missing_b_numbers_error' => 'B-Nummern fehlen in den folgenden Zeilen des CSV-Dokumentes: \':rows\'.',
+    
 ];

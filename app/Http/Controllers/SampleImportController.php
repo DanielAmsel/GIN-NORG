@@ -122,16 +122,40 @@ class SampleImportController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->errorInfo[1] === 1062) { 
                 // Identifiziere die doppelten Einträge
+                $duplicateIdentifiersCSV = [];
+                $uniqueCombinations = [];
+                $duplicateCombinations = [];
+                $uniqueIdentifiersCSV = [];
                 $duplicateEntries = [];
                 $duplicateIdentifiers = [];
-                
+        
                 foreach ($validData as $data) {
+                    // Erstelle eine eindeutige Kombination aus den relevanten Feldern
+                    $combination = $data['pos_tank_nr'] . '_' . $data['pos_insert'] . '_' . $data['pos_tube'] . '_' . $data['pos_smpl'];
+                
+                    // Überprüfe, ob die Kombination bereits vorhanden ist
+                    if (in_array($combination, $uniqueCombinations)) {
+                        // Die Kombination wurde bereits gesehen, füge sie zur Liste der Duplikate hinzu
+                        $duplicateCombinations[] = $combination;
+                    } else {
+                        // Die Kombination ist einzigartig, füge sie zur Liste der eindeutigen Kombinationen hinzu
+                        $uniqueCombinations[] = $combination;
+                    }
+        
+                    if (in_array($data['identifier'], $uniqueIdentifiersCSV)) {
+                        // Der identifier wurde bereits gesehen, füge ihn zur Liste der Duplikate hinzu
+                        $duplicateIdentifiersCSV[] = $data['identifier'];
+                    } else {
+                        // Der identifier ist einzigartig, füge ihn zur Liste der eindeutigen identifier hinzu
+                        $uniqueIdentifiersCSV[] = $data['identifier'];
+                    }
+
                     $duplicates = DB::table('sample')
                         ->where(function($query) use ($data) {
                             $query->where('pos_tank_nr', $data['pos_tank_nr'])
-                                  ->where('pos_insert', $data['pos_insert'])
-                                  ->where('pos_tube', $data['pos_tube'])
-                                  ->where('pos_smpl', $data['pos_smpl']);
+                                    ->where('pos_insert', $data['pos_insert'])
+                                    ->where('pos_tube', $data['pos_tube'])
+                                    ->where('pos_smpl', $data['pos_smpl']);
                         })
                         ->get();
                     
@@ -154,9 +178,18 @@ class SampleImportController extends Controller
                         }
                     }
                 }
-            
-                // Erzeuge die Fehlermeldung basierend auf den gefundenen doppelten Einträgen und/oder identifiern
+        
                 $errorMessage = '';
+        
+                if (!empty($duplicateCombinations)) {
+                    $errorMessage .= __('messages.position', ['positions' => implode(', ', $duplicateCombinations)]);
+                }
+        
+                if (!empty($duplicateIdentifiersCSV)) {
+                    // Füge dem Fehlermeldungs-String für wiederholende Kombinationen die Meldung für doppelte Identifier hinzu
+                    $errorMessage .= "\n" . __('messages.duplicated_identifier', ['identifiers' => ' identifier: ' . implode(', ', $duplicateIdentifiersCSV)]);
+                }
+
                 if (!empty($duplicateIdentifiers)) {
                     $errorMessage = __('messages.duplicated_entry', ['duplicates' => ' identifier: ' . implode(', ', $duplicateIdentifiers)]);
                 } elseif (!empty($duplicateEntries)) {
@@ -169,7 +202,8 @@ class SampleImportController extends Controller
                     }
                     $errorMessage = __('messages.duplicated_entry', ['duplicates' => $duplicateEntriesString]);
                 }
-            
+        
+                // Gib den Fehlermeldungs-String zurück
                 return redirect()->back()->withErrors(['error' => $errorMessage]);
             } elseif (isset($missingMaterials[0]) && isset($missingPersons[0])) {
                 $missingMaterialMessage = __('messages.missing_material_error', ['materials' => implode("', '", array_unique($missingMaterials))]);
@@ -182,7 +216,6 @@ class SampleImportController extends Controller
                 $missingPersonsMessage = __('messages.missing_person_error', ['persons' => implode("', '", array_unique($missingPersons))]);
                 return redirect()->back()->withErrors(['error' => $missingPersonsMessage]);
             } else {
-                // Log::error($e->getMessage());
                 return redirect()->back()->withErrors(['error' => __('messages.unexpected_error')]);
             }
         }
