@@ -153,10 +153,10 @@ After the import process is completed, you will receive a notification within th
 This is how the csv should look like:
 | #  | tank name | container | tube | position | ID            | material | responsible person           | storage date  |
 |----|-----------|-----------|------|----------|---------------|----------|------------------------------|---------------|
-| 1  | 6         | 1         | 1    | 1        | B846-22_ISS   | TM       | daniel.amsel@patho.med.uni-giessen.de | 20.07.2022 09:13 |
-| 2  | 6         | 1         | 1    | 2        | B855-22_ISS   | TM       | daniel.amsel@patho.med.uni-giessen.de | 20.07.2022 09:14 |
-| 3  | 6         | 1         | 1    | 5        | B862-22_laSS  | TM       | daniel.amsel@patho.med.uni-giessen.de | 20.07.2022 09:16 |
-| 4  | 6         | 1         | 2    | 1        | B871-22_laSS  | TM       | daniel.amsel@patho.med.uni-giessen.de | 20.07.2022 09:17 |
+| 1  | 6         | 1         | 1    | 1        | B846-22_ISS   | TM       | testuser@testmail.com | 20.07.2022 09:13 |
+| 2  | 6         | 1         | 1    | 2        | B855-22_ISS   | TM       | testuser@testmail.com | 20.07.2022 09:14 |
+| 3  | 6         | 1         | 1    | 5        | B862-22_laSS  | TM       | testuser@testmail.com | 20.07.2022 09:16 |
+| 4  | 6         | 1         | 2    | 1        | B871-22_laSS  | TM       | testuser@testmail.com | 20.07.2022 09:17 |
 
 
 ### Additional Guidance
