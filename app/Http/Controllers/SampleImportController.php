@@ -241,7 +241,7 @@ class SampleImportController extends Controller
         $germanColumnNames = ['#', 'Tank Nummer', 'Einsatz', 'Röhrchen', 'Probenplatz', 'B-Nummer', 'Material', 'Verantwortlicher', 'Einlagerungsdatum'];
         
         // Englische Spaltennamen
-        $englishColumnNames = ['#', 'tank name', 'container', 'tube', 'position', 'ID', 'material', 'responsible person', 'storage Date'];
+        $englishColumnNames = ['#', 'tank name', 'container', 'tube', 'position', 'ID', 'material', 'responsible person', 'storage date'];
         
         // Überprüfe, ob die Zeile die Kopfzeile mit den Spaltennamen enthält
         foreach ($row as $columnName) {
