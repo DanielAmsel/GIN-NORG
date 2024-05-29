@@ -150,6 +150,15 @@ If you're moving to NORG from another system and have your sample data stored in
 
 After the import process is completed, you will receive a notification within the NORG system indicating whether the import was successful.
 
+This is how the csv should look like:
+| #  | tank name | container | tube | position | ID            | material | responsible person           | storage date  |
+|----|-----------|-----------|------|----------|---------------|----------|------------------------------|---------------|
+| 1  | 6         | 1         | 1    | 1        | B846-22_ISS   | TM       | testuser@testmail.com | 20.07.2022 09:13 |
+| 2  | 6         | 1         | 1    | 2        | B855-22_ISS   | TM       | testuser@testmail.com | 20.07.2022 09:14 |
+| 3  | 6         | 1         | 1    | 5        | B862-22_laSS  | TM       | testuser@testmail.com | 20.07.2022 09:16 |
+| 4  | 6         | 1         | 2    | 1        | B871-22_laSS  | TM       | testuser@testmail.com | 20.07.2022 09:17 |
+
+
 ### Additional Guidance
 
 For a detailed explanation of NORG’s functionalities and step-by-step instructions, including sample importation, check out our paper, "NORG - Nitrogen ORGanizer: a novel web-based system for cryopreservation and freezer management." This publication offers a comprehensive insights into leveraging NORG for biological sample management.
