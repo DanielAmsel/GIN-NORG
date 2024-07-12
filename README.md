@@ -164,5 +164,8 @@ This is how the csv should look like:
 For a detailed explanation of NORG’s functionalities and step-by-step instructions, including sample importation, check out our paper, "NORG - Nitrogen ORGanizer: a novel web-based system for cryopreservation and freezer management." This publication offers a comprehensive insights into leveraging NORG for biological sample management.
 
 ## License
+GPL-3.0 license 
 
 ## How to cite
+to be announced
+
