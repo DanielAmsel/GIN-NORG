@@ -34,8 +34,8 @@ For inquiries, support, and collaboration opportunities, please contact daniel.a
 Thank you for considering the NORG System as your next-generation solution for biological sample management. Together, we can revolutionize the way we preserve and utilize valuable biological resources.
 
 ### Required Software
-- Docker
-- Docker-compose
+- Docker (27.0.3)
+- Docker-compose (v2.6.1)
 
   
 ### How to install 
@@ -48,8 +48,8 @@ cd GIN-NORG
 
 docker-compose up
 ```
-
-If this is your first start, your need to initialize the database by using these four commands:
+This should pull all the necessary containers.
+If this is your first start, your need to initialize the database by using these four commands in a separate console:
 ```bash
 docker exec norg_laravel php artisan key:generate
 
@@ -57,8 +57,7 @@ docker exec norg_laravel php artisan migrate
 
 docker exec norg_laravel php artisan db:seed
 
-docker exec norg_laravel php artisan route:cache
-```
+php artisan migrate```
 
 You can now login via the default credentials
 `admin@norg.de`
