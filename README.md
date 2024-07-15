@@ -50,6 +50,7 @@ docker-compose up
 ```
 This should pull all the necessary containers.
 If this is your first start, your need to initialize the database by using these four commands in a separate console:
+
 ```bash
 docker exec norg_laravel php artisan key:generate
 
@@ -57,7 +58,9 @@ docker exec norg_laravel php artisan migrate
 
 docker exec norg_laravel php artisan db:seed
 
-php artisan migrate```
+php artisan migrate
+```
+
 
 You can now login via the default credentials
 `admin@norg.de`
