@@ -42,6 +42,11 @@ Thank you for considering the NORG System as your next-generation solution for b
 The installation is easily manageable via Docker containerization and Docker-compose.
 
 ```bash
+
+mkdir /mariadb_data/
+sudo chown -R 1001:1001 /mariadb_data/
+sudo chmod -R 775 /mariadb_data/
+
 git clone https://github.com/DanielAmsel/GIN-NORG.git
 
 cd GIN-NORG
