@@ -63,7 +63,7 @@ docker exec norg_laravel php artisan migrate
 
 docker exec norg_laravel php artisan db:seed
 
-php artisan migrate
+docker exec norg_laravel php artisan migrate
 ```
 
 
