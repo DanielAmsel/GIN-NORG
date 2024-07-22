@@ -64,6 +64,8 @@ docker exec norg_laravel php artisan migrate
 docker exec norg_laravel php artisan db:seed
 
 docker exec norg_laravel php artisan route:cache
+
+docker exec norg_laravel composer update
 ```
 
 
